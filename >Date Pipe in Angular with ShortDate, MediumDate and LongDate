@@ -1,0 +1,24 @@
+<h1>Angular 19 Course by Tech Sharmit</h1>
+
+<h2>Date Pipe in Angular with ShortDate, MediumDate and LongDate </h2>
+
+<p>
+    Current Date (Without Date Pipe) : {{CurrentDate}}
+</p>
+
+<p>
+    Current Date (with Date Pipe - shortdate) : {{CurrentDate | date : 'shortDate'}}
+    <br> Current Date (with Date Pipe - short) : {{CurrentDate | date : 'short'}}
+</p>
+
+<p>
+    Current Date (with Date Pipe - MediumDate) : {{CurrentDate | date : 'mediumDate'}}
+    <br> Current Date (with Date Pipe - medium) : {{CurrentDate | date : 'medium'}}
+
+</p>
+
+<p>
+    Current Date (with Date Pipe - LongDate) : {{CurrentDate | date : 'longDate'}}
+    <br> Current Date (with Date Pipe - long) : {{CurrentDate | date : 'long'}}
+
+</p>
