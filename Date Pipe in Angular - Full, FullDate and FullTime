@@ -1,0 +1,26 @@
+🎓 Expand Your Tech Knowledge! 🎓
+Check out Tech Sharmit Digital Course Book—featuring thousands of tutorials available in Hindi and English. 
+https://docs.google.com/spreadsheets/d/1iBvyN-LXWEk8gwk-70dIr-CzrZuKXGqZ0d5dQh64osQ/edit?usp=sharing
+
+Subscribe to Tech Sharmit for the complete course! : https://www.youtube.com/@TechSharmit
+
+
+<h1>Angular 19 Course by Tech Sharmit</h1>
+
+<h2>Date Pipe in Angular - Full, FullDate and FullTime</h2>
+
+<p>
+    1.Current Date (without any Pipe) : {{CurrentDate}}
+</p>
+
+<p>
+    2.Current Date (With Date Pipe - Full) : {{CurrentDate | date : 'full'}}
+</p>
+
+<p>
+    3.Current Date (with Date Pipe - FullDate) : {{CurrentDate | date : 'fullDate'}}
+</p>
+
+<p>
+    4.Current Time (With Date Pipe - FullTime) : {{CurrentDate | date : 'fullTime'}}
+</p>
