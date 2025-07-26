@@ -1,0 +1,20 @@
+
+<h1>Angular 19 Course by Tech Sharmit</h1>
+
+<h2>Angular Date Pipe - 'yyyy-MM-dd', 'dd-MM-yyyy', 'EEEE, MMMM d, y'</h2>
+
+<p>
+    Current Date (Without Date Pipe) : {{CurrentDate}}
+</p>
+
+<p>
+    Current Date ('yyyy-MM-dd') : {{CurrentDate | date : 'yyyy-MM-dd'}}
+</p>
+
+<p>
+    Current Date ('dd-MM-yyyy') : {{CurrentDate | date : 'dd/MM/yyyy'}}
+</p>
+
+<p>
+    Current Date ('EEEE, MMMM d, y') : {{CurrentDate | date : 'EEEE, MMMM d ,y'}}
+</p>
