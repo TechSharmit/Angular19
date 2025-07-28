@@ -1,0 +1,90 @@
+<h1>Angular 19 Course by Tech Sharmit</h1>
+
+<!--Token	Meaning	          Example
+yyyy	4-digit year	  2025
+yy   	2-digit year	  25
+MM	    Month (01–12)	  07
+MMM	    Month short name  Jul
+MMMM	Month full name	  July
+dd	    Day (01–31)	      22
+EEE	    Day short name	  Tue
+EEEE	Day full name	  Tuesday
+HH	    Hours (24-hr)	  17
+hh	    Hours (12-hr)  	  05
+mm	    Minutes	          09
+ss	    Seconds	          30
+a	    AM/PM	          AM
+Z	    Timezone offset	  +0530
+
+-->
+
+
+<h2>
+    Angualr Date Pipe Token Introduction
+</h2>
+
+<p>
+    Current Date (Wihtout Date Pipe) : {{CurrentDate}}
+</p>
+
+<p>
+    yyyy : {{CurrentDate | date : 'yyyy'}}
+</p>
+
+<p>
+    yy : {{CurrentDate | date : 'yy'}}
+</p>
+
+<p>
+    YYYY : {{CurrentDate | date : 'YYYY'}}
+</p>
+
+<p>
+    MM : {{CurrentDate | date : 'MM'}}
+</p>
+
+<p>
+    MMM : {{CurrentDate | date : 'MMM'}}
+</p>
+
+<p>
+    MMMM : {{CurrentDate | date : 'MMMM'}}
+</p>
+
+<p>
+    dd : {{CurrentDate | date : 'dd'}}
+</p>
+
+<p>
+    EEE : {{CurrentDate | date : 'EEE'}}
+</p>
+
+<p>
+    EEEE : {{CurrentDate | date : 'EEEE'}}
+</p>
+
+
+<p>
+    HH : {{CurrentDate | date : 'HH'}}
+</p>
+
+<p>
+    mm : {{CurrentDate | date : 'mm'}}
+</p>
+
+<p>
+    MM : {{CurrentDate | date : 'MM'}}
+</p>
+
+<p>
+    ss : {{CurrentDate | date : 'ss'}}
+</p>
+
+<p>
+    a : {{CurrentDate | date : 'a'}}
+</p>
+
+
+<p>
+    z : {{CurrentDate | date : 'z'}}
+</p>
