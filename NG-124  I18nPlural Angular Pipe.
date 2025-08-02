@@ -1,0 +1,32 @@
+<h1>Angular 19 Course by Tech Sharmit</h1>
+
+<h2>
+    I18nPlural Angular Pipe.
+</h2>
+
+<p>
+    {{MessageCount | i18nPlural : MessageMap}}
+</p>
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  MessageCount = 12;
+
+  MessageMap = {
+    '=0': 'You have 0 Message',
+    '=1': 'You have 1 Message',
+    '=2': 'You have 2 Message',
+    other: 'You have # Messages',
+  };
+}
+
+
