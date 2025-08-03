@@ -1,0 +1,30 @@
+<h1>Angular 19 Course by Tech Sharmit</h1>
+
+<h2>
+    Keyvalue Pipe in Angular.
+</h2>
+
+<div *ngFor="let Item of MyObject | keyvalue">
+    {{Item.key}} : {{Item.value}}
+</div>
+
+
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+
+  MyObject = {
+    Name : 'Tech Sharmit',
+    Role : 'Content Creator',
+    Platform : 'YouTube'
+  }
+}
