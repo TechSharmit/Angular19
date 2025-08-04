@@ -1,0 +1,46 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    percent Pipe in Agular
+</h2>
+
+<h2>
+    Syntax : Number_Expression | percent : digitsInfo
+
+    Note : digitsInfo is 'minIntegerDigits.minFractionDigits-maxFractionDigits'
+</h2>
+
+<p>
+    Number withtout percent Pipe : {{0.259}}
+</p>
+
+<p>
+    Number With percent Pipe : {{0.259 | percent : '1.0-0'}}
+</p>
+
+<p>
+    Number With percent Pipe : {{0.259 | percent : '1.1-1'}}
+</p>
+
+<p>
+    Number With percent Pipe : {{0.259 | percent : '1.2-2'}}
+</p>
+
+<p>
+    Number With percent Pipe : {{0.259 | percent : '1.0-3' }}
+</p>
+
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
