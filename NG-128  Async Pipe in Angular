@@ -1,0 +1,40 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Async Pipe in Angular.
+</h2>
+
+<p>
+    TotalStudents without async Pipe : {{TotalStudents}}
+</p>
+
+<p>
+    TotalStudents with async Pipe : {{TotalStudents | async}}
+</p>
+
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  Students = [1, 2, 3, 4];
+
+  TotalStudents = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (this.Students && Array.isArray(this.Students)) {
+        resolve(this.Students.length); // Success : return number of students
+      } else {
+        reject('Student list not found or invalid.'); // Failure : Something went wrong.
+      }
+    }, 4000);
+  });
+}
