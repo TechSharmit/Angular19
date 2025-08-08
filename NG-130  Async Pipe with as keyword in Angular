@@ -1,0 +1,35 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Async Pipe with as keyword in Angular
+</h2>
+
+<ng-container *ngIf="UserDetails | async as User">
+
+    <p>
+        Name : {{User.Name}}
+    </p>
+    <p>
+        Email : {{User.Email}}
+    </p>
+</ng-container>
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { of } from 'rxjs';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  UserDetails = of({
+    Name: 'Tech Sharmit',
+    Email: 'Abc@gmail.com',
+  });
+}
