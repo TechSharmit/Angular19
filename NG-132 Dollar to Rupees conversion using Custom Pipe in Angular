@@ -1,0 +1,42 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Dollar to Rupees conversion using Custom Pipe in Angular.
+</h2>
+
+<p>
+    Value in Dollar : {{1}}
+</p>
+
+<p>
+    Value in Ruppees (Using Pipe) : {{54 | currencyConverter}}
+</p>
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'currencyConverter',
+})
+export class CurrencyConverterPipe implements PipeTransform {
+  transform(value: number, ...args: unknown[]): unknown {
+    return value * 85;
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { CurrencyConverterPipe } from './MyPipes/currency-converter.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CurrencyConverterPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
