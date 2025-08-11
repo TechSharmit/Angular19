@@ -1,0 +1,42 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Custom Pipe with Parameters in Angular.
+</h2>
+
+<p>
+    Currency in USD (Without any Pipe) : {{1}}
+</p>
+
+<p>
+    Currency in INR (with Default Rate of INR in Custom Pipe) : {{1 | curConverter}}
+</p>
+
+<p>
+    Currency in INR (With Parameter value) : {{1 | curConverter : 50}}
+</p>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'curConverter',
+})
+export class CurConverterPipe implements PipeTransform {
+  transform(CurInUsd: number, RateOfInr: number = 87): unknown {
+    return CurInUsd * RateOfInr;
+  }
+}
+
+import { Component } from '@angular/core';
+import { CurConverterPipe } from './MyPipes/cur-converter.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CurConverterPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
