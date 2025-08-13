@@ -1,0 +1,6 @@
+@Pipe({ name: 'reverse' })
+export class ReversePipe implements PipeTransform {
+  transform(OriginalString: string): string {
+    return OriginalString.split('').reverse().join('');
+  }
+}
