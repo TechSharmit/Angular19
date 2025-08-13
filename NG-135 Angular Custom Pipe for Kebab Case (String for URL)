@@ -1,0 +1,42 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+
+<h2>
+    Custom Pipe for Kebab Case (URL String with Hyphens)
+</h2>
+
+<p>
+    Normal String (Without Custom Pipe) : {{'The Tech Sharmit Podcast'}}
+</p>
+
+<p>
+    String for URL (With Custom Pipe) : {{'The Tech Sharmit Podcast' | urlString}}
+</p>
+
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'urlString',
+})
+export class UrlStringPipe implements PipeTransform {
+  transform(OriginialString: string): string {
+    return OriginialString.toLowerCase().replace(/ /g, '-');
+  }
+}
+
+
+import { Component } from '@angular/core';
+import { UrlStringPipe } from './MyPipes/url-string.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [UrlStringPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
