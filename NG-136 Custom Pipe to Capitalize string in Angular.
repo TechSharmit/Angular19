@@ -1,0 +1,53 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Custom Pipe to Capitalize string in Angular.
+</h2>
+
+<!---
+    Requirement
+
+    Input  : the tech sharmit podcast
+
+    Ouput : The Tech Sharmit Podcast
+
+
+-->
+
+<p>
+    String without Custom Pipe : {{"podcast"}}
+</p>
+
+<p>
+    String with Custom Pipe : {{'podcast' | capitalizeString}}
+</p>
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'capitalizeString',
+})
+export class CapitalizeStringPipe implements PipeTransform {
+  transform(OriginalString: string): string {
+    if (typeof OriginalString !== 'string') return OriginalString;
+
+    return OriginalString.charAt(0).toUpperCase() + OriginalString.slice(1);
+  }
+}
+
+
+
+import { Component } from '@angular/core';
+import { CapitalizeStringPipe } from './MyPipes/capitalize-string.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CapitalizeStringPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
