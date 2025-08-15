@@ -1,0 +1,59 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Custom Pipe to truncate string in Angular.
+</h2>
+
+<p>
+    String without Turncate Pipe : {{'The Tech Sharmit Podcast'}}
+</p>
+
+<p>
+    String with Truncate Pipe : {{'Tech Sharmit' | tuncateString}}
+</p>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'tuncateString',
+})
+export class TuncateStringPipe implements PipeTransform {
+  transform(
+    OriginalString: string,
+    Limit: number = 5,
+    Trail: string = '...'
+  ): string {
+    return OriginalString?.length > Limit
+      ? OriginalString.substring(0, Limit) + Trail
+      : OriginalString;
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+
+import { TuncateStringPipe } from './MyPipes/tuncate-string.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [TuncateStringPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
+
+
+
+import { TuncateStringPipe } from './tuncate-string.pipe';
+
+describe('TuncateStringPipe', () => {
+  it('create an instance', () => {
+    const pipe = new TuncateStringPipe();
+    expect(pipe).toBeTruthy();
+  });
+});
