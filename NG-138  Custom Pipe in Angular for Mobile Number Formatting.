@@ -1,0 +1,48 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Custom Pipe in Angular for Mobile Number Formatting.
+</h2>
+
+<!--
+    Sample Input  : 9876532101
+    Sample Output : (987) 653-2101
+
+-->
+
+<p>
+    Mobile Number with Custom Pipe Ouput : {{'9876532101' |mobileMask}}
+</p>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'mobileMask',
+})
+export class MobileMaskPipe implements PipeTransform {
+  transform(OriginalMobile: string): string {
+    const Cleaned = ('' + OriginalMobile).replace(/\D/g, '');
+
+    return `(${Cleaned.slice(0, 3)}) ${Cleaned.slice(3, 6)}-${Cleaned.slice(
+      6,
+      10
+    )}`;
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { MobileMaskPipe } from './MyPipes/mobile-mask.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [MobileMaskPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
