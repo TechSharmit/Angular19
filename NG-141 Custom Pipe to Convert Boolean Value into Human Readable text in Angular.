@@ -1,0 +1,50 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Custom Pipe to Convert Boolean Value into Human Readable text in Angular.
+</h2>
+
+<!--
+    Sample Input : IsActive = True
+
+    Sample Output : Yes
+
+-->
+
+<p>
+    Value without custom pipe converstion : {{IsActive}}
+</p>
+
+<p>
+    Value with Custom Pipe Converstion : {{IsActive | boolToRead}}
+</p>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'boolToRead',
+})
+export class BoolToReadPipe implements PipeTransform {
+  transform(OriginalValue: boolean): string {
+    return OriginalValue ? 'Yes' : 'No';
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { BoolToReadPipe } from './MyPipes/bool-to-read.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [BoolToReadPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  IsActive: boolean = false;
+}
