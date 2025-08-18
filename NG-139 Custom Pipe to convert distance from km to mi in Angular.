@@ -1,0 +1,47 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Custom Pipe to convert distance from km to mi in Angular.
+</h2>
+
+
+<!--
+
+    It will convert km to  miles
+
+-->
+
+<p>
+    Distance convertion using custom Pipe : {{5 |distConverter : 'mi'}}
+</p>
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'distConverter',
+})
+export class DistConverterPipe implements PipeTransform {
+  transform(OriginialDistance: number, to: 'km' | 'mi' = 'km'): number {
+    if (to === 'mi') return OriginialDistance * 0.621371;
+
+    return OriginialDistance / 0.621371;
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { DistConverterPipe } from './MyPipe/dist-converter.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [DistConverterPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
