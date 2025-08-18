@@ -1,0 +1,55 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Custom Pipe to Convert Number into Percentage in Angular.
+</h2>
+
+<!--
+        Sample Input : 0.25
+
+        Sample Output : 25%
+
+-->
+
+<p>
+    Original Values (Without any Pipe Conversion) : {{0.25}}
+</p>
+
+<p>
+    Number to Percentage Conversion using Custom Pipe In Angular (Without Decimal Parameter as it is optional) : {{0.25
+    | numToPer}}
+</p>
+
+<p>
+    Number to Percentage Conversion using Custom Pipe In Angular (With Decimal Parameter as it is optional) : {{0.25
+    | numToPer : 2}}
+</p>
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'numToPer',
+})
+export class NumToPerPipe implements PipeTransform {
+  transform(OriginalNumber: number, Decimal: number = 0): string {
+    return (OriginalNumber * 100).toFixed(Decimal) + '%';
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { NumToPerPipe } from './MyPipes/num-to-per.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [NumToPerPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
