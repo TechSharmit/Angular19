@@ -1,0 +1,51 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Custom Pipe in Angular to convert String into Date.
+</h2>
+
+<!--
+        Sample Input : '2025-08-17T12:00:00'
+
+        Sample Output : Aug 17, 2025 
+
+-->
+
+<p>
+    String (Without Pipe) : {{'2025-08-17T12:00:00'}}
+</p>
+
+<p>
+    String (with Pipe) : {{'2025-08-17T12:00:00' | strToDate | date : 'mediumDate'}}
+</p>
+
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'strToDate',
+})
+export class StrToDatePipe implements PipeTransform {
+  transform(OriginalString: string): Date {
+    return new Date(OriginalString);
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { StrToDatePipe } from './MyPipes/str-to-date.pipe';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [StrToDatePipe, CommonModule],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
