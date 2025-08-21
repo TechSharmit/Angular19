@@ -1,0 +1,58 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+
+<h2>
+    Custom Pipe in Angular to convert Name into Initials.
+</h2>
+
+<!--
+        Sample Input 1  : Tech Sharmit
+
+        Sample Output 1 : TS 
+
+        Sample Input 2  : Amit Sharma
+
+        Sample Ouput 2  : AS
+
+-->
+
+<p>
+    Name (Without Custom Pipe) : {{'Tech Sharmit'}}
+</p>
+
+<p>
+    Name (With Custom Pipe) : {{'Amit Sharma' | nameToInitials}}
+</p>
+
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'nameToInitials',
+})
+export class NameToInitialsPipe implements PipeTransform {
+  transform(OriginalName: string): string {
+    return OriginalName.split(' ')
+      .map((word) => word[0])
+      .join('')
+      .toUpperCase();
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { NameToInitialsPipe } from './MyPipes/name-to-initials.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [NameToInitialsPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
