@@ -1,0 +1,51 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Angular Custom Pipe to mask numbers / hide sensitive infomration.
+</h2>
+
+<!--
+        Sample Input  : 1234 5678 9012 3456
+
+        Sample Output : **** **** **** 3456
+
+-->
+
+<p>
+    Number (Without Mask Pipe) : {{'1234567890123456'}}
+</p>
+
+<p>
+    Number (with Mask Pipe) : {{'1234567890123456' | numMask}}
+</p>
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'numMask',
+})
+export class NumMaskPipe implements PipeTransform {
+  transform(OriginialNumber: string, VisibleDigit: number = 4): string {
+    const Masked = OriginialNumber.slice(0, -VisibleDigit).replace(/./g, '*');
+
+    return Masked + OriginialNumber.slice(-VisibleDigit);
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { NumMaskPipe } from './MyPipes/num-mask.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [NumMaskPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
