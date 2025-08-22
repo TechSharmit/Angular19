@@ -1,0 +1,55 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Angular Custom Pipe to Convert Number into Ordinal Format.
+</h2>
+
+<!--
+        Sample Inputs : 1 , 2 , 3 , 4 , 31
+
+        Sample Ouputs : 1st , 2nd , 3rd , 4th , 31st
+
+-->
+
+<p>
+    Number (Without Custom Pipe) : {{4}}
+</p>
+
+<p>
+    Number (With Custom Pipe) : {{1 | numToOrdinal}}
+</p>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'numToOrdinal',
+})
+export class NumToOrdinalPipe implements PipeTransform {
+  transform(OriginalNumber: number): string {
+    if (!OriginalNumber) return '';
+
+    const suffixes = ['th', 'st', 'nd', 'rd'];
+
+    const v = OriginalNumber % 100;
+
+    return (
+      OriginalNumber + (suffixes[(v - 20) % 10] || suffixes[v] || suffixes[0])
+    );
+  }
+}
+
+
+
+import { Component } from '@angular/core';
+import { NumToOrdinalPipe } from './MyPipes/num-to-ordinal.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [NumToOrdinalPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
