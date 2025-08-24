@@ -1,0 +1,71 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Angular Custom Pipe to convert numbers to Roman Numerals.
+</h2>
+
+<!--
+    Sample Input  :  2025
+    Sample Output :  MMXXV (Like old clock numbers)
+-->
+
+<p>
+    Number (Without Pipe) : {{2025}}
+</p>
+
+<p>
+    Number (With Pipe) : {{2025 | numToRnum}}
+</p>
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'numToRnum',
+})
+export class NumToRnumPipe implements PipeTransform {
+  transform(OriginialNumber: number): string {
+    const map: any = {
+      M: 1000,
+      CM: 900,
+      D: 500,
+      CD: 400,
+      C: 100,
+      XC: 90,
+      L: 50,
+      XL: 40,
+      X: 10,
+      IX: 9,
+      V: 5,
+      IV: 4,
+      I: 1,
+    };
+
+    let result = '';
+
+    for (const key in map) {
+      while (OriginialNumber >= map[key]) {
+        result += key;
+
+        OriginialNumber -= map[key];
+      }
+    }
+    return result;
+  }
+}
+
+
+
+import { Component } from '@angular/core';
+import { NumToRnumPipe } from './MyPipes/num-to-rnum.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [NumToRnumPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
