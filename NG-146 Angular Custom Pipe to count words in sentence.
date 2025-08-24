@@ -1,0 +1,46 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Angular Custom Pipe to count words in sentence.
+</h2>
+
+<!--
+        Sample Input  : 'The Tech Sharmit Podcast
+        
+        Sample Output :  4
+-->
+
+<p>
+    String (Without Pipe) : {{'The Tech Sharmit Podcast'}}
+</p>
+
+<p>
+    String(With Pipe) : {{'Tech Sharmit' | countWord}}
+</p>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'countWord',
+})
+export class CountWordPipe implements PipeTransform {
+  transform(OriginalSting: string): number {
+    return OriginalSting ? OriginalSting.trim().split(/\s+/).length : 0;
+  }
+}
+
+
+
+import { Component } from '@angular/core';
+import { CountWordPipe } from './MyPipes/count-word.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [CountWordPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
