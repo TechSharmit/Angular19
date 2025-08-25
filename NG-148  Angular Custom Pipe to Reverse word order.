@@ -1,0 +1,47 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Angular Custom Pipe to Reverse word order.
+</h2>
+
+<!--
+    Sample Input  : "The Tech Sharmit Podcast"
+
+    Sample Output : "Podcast Sharmit Tech The" 
+
+-->
+
+<p>
+    String (Without Pipe) : {{'The Tech Sharmmit Podcast'}}
+</p>
+
+<p>
+    String (With Pipe) : {{'Angular Pipe Tutorial' | reverseWord}}
+</p>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'reverseWord',
+})
+export class ReverseWordPipe implements PipeTransform {
+  transform(OriginalString: string): string {
+    return OriginalString.split(' ').reverse().join(' ');
+  }
+}
+
+import { Component } from '@angular/core';
+import { ReverseWordPipe } from './MyPipes/reverse-word.pipe';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [ReverseWordPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
+
+
