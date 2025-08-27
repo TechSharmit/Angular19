@@ -1,0 +1,50 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Angular Custom Pipe to hide part of email.
+</h2>
+
+<!--
+    Sample Input   :  testing@gmail.com
+
+    Sample Output  :  t***@gmail.com
+
+-->
+
+<p>
+    Email (Without Pipe) : {{"Testing@gmail.com"}}
+</p>
+
+<p>
+    Email (With Pipe) : {{"Testing@gmail.com" | maskEmail}}
+</p>
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'maskEmail',
+})
+export class MaskEmailPipe implements PipeTransform {
+  transform(Email: string): string {
+    const [user, domain] = Email.split('@');
+
+    return user[0] + '***@' + domain;
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { MaskEmailPipe } from './MyPipes/mask-email.pipe';
+@Component({
+  selector: 'app-root',
+
+  imports: [MaskEmailPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
