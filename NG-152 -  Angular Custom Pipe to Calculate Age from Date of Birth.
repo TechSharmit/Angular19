@@ -1,0 +1,50 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Angular Custom Pipe to Calculate Age from Date of Birth.
+</h2>
+
+<!--
+        Sample Input  :  '2000-01-01'
+
+        Sample Output :  25 years old.
+-->
+
+<p>
+    Date of Birth Passed : {{"2000-01-01"}}
+</p>
+
+
+<p>
+    Date of Birth with Pipe to calucalte Age : {{"2000-01-01" | calcAge}}
+</p>
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'calcAge',
+})
+export class CalcAgePipe implements PipeTransform {
+  transform(DOB: string | Date): string {
+    const Birth = new Date(DOB);
+    const Diff = Date.now() - Birth.getTime();
+    const Age = new Date(Diff).getUTCFullYear() - 1970;
+
+    return `${Age} years old`;
+  }
+}
+
+
+
+import { Component } from '@angular/core';
+import { CalcAgePipe } from './MyPipes/calc-age.pipe';
+@Component({
+  selector: 'app-root',
+
+  imports: [CalcAgePipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
