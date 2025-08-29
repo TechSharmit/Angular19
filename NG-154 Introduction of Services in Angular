@@ -1,0 +1,93 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+1.What is a Service in Angular?
+
+A service is simply a TypeScript class (TypeScript = a programming language that adds types on top of JavaScript).
+
+It is used to organize and share logic or data across different parts of an Angular application.
+
+
+2.Why Do We Need Services?
+
+Without services, each component (a building block of UI in Angular) would have to handle both UI work and logic work
+(like fetching data).
+
+Services allow us to separate UI logic (in components) from business logic (in services), making code clean and
+reusable.
+
+
+3.Dependency Injection (DI)
+
+Angular has a built-in system called Dependency Injection.
+
+DI means you don’t create objects manually; instead, Angular creates and provides (injects) them wherever needed.
+
+Example: If a component needs a service, Angular automatically gives it an instance.
+
+
+4.How to Create a Service?
+
+We make a class and add the @Injectable() decorator.
+
+A decorator is a special function in Angular (written with @) that tells Angular how to use the class.
+
+
+5.How to Use (Inject) a Service?
+
+In a component’s constructor (a special function that runs when the component is created), we tell Angular what service
+we need.
+
+6.Singleton Nature (Single Copy of Service)
+
+If a service is provided at the root level, Angular makes only one copy (called singleton) for the whole app.
+
+This is useful when multiple components need to share the same data or state.
+
+
+7.Scope of a Service
+
+Services can live at different levels:
+
+Root → Available everywhere in the app.
+
+Module level → Available only inside that specific Angular module (a logical grouping of features).
+
+Component level → A new service instance is created each time the component is used.
+
+
+8.Examples of What Services Do
+
+Fetching data from an API using Angular’s HttpClient.
+
+Storing temporary data (like cart items in an e-commerce app).
+
+Writing reusable utility functions (e.g., date formatting).
+
+Handling application-wide logic like authentication (login/logout).
+
+
+9.Service Lifecycle
+
+Angular creates a service when it is first needed (e.g., when a component asks for it).
+
+Angular destroys the service when its scope (root/module/component) is destroyed.
+
+
+10.Testing Services
+
+Services are easier to test than components because they don’t deal with UI.
+
+We can test them by checking if their functions return the expected results.
+
+
+
+11.Best Practices
+
+Keep each service focused on one purpose (e.g., don’t mix user authentication and product management in the same
+service).
+
+Don’t put UI code inside services — that belongs in components.
+
+Prefer providedIn: 'root' for most cases (simpler and avoids duplicate services).
