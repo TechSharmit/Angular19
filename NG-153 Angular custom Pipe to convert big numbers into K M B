@@ -1,0 +1,58 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Angular custom Pipe to convert big numbers into K M B
+</h2>
+
+<!--
+        Sample Input-1   :  1500
+
+        Sample Output-1  :  1.5K
+
+        Sample Input-2   : 2,000,000
+
+        Sample Output-2  : 2M
+-->
+
+<p>
+    Number (Without Pipe) : {{1500}}
+</p>
+
+<p>
+    Number (With Pipe) : {{1500 | conBigNum}}
+</p>
+
+
+import { Component } from '@angular/core';
+import { ConBigNumPipe } from './MYPipes/con-big-num.pipe';
+@Component({
+  selector: 'app-root',
+
+  imports: [ConBigNumPipe],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
+
+
+
+
+import { Pipe, PipeTransform } from '@angular/core';
+
+@Pipe({
+  name: 'conBigNum',
+})
+export class ConBigNumPipe implements PipeTransform {
+  transform(OriginalNumber: number): string {
+    if (OriginalNumber >= 1_000_000_000)
+      return (OriginalNumber / 1_000_000_000).toFixed(1) + 'B';
+    if (OriginalNumber >= 1_000_000)
+      return (OriginalNumber / 1_000_000).toFixed(1) + 'M';
+    if (OriginalNumber >= 1_000)
+      return (OriginalNumber / 1_000).toFixed(1) + 'K';
+
+    return OriginalNumber.toString();
+  }
+}
