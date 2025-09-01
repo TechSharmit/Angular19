@@ -1,0 +1,76 @@
+Service Code
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class PowerHouseService {
+  Power = 'Power from the city electricity company (Power House).';
+}
+
+
+App Component Code
+
+import { Component } from '@angular/core';
+import { PowerHouseService } from './MyServices/power-house.service';
+import { HouseTwoComponent } from "./house-two/house-two.component";
+@Component({
+  selector: 'app-root',
+
+  imports: [HouseTwoComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(public Electricity: PowerHouseService) {}
+}
+
+
+App Component html code
+
+
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Sharing Serivces in two components in Angular.
+</h2>
+
+
+<h3>House One</h3>
+
+<p>
+    {{Electricity.Power}} <br>
+</p>
+
+<app-house-two></app-house-two>
+
+
+
+
+House Two Component Code
+
+import { Component } from '@angular/core';
+
+import { PowerHouseService } from '../MyServices/power-house.service';
+
+@Component({
+  selector: 'app-house-two',
+  imports: [],
+  templateUrl: './house-two.component.html',
+  styleUrl: './house-two.component.css',
+})
+export class HouseTwoComponent {
+  constructor(public Electricity: PowerHouseService) {}
+}
+
+
+House Two Component HTML Code
+
+<h3>House Two</h3>
+
+<p>
+    {{Electricity.Power}} <br>
+</p>
