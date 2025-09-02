@@ -1,0 +1,38 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Component Asks service for data (Direct Call) in Angular.
+</h2>
+
+<p>
+    Data Recived from Service : {{Book}}
+</p>
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LibraryService {
+  getBook() {
+    return 'The Tech Sharmit Digital Course Book';
+  }
+}
+
+import { Component } from '@angular/core';
+import { LibraryService } from './MyServices/library.service';
+@Component({
+  selector: 'app-root',
+
+  imports: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  Book: string;
+  constructor(private Library: LibraryService) {
+    this.Book = this.Library.getBook();
+  }
+}
