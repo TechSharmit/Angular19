@@ -1,0 +1,46 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Component sends data to service (On-way Communication, Component -> Service)
+</h2>
+
+<button (click)="markPresent()">Mark Present</button>
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root'
+})
+export class TeacherAttendanceService {
+
+ Attendance  : string[] = [];
+
+
+ markAttendance(StudentName : string){
+
+  this.Attendance.push(StudentName);
+  console.log('Marked Present', StudentName);
+  
+ }
+}
+
+
+
+import { Component } from '@angular/core';
+import { TeacherAttendanceService } from './MyFolder/teacher-attendance.service';
+@Component({
+  selector: 'app-root',
+
+  imports: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private TeacherAttendance: TeacherAttendanceService) {}
+
+  markPresent() {
+    this.TeacherAttendance.markAttendance('Sharmit');
+  }
+}
