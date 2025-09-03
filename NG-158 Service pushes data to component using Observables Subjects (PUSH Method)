@@ -1,0 +1,41 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+   Service pushes data to component using Observables Subjects (PUSH Method)
+</h2>
+
+<p>
+    Latest Value received from Service : {{Parcel}}
+</p>
+
+import { Injectable } from '@angular/core';
+import { BehaviorSubject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class DeliverHubService {
+  Parcel = new BehaviorSubject<string>('First Package Ready');
+}
+
+
+import { Component } from '@angular/core';
+import { DeliverHubService } from './MyFolder/deliver-hub.service';
+@Component({
+  selector: 'app-root',
+
+  imports: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  Parcel = '';
+
+  constructor(private Delivery: DeliverHubService) {}
+
+  ngOnInit() {
+    this.Delivery.Parcel.subscribe((data) => (this.Parcel = data));
+  }
+}
