@@ -1,0 +1,73 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Two-Way Communication in Components and Services.
+</h2>
+
+<Button (click)="playSong()">
+    Play Song
+</Button>
+
+<app-listner></app-listner>
+
+<br><br>
+Now Playing : {{song}}
+
+import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class RadioStationService {
+  private Station = new Subject<string>();
+
+  Brodcast$ = this.Station.asObservable();
+
+  Play(Song: string) {
+    this.Station.next(Song);
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { RadioStationService } from './Myfolder/radio-station.service';
+import { ListnerComponent } from "./listner/listner.component";
+@Component({
+  selector: 'app-root',
+
+  imports: [ListnerComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private Radio: RadioStationService) {}
+
+  playSong() {
+    this.Radio.Play('Angular Beats');
+  }
+}
+
+
+
+import { Component } from '@angular/core';
+import { RadioStationService } from '../Myfolder/radio-station.service';
+
+@Component({
+  selector: 'app-listner',
+  imports: [],
+  templateUrl: './listner.component.html',
+  styleUrl: './listner.component.css',
+})
+export class ListnerComponent {
+  song = '';
+  constructor(private Radio: RadioStationService) {}
+
+  ngOnInit() {
+    this.Radio.Brodcast$.subscribe((s) => (this.song = s));
+  }
+}
