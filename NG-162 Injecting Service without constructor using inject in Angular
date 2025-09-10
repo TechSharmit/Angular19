@@ -1,0 +1,43 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Injecting Service without constructor in Angular.
+</h2>
+
+<hr>
+<button (click)="SayHello()">Click Me</button>
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class LoggerService {
+  Log(Message: string) {
+    console.log('LOG', Message);
+  }
+}
+
+
+
+import { Component, inject } from '@angular/core';
+import { LoggerService } from './MyFolder/logger.service';
+@Component({
+  selector: 'app-root',
+
+  imports: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  
+  // constructor(private Logger : LoggerService){} With Constructor
+
+  private Logger = inject(LoggerService); // Without Constructor
+
+  SayHello() {
+    this.Logger.Log('Button was Clicked!');
+  }
+}
