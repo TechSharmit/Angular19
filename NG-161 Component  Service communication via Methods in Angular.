@@ -1,0 +1,85 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Component - Service communication via Methods in Angular.
+</h2>
+
+<input [(ngModel)]="Msg" placeholder="Enter Message">
+
+<button (click)="Send()">Send</button>
+
+<hr>
+
+<app-comp1>
+
+</app-comp1>
+
+import { Component } from '@angular/core';
+import { DataService } from '../MyFolder/data.service';
+
+@Component({
+  selector: 'app-comp1',
+  imports: [],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  constructor(private DataService: DataService) {}
+
+  GetMessage() {
+    return this.DataService.GetMessage();
+  }
+}
+
+<h1>Receiver Component</h1>
+
+<p>
+    Message : {{GetMessage()}}
+</p>
+
+
+import { Injectable } from '@angular/core';
+
+@Injectable({
+  providedIn: 'root',
+})
+export class DataService {
+  private Message: string = '';
+
+  SetMessage(Data: string) {
+    this.Message = Data;
+  }
+
+  GetMessage(): string {
+    return this.Message;
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { DataService } from './MyFolder/data.service';
+import { FormsModule } from '@angular/forms';
+import { Comp1Component } from "./comp1/comp1.component";
+@Component({
+  selector: 'app-root',
+
+  imports: [FormsModule, Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  Msg: string = '';
+
+  constructor(private DataService: DataService) {}
+
+  Send() {
+    this.DataService.SetMessage(this.Msg);
+  }
+}
+
+
+
