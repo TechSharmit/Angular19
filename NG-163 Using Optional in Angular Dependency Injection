@@ -1,0 +1,43 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Using Optional() in Angular Dependency Injection
+</h2>
+
+<hr>
+
+<button (click)="SayHello()">Click Me</button>
+
+<hr>
+
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class LoggerService {
+  Log(Message: string) {
+    console.log('LOG', Message);
+  }
+}
+
+
+
+import { Component, Optional } from '@angular/core';
+import { LoggerService } from './MyFolder/logger.service';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(@Optional() private Logger: LoggerService | null) {}
+
+  SayHello() {
+    this.Logger?.Log('Button was Clicked!');
+  }
+}
+v
