@@ -1,0 +1,61 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Self Decorator for Dependcy injection for Service in Angular.
+</h2>
+
+<app-child-comp></app-child-comp>
+
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class LoggerService {
+  Log(Message: string) {
+    console.log('LOG', Message);
+  }
+}
+
+
+import { Component, Self } from '@angular/core';
+import { LoggerService } from '../MyFolder/logger.service';
+
+@Component({
+  selector: 'app-child-comp',
+  imports: [],
+
+  templateUrl: './child-comp.component.html',
+  styleUrl: './child-comp.component.css',
+})
+export class ChildCompComponent {
+  constructor(@Self() private Logger: LoggerService) {}
+
+  SayHello() {
+    this.Logger.Log('Hello from child!');
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { ChildCompComponent } from './child-comp/child-comp.component';
+import { LoggerService } from './MyFolder/logger.service';
+
+@Component({
+  selector: 'app-root',
+
+  imports: [ChildCompComponent],
+  providers: [LoggerService],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
+
+
+
+
+<p>child-comp works!</p>
+
+<button (click)="SayHello()">Say Hello</button>
