@@ -1,0 +1,98 @@
+import { Component, Host } from '@angular/core';
+import { LoggerService } from '../MyFolder/logger.service';
+
+@Component({
+  selector: 'app-child-comp',
+  imports: [],
+  standalone: true,
+  providers: [LoggerService],
+  templateUrl: './child-comp.component.html',
+  styleUrl: './child-comp.component.css',
+})
+export class ChildCompComponent {
+  constructor(@Host() private logger: LoggerService) {}
+
+  SayHello() {
+    this.logger.Log('Hello from Child!');
+  }
+}
+
+
+import { Component } from '@angular/core';
+import { ChildCompComponent } from '../child-comp/child-comp.component';
+import { LoggerService } from '../MyFolder/logger.service';
+
+@Component({
+  imports: [ChildCompComponent],
+
+  selector: 'app-parent-comp',
+  templateUrl: './parent-comp.component.html',
+  styleUrl: './parent-comp.component.css',
+})
+export class ParentCompComponent {}
+
+
+import { Component } from '@angular/core';
+import { ParentCompComponent } from '../parent-comp/parent-comp.component';
+
+@Component({
+  selector: 'app-grand-pcomp',
+  imports: [ParentCompComponent],
+
+  templateUrl: './grand-pcomp.component.html',
+  styleUrl: './grand-pcomp.component.css',
+})
+export class GrandPCompComponent {}
+
+
+
+import { Component } from '@angular/core';
+import { GrandPCompComponent } from './grand-pcomp/grand-pcomp.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [GrandPCompComponent],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
+
+
+
+
+import { Injectable } from '@angular/core';
+
+@Injectable()
+export class LoggerService {
+  Log(Message: string) {
+    console.log('LOG', Message);
+  }
+}
+
+<hr>
+
+<h3>👶 Child</h3>
+<button (click)="SayHello()">Click Me</button>
+
+<h1>👴 Grandparent</h1>
+<app-parent-comp></app-parent-comp>
+
+
+<h2>👩 Parent</h2>
+<app-child-comp></app-child-comp>
+
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Host Decorator for Service Dependency Injection in Angular.
+</h2>
+
+<hr>
+<h1>🏠 App Root </h1>
+
+<app-grand-pcomp></app-grand-pcomp>
+
+
