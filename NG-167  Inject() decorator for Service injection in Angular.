@@ -1,0 +1,52 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Inject() decorator for Service injection in Angular.
+</h2>
+
+<h1>
+    {{title}}
+</h1>
+
+<button (click)="ShowTitle()">Show Title</button>
+
+import { Component, Inject } from '@angular/core';
+import { APP_TITLE } from './app.config';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [],
+  providers: [{ provide: APP_TITLE, useValue: 'My Angular 19 App' }],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(@Inject(APP_TITLE) public title: string) {}
+
+  ShowTitle() {
+    console.log('App Title', this.title);
+  }
+}
+
+
+
+import {
+  ApplicationConfig,
+  InjectionToken,
+  provideZoneChangeDetection,
+} from '@angular/core';
+import { provideRouter } from '@angular/router';
+
+import { routes } from './app.routes';
+
+export const appConfig: ApplicationConfig = {
+  providers: [
+    provideZoneChangeDetection({ eventCoalescing: true }),
+    provideRouter(routes),
+  ],
+};
+
+export const APP_TITLE = new InjectionToken<string>('App Title');
