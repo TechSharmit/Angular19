@@ -1,0 +1,45 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    providedIn: 'any' (Feature-level Service) in Angular
+</h2>
+
+<p>
+
+    1.'any' is less common but very powerful. <br>
+
+    2.Service is registered in the injector of the lazy-loaded module. <br>
+
+    3.This means Angular creates a new instance for each lazy-loaded feature. <br>
+
+    4.Lazy-loaded features are loaded only when you navigate to them. <br>
+
+    5.Each feature that uses the service will get a separate copy. <br>
+
+    6.Example: Feature A and Feature B both lazy-loaded. <br>
+
+    7.With 'any', Feature A has its own LoggerService, Feature B has its own. <br>
+
+    8.This keeps data and state separate between features. <br>
+
+    9.Useful when features should not interfere with each other. <br>
+
+    10.For example, a shopping cart in an e-commerce app’s “Guest” feature vs “Admin” feature. <br>
+
+    11.Both carts are separate because they are in different features. <br>
+
+    12.If you switch providedIn to 'root', both features will share the same cart. <br>
+
+    13.That could cause unexpected behavior. <br>
+
+    14.If the app has no lazy loading, 'any' behaves just like 'root'. <br>
+
+    15.Analogy: Each floor (feature module) has its own water tank. <br>
+
+    16.Floor 1 can use water freely, Floor 2 won’t be affected. <br>
+
+    17.Best practice: Use 'any' when you need isolation per feature/module. <br>
+
+</p>
