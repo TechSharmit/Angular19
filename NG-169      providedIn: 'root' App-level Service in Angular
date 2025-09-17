@@ -1,0 +1,46 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    providedIn: 'root' (App-level Service) in Angular
+</h2>
+
+<p>
+
+    1.'root' is the default providedIn value. <br>
+
+    2.Service is registered in the application-level injector. <br>
+
+    3.Angular creates only one instance per Angular app. <br>
+
+    4.That one instance is shared everywhere inside the app.<br>
+
+    5.You don’t need to write providers: [Service] in components anymore. <br>
+
+    6.Angular will make the service available automatically. <br>
+
+    7.This makes your code cleaner and simpler. <br>
+
+    8.Works great for services that hold global state. <br>
+
+    9.Example: authentication service, logging service, user settings service. <br>
+
+    10.If you open the same Angular app twice on one page → each app has its own instance. <br>
+
+    11.Think of it like a big water tank for the whole building. <br>
+
+    12.All rooms (components) use the same tank (same service instance). <br>
+
+    13.Before Angular introduced this, you had to add providers manually → messy. <br>
+
+    14.With 'root', Angular handles tree-shaking: if service isn’t used, it won’t be included in the bundle. <br>
+
+    15.Best practice: Use 'root' for most services. <br>
+
+    Example :
+
+    @Injectable({ providedIn: 'root' })
+    export class LoggerService {}
+
+</p>
