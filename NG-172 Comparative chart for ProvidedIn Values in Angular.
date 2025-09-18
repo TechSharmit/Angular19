@@ -1,0 +1,32 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Comparative Chart for proviedIn Values - 'root', 'any' and 'platform'
+</h2>
+
+<p>
+    'root' → one instance for the whole app.
+    (This is the Default Provided in Value)
+
+    'any' → one instance per lazy-loaded feature. 
+    (If no Lazy-Loaded features in the application then it will work same as 'root')
+
+    'platform' → one instance shared across all Angular apps on the page.
+    (If there is no multiple application then it will work same as 'root')
+
+    Analogy:
+
+    Root = one tank per building - one instance for the whole app.
+
+    Any = one tank per floor - one instance per lazy-loaded feature.
+
+    Platform = one tank for the whole city - one instance shared across all Angular apps on the page.
+
+    Use 'root' for most services.
+
+    Use 'any' for isolated features.
+
+    Use 'platform' for multiple Angular apps.
+</p>
