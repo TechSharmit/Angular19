@@ -1,0 +1,43 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    providedIn: 'platform' (Cross-App Service)
+</h2>
+
+<p>
+    1.'platform' is the least used, but very interesting.
+
+    2.Registers the service in the platform injector.
+
+    3.The platform injector is the highest-level injector Angular creates.
+
+    4.This means multiple Angular apps on the same webpage will share one service instance.
+
+    5.Example: You have App One and App Two on the same HTML page.
+
+    6.With 'root', each app gets its own LoggerService instance.
+
+    7.With 'platform', both apps share the same LoggerService instance.
+
+    8.This allows cross-app communication.
+
+    9.For example, logging → all apps log to the same counter.
+
+    10.Or authentication → user login in App One is also reflected in App Two.
+
+    11.Very useful in micro-frontend architectures.
+
+    12.Without 'platform', you would need extra messaging systems to share state.
+
+    13.With 'platform', Angular handles it automatically.
+
+    14.If you have only one Angular app, 'platform' behaves just like 'root'.
+
+    15.Analogy: The whole city (all apps) shares one giant water tank.
+
+    16.Each building (app) drinks from the same tank.
+
+    17.Best practice: Use 'platform' only if you run multiple Angular apps on the same page.
+</p>
