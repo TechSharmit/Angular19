@@ -1,0 +1,92 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Singleton Service in Angular.
+</h2>
+
+<p>
+    🔹 What is a Singleton Service?
+
+    1.A singleton means: only one instance of a class exists during the app’s lifetime.
+
+    2.In Angular, a singleton service means:
+
+    Only one object of that service is created.
+
+    All components and services that inject it share the same instance.
+
+    3.Angular uses Dependency Injection (DI) to control this.
+
+
+    🔹 How Does Angular Make a Service Singleton?
+
+    1.By default, if you use @Injectable({ providedIn: 'root' }), Angular makes it a singleton.
+
+    2.It registers the service in the root injector (app-level).
+
+    3.Angular creates the instance once when it’s first needed.
+
+    4.Afterwards, every component that injects it gets the same reference.
+
+    5.This avoids duplicate copies and ensures consistent state.
+
+
+    🔹 Why are Singleton Services Useful?
+
+    1.They are perfect for shared global data.
+
+    2.Examples:
+
+    Authentication state (logged-in user info).
+
+    Global settings or configuration.
+
+    Shared logging system.
+
+    Data caching across components.
+
+    3.Without a singleton, every component would create its own copy, leading to inconsistent data.
+
+    🔹 Example in Layman’s Terms
+
+    Imagine a TV remote in a living room.
+
+    Everyone (mom, dad, kids) shares the same remote.
+
+    If dad changes the channel, everyone sees it change.
+
+    That’s a singleton service → one shared instance.
+
+    🔹 When is a Service NOT Singleton?
+
+    1.If you provide it in a component’s providers array.
+
+    2.Then every time that component is created, a new instance of the service is made.
+
+    3.Example:
+
+    Parent and Child both provide LoggerService in providers.
+
+    Each one gets a different logger instance.
+
+    4.This can be useful if you want isolated state.
+
+    🔹 Key Takeaways
+
+    1.Singleton = one instance shared by the whole app.
+
+    2.Angular makes services singleton by default when provided in 'root'.
+
+    3.Great for shared state and global utilities.
+
+    4.Not singleton if provided in a component or lazy-loaded feature → new instance created.
+
+    5.Analogy:
+
+    Singleton = one TV remote for family.
+
+    Non-singleton = every person has their own remote.
+
+</p>
