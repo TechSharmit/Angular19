@@ -1,0 +1,85 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Routing in Angular.
+</h2>
+
+<p>
+    🔹 What is Routing?
+
+    1.Routing is how Angular helps us navigate between different views (pages) inside a Single Page Application (SPA).
+
+    2.In a normal website → clicking a link reloads the whole page.
+
+    3.In Angular → routing swaps out components without reloading the whole page.
+
+    4.This makes apps faster and smoother.
+
+    5.Analogy: 🚗 Routing is like Google Maps for your app → it decides which road (component) to show based on the
+    address (URL).
+
+    🔹 Why Do We Need Routing?
+
+    1.To build multi-page-like apps using a single index.html.
+
+    2.Users expect different pages → "Home", "About", "Contact", etc.
+
+    3.Routing helps us connect URLs to components.
+
+    4.Makes apps more user-friendly and shareable with links.
+
+    🔹 Core Building Blocks of Routing
+
+    1.RouterModule – Angular’s built-in module that enables routing.
+
+    2.Routes array – A list of objects mapping URLs to components.
+
+    3.Example: { path: 'home', component: HomeComponent }.
+
+    4.RouterOutlet – A placeholder in your HTML where the chosen component appears.
+
+    5.RouterLink – Directive used in templates to navigate (<a [routerLink]="'/home'">Home</a>).
+
+    🔹 Types of Routing
+
+    1.Eager loading – All routes/components loaded when the app starts.
+
+    2.Lazy loading – Load routes only when user navigates to them (saves performance).
+
+    3.Child routes – Nested routes inside parent components.
+
+    🔹 Routing Lifecycle (How it Works)
+
+    1.User clicks a link or types a URL.
+
+    2.Angular’s Router matches the URL to a route in routes[].
+
+    3.Router loads the corresponding component into <router-outlet>.
+
+        4.URL updates in the browser (so you can bookmark/share it).
+
+        🔹 Benefits of Angular Routing
+
+        1.No full page reloads → app feels like a native app.
+
+        2.URL-based navigation → easy to bookmark & share.
+
+        3.Can protect routes with guards (AuthGuard).
+
+        4.Supports lazy loading → performance optimization.
+
+        5.Can pass data between routes with parameters or query strings.
+
+        🔹 Analogy Recap
+
+        1.Think of your Angular app as a shopping mall.
+
+        2.Each shop = a component.
+
+        3.Routing = signboards and maps telling you where to go (URL → Component).
+
+        4.RouterOutlet = the doorway where the right shop is shown when you follow a sign.
+
+</p>
