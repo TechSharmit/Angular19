@@ -1,0 +1,45 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Wildcard Route in Angular.
+</h2>
+
+What is a Wildcard Route in Angular?
+
+1.In Angular, a wildcard route is defined with **.
+
+2.It matches any URL that is not already matched by your defined routes.
+
+3.Usually used to handle 404 Not Found pages or redirects
+
+<hr>
+
+<ul>
+    <li>
+        <a routerLink="/About">About Page</a>
+    </li>
+    <li>
+        <a routerLink="/Contact">Contact Page</a>
+    </li>
+    <li>
+        <a routerLink="/Services">Services Page</a>
+    </li>
+</ul>
+
+<router-outlet></router-outlet>
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ServicesComponent } from './services/services.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+
+export const routes: Routes = [
+  { path: 'About', component: AboutComponent },
+  { path: 'Contact', component: ContactComponent },
+  { path: 'Services', component: ServicesComponent },
+  { path: '**', component: NotFoundComponent },
+];
