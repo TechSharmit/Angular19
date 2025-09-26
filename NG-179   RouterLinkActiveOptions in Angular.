@@ -1,0 +1,67 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    RouterLinkActiveOptions in Angular.
+</h2>
+
+<hr>
+
+<ul>
+    <li>
+        <a routerLink="/About" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">About Page</a>
+    </li>
+    <li>
+        <a routerLink="/Contact" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Contact Page</a>
+    </li>
+    <li>
+        <a routerLink="/Services" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Services Page</a>
+    </li>
+    <li>
+        <a routerLink=" /Contact/Services" routerLinkActive="active"
+            [routerLinkActiveOptions]="{exact:true}">/Contact/Services Page</a>
+    </li>
+</ul>
+
+<router-outlet></router-outlet>
+
+
+<hr>
+
+
+.active {
+  color: red;
+}
+
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ServicesComponent } from './services/services.component';
+import { ContactComponent } from './contact/contact.component';
+
+export const routes: Routes = [
+  { path: 'About', component: AboutComponent },
+  { path: 'Contact', component: ContactComponent },
+  { path: 'Services', component: ServicesComponent },
+
+  { path: 'Contact/Services', component: ServicesComponent },
+];
+
+
+
+
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterLink, RouterLinkActive, RouterOutlet, ],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
