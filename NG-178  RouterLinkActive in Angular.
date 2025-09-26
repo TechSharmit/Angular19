@@ -1,0 +1,59 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    RouterLinkActive in Angular.
+</h2>
+
+<hr>
+
+<Ul>
+    <li>
+        <a routerLink="/About" routerLinkActive="active">About Page</a>
+    </li>
+    <li>
+        <a routerLink="/Contact" routerLinkActive="active">Contact Page</a>
+    </li>
+    <li>
+        <a routerLink="/Services" routerLinkActive="active">Services Page</a>
+    </li>
+</Ul>
+
+<router-outlet></router-outlet>
+
+<hr>
+
+
+.active {
+  color: red;
+}
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ServicesComponent } from './services/services.component';
+
+export const routes: Routes = [
+  { path: 'About', component: AboutComponent },
+  { path: 'Contact', component: ContactComponent },
+  { path: 'Services', component: ServicesComponent },
+];
+
+
+
+
+import { Component } from '@angular/core';
+import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterLink, RouterOutlet, RouterLinkActive],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
