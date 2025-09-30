@@ -1,0 +1,82 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    router.navigate() method with parameter for Angular routes.
+</h2>
+
+<hr>
+
+<h2>
+    App Page!
+</h2>
+
+<button (click)="GoToAbout(5)">
+    Go To About with User Id = 5
+</button>
+
+
+
+<router-outlet></router-outlet>
+
+<p>About Page!</p>
+
+Paramerer : {{UserId}}
+
+
+import { Component, OnInit } from '@angular/core';
+import { Router, RouterOutlet,  } from '@angular/router';
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+
+
+  constructor(private router: Router) {}
+
+
+  GoToAbout(id: number) {
+    this.router.navigate(['About', id]);
+  }
+}
+
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ServicesComponent } from './services/services.component';
+export const routes: Routes = [
+  { path: 'About/:id', component: AboutComponent },
+  { path: 'Contact', component: ContactComponent },
+  { path: 'Services', component: ServicesComponent },
+];
+
+
+
+
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {
+  UserId!: string;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.UserId = this.route.snapshot.paramMap.get('id')!;
+  }
+}
