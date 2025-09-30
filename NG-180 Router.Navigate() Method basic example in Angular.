@@ -1,0 +1,49 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Router.Navigate() Method in Angular.
+</h2>
+
+<hr>
+
+<h2>
+    AppPage
+</h2>
+
+<button (click)="GoToAbout()">Go To About Page</button>
+
+<router-outlet></router-outlet>
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ServicesComponent } from './services/services.component';
+export const routes: Routes = [
+  { path: 'About', component: AboutComponent },
+  { path: 'Contact', component: ContactComponent },
+  { path: 'Services', component: ServicesComponent },
+];
+
+
+
+
+import { Component } from '@angular/core';
+import { Router, RouterLink, RouterOutlet } from '@angular/router';
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterLink, RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  GoToAbout() {
+    this.router.navigate(['About']);
+  }
+}
