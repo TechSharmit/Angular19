@@ -1,0 +1,75 @@
+import { Routes } from '@angular/router';
+import { ContactComponent } from './contact/contact.component';
+import { ServicesComponent } from './services/services.component';
+export const routes: Routes = [
+  { path: 'About/:id/Contact', component: ContactComponent },
+
+  { path: 'Contact', component: ContactComponent },
+
+  { path: 'Services', component: ServicesComponent },
+];
+
+
+
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  GoToAboutIdContact(id: number) {
+    this.router.navigate([' /About', id, 'Contact']);
+  }
+}
+
+
+
+
+<p>Contact Page!</p>
+
+Parameter Recived : {{UserId}}
+
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-contact',
+  imports: [],
+  templateUrl: './contact.component.html',
+  styleUrl: './contact.component.css',
+})
+export class ContactComponent {
+  UserId!: string;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.UserId = this.route.snapshot.paramMap.get('id')!;
+  }
+}
+
+
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Navigating to Child Route with Parameter in Angular.
+</h2>
+
+<hr>
+
+
+<button (click)="GoToAboutIdContact(123)">
+    Go To About Id Contact
+</button>
+
+<router-outlet></router-outlet>
