@@ -1,0 +1,77 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Navigate to route with Query Parms using router.navigate() method in Angular.
+</h2>
+
+<hr>
+
+<h2>Home Page</h2>
+
+<button (click)="GoToAboutWithParms()">
+    Go to About with Query Parms
+</button>
+
+<router-outlet></router-outlet>
+
+<p>About Page!</p>
+
+<h2>About Page!</h2>
+<p>Page : {{Page}}</p> <br>
+<p>Sort : {{Sort}}</p> <br>
+
+
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {
+  Page: string | null = null;
+
+  Sort: string | null = null;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.Page = this.route.snapshot.queryParamMap.get('Page');
+
+    this.Sort = this.route.snapshot.queryParamMap.get('Sort');
+  }
+}
+
+
+
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+constructor(private router : Router){}
+
+GoToAboutWithParms(){
+  this.router.navigate(['/About'], {queryParams : {Page : 2, Sort : 'Asc'}});
+}
+
+}
+
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+export const routes: Routes = [{ path: 'About', component: AboutComponent }];
