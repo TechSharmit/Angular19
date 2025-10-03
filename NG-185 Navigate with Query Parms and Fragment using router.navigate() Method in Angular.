@@ -1,0 +1,86 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Navigate with Query Parms and Fragment using router.navigate() Method in Angular.
+</h2>
+
+<hr>
+
+<button (click)="GoToAboutWithQpFr()">
+    Go To About with Query Parms and Fragment.
+</button>
+
+<router-outlet>
+
+</router-outlet>
+
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {
+  Catergory: string | null = null;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit(): void {
+    this.Catergory = this.route.snapshot.queryParamMap.get('Category');
+  }
+}
+
+
+
+<h1>About Page!</h1>
+
+
+<p>
+    Category Filter : {{Catergory}}
+</p>
+
+<div id='Comments'>
+
+    <h3>
+        Comments Section
+    </h3>
+
+    <p>
+        Here are user comments...
+    </p>
+
+</div>
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+export const routes: Routes = [{ path: 'About', component: AboutComponent }];
+
+
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  GoToAboutWithQpFr() {
+    this.router.navigate(['/About'], {
+      queryParams: { Category: 'Tech' },
+      fragment: 'Comments',
+    });
+  }
+}
