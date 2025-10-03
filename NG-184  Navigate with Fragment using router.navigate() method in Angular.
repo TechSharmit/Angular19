@@ -1,0 +1,60 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Navigate with Fragment using router.navigate() method in Angular.
+</h2>
+
+<hr>
+
+<button (click)="GoToTeam()">
+    Go To Team
+</button>
+
+<router-outlet></router-outlet>
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+export const routes: Routes = [{ path: 'About', component: AboutComponent }];
+
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  GoToTeam() {
+    this.router.navigate(['/About'], { fragment: 'Team' });
+  }
+}
+
+
+<h1>About Page!</h1>
+
+
+<p>
+    Content...
+</p>
+
+
+<div id="Team">
+
+    <h3>
+        Our Team
+    </h3>
+
+    <p>
+        Meet the awesome people behind this project.
+    </p>
+
+</div>
