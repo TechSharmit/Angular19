@@ -1,0 +1,79 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Passing data without exposing it to URL with router.navigate() method in Angular.
+</h2>
+
+<hr>
+
+<button (click)="GoToContact()">
+    Go To Contact (Pass Data using State)
+</button>
+
+<router-outlet></router-outlet>
+
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+
+@Component({
+  selector: 'app-contact',
+  imports: [],
+  templateUrl: './contact.component.html',
+  styleUrl: './contact.component.css',
+})
+export class ContactComponent {
+  Message: string | undefined;
+
+  Year: number | undefined;
+
+  constructor(private router: Router) {
+    //Access the state data passed during navigate.
+
+    const nav = this.router.getCurrentNavigation();
+    this.Message = nav?.extras.state?.['Message'];
+    this.Year = nav?.extras.state?.['Year'];
+  }
+}
+
+
+<p>Contact Page!</p>
+
+{{Message}}
+
+{{Year}}
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+export const routes: Routes = [
+  { path: 'About', component: AboutComponent },
+  { path: 'Contact', component: ContactComponent },
+];
+
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  //Navigate to contact and pass hidden state data
+
+  GoToContact() {
+    this.router.navigate(['/Contact'], {
+      state: { Message: 'Hello from App Page', Year: 20205 },
+    });
+  }
+}
