@@ -1,0 +1,57 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Multiple path navigation as an array using router.navigate() method.
+</h2>
+
+
+<hr>
+
+<button (click)="GoToServices()">
+    Go To Services
+</button>
+
+<router-outlet></router-outlet>
+
+<h1>Services Page!</h1>
+
+<p>Welcome to the Services section inside Contact -> About</p>
+
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-contact',
+  imports: [RouterOutlet],
+  templateUrl: './contact.component.html',
+  styleUrl: './contact.component.css',
+})
+export class ContactComponent {}
+
+
+
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+
+@Component({
+  selector: 'app-about',
+  imports: [RouterOutlet],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {}
+
+
+
+<h1>About Page!</h1>
+
+<router-outlet></router-outlet>
+
+
+
+<h1>Contact Page!</h1>
+
+<router-outlet></router-outlet>
