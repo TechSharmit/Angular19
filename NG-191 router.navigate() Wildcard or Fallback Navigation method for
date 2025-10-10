@@ -1,0 +1,49 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Wildcard Route with router.navigate() method in Angular.
+</h2>
+
+<hr>
+
+<button (click)="GoToError()">
+    Go To Fallback or Wildcard Route
+</button>
+
+<router-outlet></router-outlet>
+
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Wildcard Route with router.navigate() method in Angular.
+</h2>
+
+<hr>
+
+<button (click)="GoToError()">
+    Go To Fallback or Wildcard Route
+</button>
+
+<router-outlet></router-outlet>
+
+<h1>Page Not-Found 404 </h1>
+
+<p>The page you're looking for doesn't exist</p>
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+export const routes: Routes = [
+  { path: '', redirectTo: '/About', pathMatch: 'full' },
+  { path: 'About', component: AboutComponent },
+  { path: 'Contact', component: ContactComponent },
+
+  // Wildcard Route (Must be last)
+
+  { path: '**', component: NotFoundComponent },
+];
