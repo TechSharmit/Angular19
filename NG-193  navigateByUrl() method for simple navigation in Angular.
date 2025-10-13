@@ -1,0 +1,65 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    navigateByUrl() method for simple navigation in Angular.
+</h2>
+
+<hr>
+
+<button (click)="GoToAbout()">
+    Go To About
+</button>
+
+<button (click)="GoToContact()">
+    Go To Contact
+</button>
+
+<router-outlet></router-outlet>
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+export const routes: Routes = [
+  {
+    path: 'About',
+    component: AboutComponent,
+  },
+
+  {
+    path: 'Contact',
+    component: ContactComponent,
+  },
+];
+
+
+
+
+vimport { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  GoToAbout() {
+    this.router.navigateByUrl('/About');
+  }
+
+  GoToContact() {
+    this.router.navigateByUrl('/Contact');
+  }
+}
+
+
+
+
+<h1>About Page!</h1>
