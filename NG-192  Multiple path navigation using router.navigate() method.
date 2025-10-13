@@ -56,3 +56,22 @@ export class AboutComponent {}
 <h1>Contact Page!</h1>
 
 <router-outlet></router-outlet>
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { ServicesComponent } from './services/services.component';
+export const routes: Routes = [
+  {
+    path: 'About',
+    component: AboutComponent,
+    children: [
+      {
+        path: 'Contact',
+        component: ContactComponent,
+        children: [{ path: 'Services', component: ServicesComponent }],
+      },
+    ],
+  },
+];
