@@ -1,0 +1,76 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    navigateByUrl - Navigate with Query Parms
+</h2>
+
+<hr>
+
+<button (click)="GoToAboutWithQueryParms()">
+    Go To About With Query Parms
+</button>
+
+<router-outlet></router-outlet>
+
+
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {
+  Page: string | null = null;
+  Sort: string | null = null;
+
+  constructor(private router: ActivatedRoute) {
+    this.Page = this.router.snapshot.queryParamMap.get('Page');
+
+    this.Sort = this.router.snapshot.queryParamMap.get('Sort');
+  }
+}
+
+
+
+<h1>About Page!</h1>
+
+
+Page = {{Page}}
+<br>
+Sorting = {{Sort}}
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+export const routes: Routes = [
+  {
+    path: 'About',
+    component: AboutComponent,
+  },
+];
+
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  GoToAboutWithQueryParms() {
+    this.router.navigateByUrl('/About?Page=2&Sort=Asc');
+  }
+}
