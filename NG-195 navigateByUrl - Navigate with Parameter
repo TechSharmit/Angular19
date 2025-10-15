@@ -1,0 +1,64 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Navigation with Parameters using navigateByUrl method in Angular.
+</h2>
+
+<hr>
+
+<button (click)="GoToAboutWithUserId()">
+    Go to About component with user id 10
+</button>
+
+<router-outlet></router-outlet>
+
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {
+  Id: string | null = null;
+
+  constructor(private router: ActivatedRoute) {
+    this.Id = this.router.snapshot.paramMap.get('Id');
+  }
+}
+
+
+<h1>About Page!</h1>
+
+Id Received from App Component : {{Id}}
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+export const routes: Routes = [
+  {
+    path: 'About/:Id',
+    component: AboutComponent,
+  },
+];
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  GoToAboutWithUserId() {
+    this.router.navigateByUrl('/About/10'); //Parameter in URL
+  }
+}
