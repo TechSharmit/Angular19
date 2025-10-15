@@ -1,0 +1,50 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Navigate to Child Route using navigateByUrl method in Angular.
+</h2>
+
+<hr>
+
+
+<button (click)="GoToContact()">
+    Go To Child Route.
+</button>
+
+<router-outlet></router-outlet>
+
+<h1>About Page!</h1>
+
+<h1>Contact Page!</h1>
+
+
+import { Routes } from '@angular/router';
+import { ContactComponent } from './contact/contact.component';
+export const routes: Routes = [
+  {
+    path: 'About/Contact',
+    component: ContactComponent,
+  },
+];
+
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(private router: Router) {}
+
+  GoToContact() {
+    this.router.navigateByUrl('/About/Contact');
+  }
+}
