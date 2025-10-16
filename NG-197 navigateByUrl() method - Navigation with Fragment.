@@ -1,0 +1,46 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    navigateByUrl() method - Navigation with Fragment.
+</h2>
+
+<hr>
+
+<button (click)="GoToTeamSection()">
+    Go To Team Section
+</button>
+
+<router-outlet></router-outlet>
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+export const routes: Routes = [
+  {
+    path: 'About',
+    component: AboutComponent,
+  },
+];
+
+
+import { Component } from '@angular/core';
+import { Router, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+
+  constructor(private router : Router) {}
+
+  GoToTeamSection(){
+    this.router.navigateByUrl('/About#Team')
+  }
+
+}
