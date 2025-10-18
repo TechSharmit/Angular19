@@ -1,0 +1,18 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+
+Difference Between router.navigate() vs router.navigateByUrl() in Angular
+
+| Point                                | `router.navigate()`                                               | `router.navigateByUrl()`                                               |
+| ------------------------------------ | ----------------------------------------------------------------- | ---------------------------------------------------------------------- |
+| **Syntax Type**                      | Takes an **array of path segments**                               | Takes a **full URL string**                                            |
+| **Best for**                         | Dynamic or programmatic navigation (building routes step by step) | Simple or static URLs                                                  |
+| **Relative Navigation Support**      | ✅ Yes (supports `{ relativeTo: this.route }`)                     | ❌ No relative navigation                                               |
+| **Query Params & Fragment Handling** | ✅ Easier (passed as object)                                       | ❌ Harder (you must manually write them in URL)                         |
+| **Multiple Path Segments**           | Done in array format (`['/user', id, 'profile']`)                 | Must be manually concatenated in string (`'/user/' + id + '/profile'`) |
+| **Readability**                      | Better for parameterized and complex routes                       | Better for simple direct routes                                        |
+| **Internally Calls**                 | Converts commands to a URL and calls `navigateByUrl()`            | Directly updates URL                                                   |
+| **Error Handling / Guards**          | Fully respects route guards, interceptors                         | Same behavior                                                          |
+| **Performance**                      | Slight overhead (array to URL conversion)                         | Slightly faster (direct URL update)                                    |
