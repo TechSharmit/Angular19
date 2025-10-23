@@ -1,0 +1,50 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+
+Angular Route Guards — Complete Theory Summary
+
+1. What Are Route Guards?
+
+Route Guards are interfaces provided by Angular’s RouterModule.
+
+They control navigation: whether a user can access, leave, or load a particular route.
+
+Used for authentication, authorization, data protection, and user flow control.
+
+
+
+2. Purpose of Route Guards
+
+They help in:
+
+Protecting routes from unauthorized access.
+
+Preventing navigation away from unsaved changes.
+
+Restricting module loading based on conditions.
+
+Managing dynamic or conditional routing.
+
+Controlling how and when a route should be matched or activated.
+
+3. Types of Route Guards
+CanActivate
+CanActivateChild
+CanDeactivate
+CanLoad
+CanMatch
+
+
+4. Return Types (What a Guard Can Return)
+
+A guard can return:
+
+boolean → true (allow) / false (deny)
+
+UrlTree → redirect to another route
+
+Observable<boolean | UrlTree> → for async logic
+
+Promise<boolean | UrlTree> → for async logic
