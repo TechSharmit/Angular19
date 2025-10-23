@@ -1,0 +1,23 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+Types of Route Guards :-
+
+1.CanActivate 
+    Interface : CanActivate   
+    Purpose : Controls if a route can be Activated (Enterred) 
+    When it runs : Before route navigation
+2.CanActivateChild
+    Interface : CanActivateChild
+    Purpose : Controls if a child route can be Activated
+    When it runs : Before navigating to a child route
+3.CanDeactivate
+    Interface : CanDeactivate<T>
+    Purpose : Controls if user can leave (deactivate) a route
+    When it runs : Before leaving a route
+    
+4.CanMatch
+    Interface : CanMatch
+    Purpose : Controls if a route should even be matched
+    When it runs : During route matching
