@@ -1,0 +1,30 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+Guard Execution Order
+
+When navigating, Angular checks guards in this order:
+
+1.CanMatch → checks if route should be considered.
+
+2.CanLoad → checks if lazy module should be loaded.
+
+3.CanActivateChild → checks child routes.
+
+4.CanActivate → checks if route can be activated.
+
+5.CanDeactivate → checks before leaving current route.
+
+Navigation continues only if all guards return true (or a valid UrlTree redirect).
+
+
+Guard Evaluation Rules
+
+1.Guards run in order of appearance in the route configuration.
+
+2.If any guard returns false, navigation is cancelled.
+
+3.If any guard returns UrlTree, navigation redirects to that URL.
+
+4.Angular waits for async guards (Observable or Promise) to resolve before continuing.
