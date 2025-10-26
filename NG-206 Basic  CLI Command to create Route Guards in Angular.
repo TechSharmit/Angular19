@@ -1,0 +1,22 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    CLI Command to create Route Guards in Angular.
+</h2>
+
+<p>
+    Basic Command to Create Route Guards : <br>
+
+    ng generate guard <guard-name>
+
+    ng g guard <guard-name>
+
+    Which type of guard would you like to create? (Press <space> to select, <a> to toggle all, <i> to invert selection, and <enter> to proceed)
+                        ❯◯ CanActivate
+                        ◯ CanActivateChild
+                        ◯ CanDeactivate
+                        ◯ CanMatch
+
+</p>
