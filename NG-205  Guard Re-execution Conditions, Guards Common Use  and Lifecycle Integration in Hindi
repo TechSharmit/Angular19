@@ -1,0 +1,32 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+Guard Re-execution Conditions
+
+Guards are re-run when:
+
+1.The route parameters change.
+
+2.The query parameters change (depends on config).
+
+3.A different child route is activated.
+
+4.Navigation triggers a new route evaluation.
+
+| Guard                | Common Use                                                |
+| -------------------- | --------------------------------------------------------- |
+| **CanActivate**      | Authentication check (login/logout).                      |
+| **CanActivateChild** | Role-based access for nested routes.                      |
+| **CanDeactivate**    | Warn before leaving unsaved form.                         |
+| **CanLoad**          | Don’t load modules for unauthorized users.                |
+| **CanMatch**         | Dynamic route matching (like A/B testing, feature flags). |
+
+
+Lifecycle Integration
+
+1.Guards work before components are created or destroyed:
+
+2.Before entering → CanMatch, CanLoad, CanActivate, CanActivateChild
+
+3.Before leaving → CanDeactivate
