@@ -1,0 +1,23 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Commands to create CanMatch Route Guard in Angular.
+</h2>
+
+<p>
+    Commands :- <br>
+
+    Command-1 : ng generate guard FolderName/RouteGuardName --implements CanMatch
+
+    Command-2 : ng g guard FolderName/RouteGuardName --implements CanMatch
+
+    Command-3 : ng g g FolderName/RouteGuardName --implements CanMatch
+</p>
+
+import { CanMatchFn } from '@angular/router';
+
+export const rG2Guard: CanMatchFn = (route, segments) => {
+  return true;
+};
