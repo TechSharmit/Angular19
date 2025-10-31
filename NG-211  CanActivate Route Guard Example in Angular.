@@ -1,0 +1,72 @@
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  Login() {
+    localStorage.setItem('IsLoggedIn', 'true');
+    alert('Login Successful');
+  }
+  LogOut() {
+    localStorage.removeItem('IsLoggedIn');
+    alert('Login Failed');
+  }
+}
+
+
+<h1>About Page!</h1>
+
+
+
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  Login() {
+    localStorage.setItem('IsLoggedIn', 'true');
+    alert('Login Successful');
+  }
+  LogOut() {
+    localStorage.removeItem('IsLoggedIn');
+    alert('Login Failed');
+  }
+}
+
+
+
+import { CanActivateFn } from '@angular/router';
+
+export const authGuard: CanActivateFn = (route, state) => {
+  const IsLoggedIn = localStorage.getItem('IsLoggedIn');
+
+  if (IsLoggedIn === 'true') {
+    return true; //Allow Access
+  } else {
+    alert('Access Blocked'); //Access Blocked
+    return false;
+  }
+};
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { authGuard } from './RouteGuards/auth.guard';
+export const routes: Routes = [
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
+  { path: 'about', component: AboutComponent, canActivate: [authGuard] },
+];
