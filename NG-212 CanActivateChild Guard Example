@@ -1,0 +1,96 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h1>👮‍♂️ CanActivateChild Guard Example (Angular 19)</h1>
+
+<button (click)="login()">Login</button>
+<button (click)="logout()">Logout</button>
+
+<hr />
+
+<a routerLink="/about">About Page</a> |
+<a routerLink="/about/team">Team Page (Child)</a>
+
+<hr />
+<router-outlet></router-outlet>
+
+import { CanActivateChildFn } from '@angular/router';
+
+export const childGuard: CanActivateChildFn = (childRoute, state) => {
+  const isLoggedIn = localStorage.getItem('isLoggedIn');
+
+  if (isLoggedIn === 'true') {
+    return true; // ✅ allow access
+  } else {
+    alert('Bhai! Pehle login kar le 😅');
+    return false; // ❌ stop access
+  }
+};
+
+
+
+<p>team works!</p>
+
+
+
+
+<h1>About Page!</h1>
+
+<router-outlet></router-outlet>
+
+
+import { Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [RouterOutlet],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {}
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { TeamComponent } from './team/team.component';
+import { childGuard } from './RouteGuards/child.guard';
+export const routes: Routes = [
+  { path: '', redirectTo: 'about', pathMatch: 'full' },
+
+  {
+    path: 'about',
+    component: AboutComponent,
+    canActivateChild: [childGuard], // 👈 Guard laga diya yahan
+    children: [
+      { path: 'team', component: TeamComponent }, // 👈 child route
+    ],
+  },
+];
+
+
+
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  login() {
+    localStorage.setItem('isLoggedIn', 'true');
+    alert('Login successful ✅');
+  }
+
+  logout() {
+    localStorage.removeItem('isLoggedIn');
+    alert('Logged out 🚪');
+  }
+}
