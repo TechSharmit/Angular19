@@ -1,0 +1,56 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+1️⃣ What is a Route Resolver?
+
+1.A Route Resolver is a feature in Angular that fetches data before a route is loaded.
+
+2.It helps ensure that when a component is displayed, its data is already available.
+
+3.Think of it as preparing data before showing the page.
+
+2️⃣ Why Do We Need a Resolver?
+
+1.Normally, we fetch data inside the component using ngOnInit().
+
+2.This causes the component to load first, and then data appears after a short delay.
+
+3.With a resolver, Angular waits for the data to be ready before loading the route.
+
+4.This removes the “loading” flicker and improves the user experience.
+
+
+3️⃣ When Does a Resolver Run?
+
+1.It runs before the route is activated.
+
+2.Angular will pause the navigation until the resolver finishes.
+
+3.Once the data is ready → the route is activated → the component receives the data.
+
+
+4️⃣ Key Benefits
+
+✅ No more “Loading…” screens
+✅ Data is ready as soon as the page opens
+✅ Cleaner, more professional user experience
+✅ Great for API-driven pages or SEO-friendly apps
+
+5️⃣ How Does It Work (Flow)
+
+User clicks on a route → 
+Angular checks if a resolver is attached →
+Resolver runs and fetches data → 
+Once done, route activates →
+Component receives the data instantly
+
+6️⃣ Common Use Cases
+
+1.Preloading user details before showing profile page
+
+2.Preloading product info before showing product detail page
+
+3.Loading configuration or settings before app startup
+
+4.Preparing dashboard data before showing the main view
