@@ -1,0 +1,90 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Example for CanMatch route guard in angualar.
+</h2>
+
+<hr>
+
+<button (click)="LogIn()">
+    Click to Login
+</button>
+
+<button (click)="LogOut()">
+    Click to Logout
+</button>
+
+<hr>
+
+<a routerLink="/about">About</a>
+<a routerLink="/contact">Contact</a>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+
+import { CanMatchFn } from '@angular/router';
+
+export const matchGuard: CanMatchFn = (route, segments) => {
+  const IsLoggedIn = localStorage.getItem('IsLoggedIn');
+
+  if (IsLoggedIn === 'true') {
+    return true; // Allow route matching
+  } else {
+    alert('Access Denied! Please login first.');
+    return false; // Route will not even match.
+  }
+};
+
+
+
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterLink, RouterOutlet],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  LogIn() {
+    localStorage.setItem('IsLoggedIn', 'true');
+    alert('Login Successful');
+  }
+
+  LogOut() {
+    localStorage.removeItem('IsLoggedIn');
+    alert('Logged Out ');
+  }
+}
+
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { matchGuard } from './RouteGuards/match.guard';
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'about',
+    pathMatch: 'full',
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+
+  {
+    path: 'contact',
+    component: ContactComponent,
+    canMatch: [matchGuard],
+  },
+];
