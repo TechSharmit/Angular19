@@ -1,0 +1,89 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Example for CanDeactivate route guard in Angular.
+</h2>
+
+<hr>
+
+<a routerLink="/about">
+    About
+</a>
+
+<a routerLink="/contact">
+    Contact
+</a>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+<h1>About Page!</h1>
+
+
+<h1>Contact Page!</h1>
+
+<hr>
+
+<form>
+    <label>Enter your name</label>
+    <input type="text" placeholder="Your Name">
+    <br> <br>
+    <button type="submit">Submit</button>
+</form>
+
+
+import { Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
+
+
+
+
+import { CanDeactivateFn } from '@angular/router';
+
+export const deactivateGuard: CanDeactivateFn<unknown> = (
+  component,
+  currentRoute,
+  currentState,
+  nextState
+) => {
+  const ConfirmLeave = confirm(
+    'You have unsaved changes. Do you really want to leave this page?'
+  );
+
+  return ConfirmLeave;
+};
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { deactivateGuard } from './RouteGuards/deactivate.guard';
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'about',
+    pathMatch: 'full',
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  {
+    path: 'contact',
+    component: ContactComponent,
+    canDeactivate: [deactivateGuard],
+  },
+];
