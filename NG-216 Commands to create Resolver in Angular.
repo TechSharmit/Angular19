@@ -1,0 +1,18 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Commands to create Resolver in Angular.
+</h2>
+
+<p>
+    Command-1 : ng generate resolver NameOfResolver
+
+    Command-2 : ng generate resolver FolderName/NameOfResolver
+
+    Command-3 : ng g resolver FolderName/NameOfResolver
+
+    Command-4 : ng g r FolderName/NameOfResolver
+
+</p>
