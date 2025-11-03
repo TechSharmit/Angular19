@@ -1,0 +1,109 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Simple Example for Resolver in Angular.
+</h2>
+
+
+<button routerLink="/About">Go to About</button>
+
+<!-- ✅ Important -->
+
+<router-outlet></router-outlet>
+
+
+
+<h1>About Page!</h1>
+
+<p>
+    <strong>Name :</strong> {{AboutInfo.Name}}
+
+</p>
+
+<p>
+    <strong>Course :</strong> {{AboutInfo.Course}}
+
+</p>
+
+<p>
+    <strong>Topic :</strong> {{AboutInfo.Topic}}
+
+</p>
+
+import { ResolveFn } from '@angular/router';
+
+export const abtResolver: ResolveFn<any> = (route, state) => {
+ 
+  console.log('Resolver executed before AboutComponent Loads');
+
+  const Data = {
+    Name : 'Tech Sharmit',
+    Course : 'Angular-19',
+    Topic : 'Route Resolver Example'
+  };
+
+  //Whaterver you return here will be available in the component.
+
+  return Data;
+
+};
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { abtResolver } from './MyResolvers/abt.resolver';
+export const routes: Routes = [
+  {
+    path: 'About',
+    component: AboutComponent,
+    resolve: {
+      aboutData: abtResolver,
+    },
+  },
+];
+
+
+
+
+import { assertPlatform, Component } from '@angular/core';
+import { RouterLink, RouterOutlet } from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
+  providers: [],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {}
+
+
+
+
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {
+  AboutInfo: any;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.AboutInfo = this.route.snapshot.data['aboutData'];
+    console.log('Data received from resolver : ', this.AboutInfo);
+  }
+}
+
+
+
+
