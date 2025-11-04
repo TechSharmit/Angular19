@@ -1,0 +1,125 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>
+    Resolver with Route Parameters (Dynamic Data) in Angular.
+</h2>
+
+<hr>
+
+<button routerLink="/about/1">
+    User 1
+</button>
+
+<button routerLink="/about/2">
+    User 2
+</button>
+
+
+<button routerLink="/about/3">
+    User 3
+</button>
+
+
+<button routerLink="/about/5">
+    Invalid user
+</button>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { abtResolver } from './abt.resolver';
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'about/1',
+    pathMatch: 'full',
+  },
+
+  {
+    path: 'about/:id', // Route parameter added
+    component: AboutComponent,
+    resolve: { aboutData: abtResolver },
+  },
+];
+
+
+
+import { ResolveFn } from '@angular/router';
+
+export const abtResolver: ResolveFn<any> = (route, state) => {
+  console.log('Resolver executed before AboutComponent loads.');
+
+  //get route parameter
+
+  const UserId = route.paramMap.get('id');
+
+  // Some dummy local data
+
+  const users = [
+    {
+      id: 1,
+      name: 'Tech Sharmit',
+      course: 'Angular 19',
+      topic: 'Resolver Example',
+    },
+
+    { id: 2, name: 'Amit', course: 'React', topic: 'Routing' },
+
+    { id: 3, name: 'Sharmit', course: 'Vue', topic: 'Components' },
+  ];
+
+  // Find matching user based on ID
+
+  const FoundUser = users.find((u) => u.id === Number(UserId));
+
+  return FoundUser || { name: 'Unkown', course: 'N/A', topic: 'N/A' };
+};
+
+
+
+
+import { CommonModule } from '@angular/common';
+import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [CommonModule],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {
+  UserInfo: any;
+
+  constructor(private route: ActivatedRoute) {}
+
+  ngOnInit() {
+    this.route.data.subscribe((data) => {
+      this.UserInfo = data['aboutData'];
+      console.log('Data Received from resolver');
+    });
+  }
+}
+
+
+
+
+<h1>About Page!</h1>
+
+<div *ngIf="UserInfo; else loading">
+    Name : {{UserInfo.name}}
+    Course : {{UserInfo.course}}
+    Topic : {{UserInfo.topic}}
+
+</div>
+
+
+<ng-template #loading>
+    Loadind data...
+</ng-template>
