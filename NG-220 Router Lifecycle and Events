@@ -1,0 +1,66 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+Router Lifecycle and Events
+
+Angular Router provides a comprehensive set of lifecycle hooks and events that allow you to respond to navigation
+changes and execute custom logic during the routing process.
+
+
+1. What is the Angular Router?
+
+The Router in Angular is a built-in service that allows navigation between different views or components based on URLs.
+
+It turns your Angular app into a Single-Page Application (SPA) with multiple views.
+
+Instead of reloading pages, the router dynamically swaps components inside a single page.
+
+It also supports lazy loading, guards, route resolvers, and route parameters.
+
+
+2. What is the Router Lifecycle?
+
+The Router Lifecycle refers to the complete internal process Angular follows whenever you move from one route to
+another.
+
+It starts the moment a navigation request begins and ends when the target component is fully activated or when
+navigation fails.
+
+This process goes through several phases — such as recognizing the route, checking guards, loading modules, resolving
+data, and finally activating components.
+
+At each phase, Angular emits specific Router Events that indicate what’s happening.
+
+3. What are Router Events?
+
+Router Events are notifications (emitted as Observables) that show the progress of navigation.
+
+Each event represents a stage in the router’s lifecycle.
+
+You can use these events to react to navigation — for example:
+
+Show or hide a loading spinner.
+
+Log page views.
+
+Handle errors or cancellations.
+
+Measure lazy-loading performance.
+
+How the Router Lifecycle Works
+
+
+NavigationStart
+↓
+RouteConfigLoadStart → RouteConfigLoadEnd (if lazy loading)
+↓
+RoutesRecognized
+↓
+GuardsCheckStart → GuardsCheckEnd
+↓
+ResolveStart → ResolveEnd
+↓
+ActivationStart → ActivationEnd
+↓
+NavigationEnd (or Cancel / Error)
