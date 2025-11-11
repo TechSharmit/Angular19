@@ -1,0 +1,115 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<div *ngIf="loading()" class="loading">Loading...</div>
+
+<nav>
+    <a routerLink="/about" routerLinkActive="active">About</a> |
+    <a routerLink="/contact" routerLinkActive="active">Contact</a>
+</nav>
+
+<router-outlet></router-outlet>
+
+.loading {
+  background: #e3f2fd;
+  color: #1976d2;
+  padding: 10px;
+  text-align: center;
+  font-weight: 500;
+}
+
+nav {
+  margin: 10px;
+}
+
+a{
+  text-decoration: none;
+  color: #1976d2;
+  font-weight: 500;
+}
+
+a.active {
+  font-weight: bold;
+  text-decoration: underline;
+}
+
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'about',
+    pathMatch: 'full',
+  },
+  {
+    path: 'about',
+    component: AboutComponent,
+  },
+  { path: 'contact', 
+    component:  ContactComponent},
+];
+
+
+
+
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { AppComponent } from './app/app.component';
+import { provideRouter } from '@angular/router';
+import { routes } from './app/app.routes';
+import { provideHttpClient } from '@angular/common/http';
+
+bootstrapApplication(AppComponent, {
+  providers: [provideRouter(routes), provideHttpClient()],
+}).catch((err) => console.log(err));
+
+
+
+
+
+import { CommonModule } from '@angular/common';
+import { Component, signal } from '@angular/core';
+import {
+  NavigationEnd,
+  NavigationStart,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
+import { filter } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, RouterOutlet, RouterLink],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  loading = signal(false);
+
+  constructor(private router: Router) {
+    // Navigation Start
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe((event: any) => {
+        // router.navigated = false means it's the first load — ignore it
+        if (!this.router.navigated) return;
+
+        this.loading.set(true);
+        console.log('➡️ Navigation started to:', event.url);
+      });
+
+    // NavigationEnd event
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe((event: any) => {
+        console.log('✅ Navigation ended. Current route is:', event.url);
+      });
+  }
+}
