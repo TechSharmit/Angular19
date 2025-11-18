@@ -1,0 +1,64 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+
+<h1>NavigationSkipped Demo</h1>
+
+<a routerLink="/about">Go to About</a>
+
+<router-outlet></router-outlet>
+
+import { Component } from '@angular/core';
+import {
+  NavigationSkipped,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationSkipped) {
+        console.log('⛔ NavigationSkipped:', event.reason, 'URL:', event.url);
+      }
+    });
+  }
+}
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+
+export const routes: Routes = [
+  { path: '', redirectTo: '/about', pathMatch: 'full' }, // causes NavigationSkipped
+  { path: 'about', component: AboutComponent },
+];
+
+
+
+<h2>About Page</h2>
+
+<a routerLink="/about">Click About Again</a>
+
+
+
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+
+@Component({
+  selector: 'app-about',
+  imports: [RouterLink],
+  templateUrl: './about.component.html',
+  styleUrl: './about.component.css',
+})
+export class AboutComponent {}
