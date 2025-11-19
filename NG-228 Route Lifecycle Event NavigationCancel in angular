@@ -1,0 +1,71 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+
+<h1>NavigationCancel Demo</h1>
+
+<a routerLink="/about">Go to About</a> |
+<a routerLink="/admin">Go to Admin</a>
+
+<router-outlet></router-outlet>
+
+<h2>About Page</h2>
+
+
+<h1>Admin Page!</h1>
+
+import { CanActivateFn } from '@angular/router';
+
+export const adminGuard: CanActivateFn = (route, state) => {
+  console.log('❌ Guard: User not allowed, cancel navigation.');
+  return false; // cancel navigation
+};
+
+
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { adminGuard } from './admin.guard';
+
+export const routes: Routes = [
+  { path: '', redirectTo: '/about', pathMatch: 'full' },
+
+  { path: 'about', component: AboutComponent },
+
+  {
+    path: 'admin',
+    canActivate: [adminGuard],
+    loadComponent: () =>
+      import('./admin/admin.component').then((m) => m.AdminComponent),
+  },
+];
+
+
+
+
+import { Component } from '@angular/core';
+import {
+  NavigationCancel,
+  Router,
+  RouterLink,
+  RouterOutlet,
+} from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof NavigationCancel) {
+        console.log('⛔ NavigationCancel:', event.reason, 'URL:', event.url);
+      }
+    });
+  }
+}
