@@ -1,0 +1,75 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+
+<h1>NavigationError Working Demo</h1>
+
+<a routerLink="/about">Go to About</a> |
+<a routerLink="/contact">Go to Contact (Will FAIL)</a>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+
+<h2>About Page</h2>
+
+<h1>Contact Page!</h1>
+
+import { ResolveFn } from '@angular/router';
+
+export const dataResolver: ResolveFn<any> = () => {
+  console.log('Resolver executing...');
+  throw new Error('Intentional Resolver Error for Demo!');
+};
+
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+import { dataResolver } from './data.resolver';
+
+export const routes: Routes = [
+  { path: '', redirectTo: '/about', pathMatch: 'full' },
+
+  { path: 'about', component: AboutComponent },
+
+  {
+    path: 'contact',
+    component: ContactComponent,
+    resolve: { data: dataResolver }, // THIS WILL THROW ERROR
+  },
+];
+
+
+import { Component } from '@angular/core';
+import {
+  NavigationError,
+  Router,
+  RouterLink,
+  RouterOutlet,
+  Event,
+} from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  constructor(private router: Router) {
+    this.router.events.subscribe((event: Event) => {
+      if (event instanceof NavigationError) {
+        console.log('🔥 NavigationError Fired!');
+        console.log('Error Message:', event.error?.message);
+        alert('Navigation Error Occurred! Check console.');
+      }
+    });
+  }
+}
+
+
+
