@@ -1,0 +1,55 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>RoutesRecognized Demo</h2>
+
+<a routerLink="/about">Go to About</a> |
+<a routerLink="/contact">Go to Contact</a>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+import { ContactComponent } from './contact/contact.component';
+
+
+export const routes: Routes = [
+  { path: '', redirectTo: '/about', pathMatch: 'full' },
+
+  { path: 'about', component: AboutComponent },
+
+  { path: 'contact', component: ContactComponent },
+];
+
+
+import { Component } from '@angular/core';
+import {
+  NavigationError,
+  Router,
+  RouterLink,
+  RouterOutlet,
+  Event,
+  RoutesRecognized,
+} from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [RouterOutlet, RouterLink],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  constructor(private router: Router) {
+    this.router.events.subscribe((event) => {
+      if (event instanceof RoutesRecognized) {
+        console.log('📌 RoutesRecognized Fired!');
+        console.log('Matched URL:', event.url);
+        console.log('Matched Route:', event.state.root.firstChild?.routeConfig);
+      }
+    });
+  }
+}
