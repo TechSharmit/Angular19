@@ -1,0 +1,19 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+Why Angular App loads Slowly?
+
+
+
+Application =  Home  + Dashboard  + Admin Pannel + Products 
+
+Application =  Home (2 KB) + Dashboard (300 KB) + Admin Pannel (500 KB) + Products (250 KB) 
+
+
+
+In case of Eager Loading -> Application will load : Home + Dashboard + Admin Pannel + Products
+                         ->  2 + 300 + 500 + 250 = 1052 KB at Startup
+
+In case of Lazy Loadig   -> Application will load only Home first and then others on Demand.
+                         ->  2 KB
