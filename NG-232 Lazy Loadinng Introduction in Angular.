@@ -1,0 +1,47 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+What is Lazy Loading?
+
+1. Lazy Loading means loading code only when it’s needed.
+
+Not all parts of the app load at startup — only when user navigates to them.
+
+2. It improves performance by reducing the initial bundle size.
+
+3. It speeds up the first-page load time (faster initial rendering).
+
+4. It helps large applications load faster and feel lightweight.
+
+5. In Angular, lazy loading is done at the route level (feature-based).
+
+6. Angular 19 uses loadComponent() and loadChildren() for lazy loading.
+
+7. Modules aren’t required anymore — components can be lazy-loaded directly.
+
+8. Lazy loaded routes load their components only when the route is visited.
+
+9. This avoids loading unused components at initial app startup.
+
+10. It reduces memory usage by loading code in smaller chunks.
+
+11. It supports code splitting — each route gets its own JS file.
+
+12. It minimizes network load by loading code on demand.
+
+13. Ideal for large sections like: Admin panel, Dashboard, Reports, etc.
+
+14. Improves user experience by making the app feel snappier.
+
+15. Lazy Loading is the opposite of Eager Loading (where everything loads upfront).
+
+16. Can be combined with Preloading Strategies for balanced performance.
+
+17. Helps maintain scalability in medium to large applications.
+
+18. Highly recommended for routes not required on the first load.
+
+19. Works seamlessly in standalone Angular apps (Angular 16+).
+
+20. Lazy loading reduces the time-to-interactive (TTI) of your application.
