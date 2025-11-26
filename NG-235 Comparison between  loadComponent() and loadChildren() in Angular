@@ -1,0 +1,34 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+| Feature                    | loadComponent()             | loadChildren()                   |
+| -------------------------- | --------------------------- | -------------------------------- |
+| Loads                      | Single standalone component | Multiple child routes            |
+| Bundle                     | Small JS chunk              | Larger JS chunk (section bundle) |
+| Complexity                 | Simple                      | Medium to High                   |
+| Use case                   | About, Contact, FAQ         | Admin, Dashboard, Settings       |
+| Child Routes               | ❌ Not supported             | ✔ Fully supported              |
+| Shared Layout              | ❌ No                        | ✔ Yes                          |
+| Guards support             | ✔ Yes                       | ✔ Yes                           |
+| Resolvers                  | ✔ Yes                       | ✔ Yes                           |
+| Ideal for beginners        | ✔ Yes                       | ❌ Slightly advanced            |
+| Recommended for Angular 19 | ✔ Primary choice            | ✔ For large features            |
+
+
+
+loadComponent() Syntax:
+
+{
+path: 'about',
+loadComponent: () =>
+import('./about/about.component').then(m => m.AboutComponent)
+}
+
+loadChildren() Syntax:
+
+{
+path: 'admin',
+loadChildren: () =>
+import('./admin/admin.routes').then(r => r.adminRoutes)
+}
