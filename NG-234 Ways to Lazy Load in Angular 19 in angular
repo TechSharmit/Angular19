@@ -1,0 +1,64 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+Ways to Lazy Load in Angular 19
+
+1. Lazy Loading Using loadComponent()
+
+✔ Detailed Pointers:
+
+1.Used only for standalone components (Angular 15+).
+
+2.Loads a single file + template only when route is visited.
+
+3.Angular creates a separate JS chunk for that component.
+
+4.Keeps initial bundle extremely small.
+
+5.Perfect for small pages with no nested routing.
+
+6.Makes routing file simple and clean.
+
+Faster than loadChildren() because:
+
+1.It downloads only one component, not a route tree.
+
+2.Useful for content-only pages (About, Contact, Terms).
+
+3.Supports route-level guards like canActivate.
+
+4.Useful for SEO-focused apps where multiple pages are not connected.
+
+2. Lazy Loading Using loadChildren()
+
+✔ Detailed Pointers:
+
+1.Used for feature sections that contain multiple pages.
+
+2.Suitable for Admin panels, User dashboards, Settings.
+
+3.Lazy loads an entire route group, not just a component.
+
+4.Enables nested routes inside the lazy-loaded area.
+
+5.Organizes large projects into logical feature folders.
+
+6.Keeps main routing file clean and maintainable.
+
+7.Angular loads one combined JS bundle for all child routes.
+
+8.Reduces code duplication across related routes.
+
+9.Essential when multiple pages share:
+
+Guards
+
+Layouts
+
+Resolvers
+
+UI shells
+
+Works with standalone route files (*.routes.ts).
+
