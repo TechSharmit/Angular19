@@ -1,0 +1,63 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+WHEN TO USE LAZY LOADING (✔ Best Situations)
+
+1. When a Feature Is Not Needed at App Startup
+
+Any part of the app that users do not see immediately.
+
+Example: Admin Panel, Analytics, User Profile.
+
+2. When the Feature Is Large or Heavy
+
+Pages with many components, charts, tables, or services.
+
+Reduces the main bundle size significantly.
+
+3. When a Section Has Its Own Sub-Pages
+
+Dashboard → Home / Reports / Settings
+
+User → Profile / Orders / Wishlist
+
+Perfect use-case for loadChildren().
+
+4. When Only a Small Percentage of Users Use That Feature
+
+Example:
+
+Admin pages (1% users)
+
+Support pages
+
+Advanced settings
+
+Reduces unnecessary load for majority users.
+
+5. When You Want Faster Initial Load (Performance Boost)
+
+Lazy loading helps pages render quicker on slow internet.
+
+Crucial for mobile users and SEO performance.
+
+6. When the Feature Is Optional
+
+Contact page
+
+About page
+
+Privacy policy
+
+Terms & conditions
+
+All good cases for loadComponent().
+
+7. When Building Large, Scalable Apps
+
+Enterprise apps
+
+Multi-role apps (Admin/Customer/Seller)
+
+Helps maintain a clean, modular architecture.
