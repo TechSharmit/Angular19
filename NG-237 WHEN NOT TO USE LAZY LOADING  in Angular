@@ -1,0 +1,68 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+
+WHEN NOT TO USE LAZY LOADING (🚫 Avoid These Situations)
+
+1. Do NOT Lazy Load the Home Page
+
+Home page must open instantly.
+
+Lazy-loading home breaks the user experience.
+
+2. Do NOT Lazy Load Very Small Components
+
+If the component is tiny, lazy-loading creates:
+
+extra network call
+
+extra delay
+
+no performance benefit
+
+Example: A simple header or small card component.
+
+3. When the Feature Is Required Immediately at App Start
+
+Login page
+
+App shell or Layout
+
+Main dashboard for signed-in users.
+
+4. When Components Share Important Services
+
+If a lazy-loaded component needs global shared services:
+
+may create duplicate service instances.
+
+Better to eagerly load shared/common components.
+
+5. When There Are Too Many Lazy-Loaded Chunks
+
+Overdoing lazy loading creates:
+
+too many network requests
+
+performance issues
+
+poor caching
+
+Balance is important.
+
+6. When SEO Requires Content On First Load
+
+If page content must appear instantly for SEO:
+
+avoid lazy loading.
+
+Example: A blog landing page in SSR apps.
+
+7. When User Flow Depends on Speed
+
+If the user must switch quickly between pages:
+
+loading time for lazy chunks creates a delay.
+
+Example: POS systems, Finance apps, Chat apps.
