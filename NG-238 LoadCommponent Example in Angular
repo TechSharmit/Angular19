@@ -1,0 +1,31 @@
+<h1>
+    Angular 19 Course by Tech Sharmit
+</h1>
+
+<h2>Example for Lazy Loading using loadComponent() in Angular</h2>
+
+<a routerLink="/about">Go to About (Eager Load)</a><br><br>
+<a routerLink="/admin">Go to Admin (Lazy Load)</a>
+
+<hr>
+
+<router-outlet></router-outlet>
+
+<h2>About Page (Eager Loaded)</h2>
+
+<h2>Admin Page (Lazy Loaded)</h2>`
+
+import { Routes } from '@angular/router';
+import { AboutComponent } from './about/about.component';
+
+export const routes: Routes = [
+  {
+    path: 'about',
+    component: AboutComponent, // EAGER LOADED ROUTE
+  },
+  {
+    path: 'admin',
+    loadComponent: () =>
+      import('./admin/admin.component').then((m) => m.AdminComponent), // LAZY Loaded Route
+  },
+];
