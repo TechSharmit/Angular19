@@ -1,0 +1,52 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+What Are Angular Forms?
+
+Introduction
+
+In web applications, forms are used to collect user input such as login details, registration data, search queries,
+payment information, etc.
+
+Angular provides a powerful and structured way to build, manage, and validate forms in applications.
+
+Definition
+
+Angular Forms refer to Angular’s system for handling user inputs through HTML forms.
+
+They allow developers to:
+
+1.Collect data from users
+
+2.Track input values and changes
+
+3.Validate data
+
+4.Respond to form events
+
+5.Submit and process final output
+
+Angular offers built-in APIs, directives, and classes to manage forms in a clean, scalable, reactive way.
+
+Why Forms Matter in Angular
+
+Forms are central to many features in modern web apps:
+
+1.User authentication (login, registration)
+
+2.Checkout and payment
+
+3.Feedback and surveys
+
+4.Search functionality
+
+5.Data-entry dashboards
+
+Angular forms help make these tasks:
+
+1.Easier to build
+
+2.Easier to maintain
+
+3.More robust and structured
