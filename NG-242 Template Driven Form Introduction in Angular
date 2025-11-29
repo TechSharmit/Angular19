@@ -1,0 +1,102 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+1️⃣ Introduction
+
+1.Template-Driven Forms are forms where most of the form logic is written inside the HTML template.
+
+2.Suitable for simple to moderately complex forms.
+
+3.Based on Angular’s FormsModule.
+
+4.Uses two-way data binding extensively.
+
+2️⃣ Key Characteristics
+
+1.Form model is created implicitly by Angular.
+
+2.Uses ngModel for mapping data between component and view.
+
+3.HTML-driven and declarative in nature.
+
+4.Minimal TypeScript code required.
+
+5.Easy to understand for beginners.
+
+3️⃣ Required Module
+
+1.Must import FormsModule from @angular/forms in the module.
+
+2.No need for ReactiveFormsModule.
+
+4️⃣ Core Directives
+
+1.ngModel – creates FormControl & binds data.
+
+2.ngForm – represents the entire form.
+
+3.ngModelGroup – defines grouped controls inside a form.
+
+4.Template reference variables like #myForm="ngForm" used for accessing form instance.
+
+5️⃣ Two-Way Data Binding
+
+1.Achieved with [(ngModel)].
+
+2.Automatically syncs input value ↔ component variable.
+
+3.Eliminates manual event handling for inputs.
+
+6️⃣ Form Model Behavior
+
+Angular automatically:
+
+1.Creates FormControls
+
+2.Tracks value changes
+
+3.Maintains validity
+
+4.Updates form state
+
+5.No explicit form model creation is required.
+
+
+7️⃣ Advantages
+
+1.Very easy to implement.
+
+2.Clean, readable HTML.
+
+3.Great for simple forms.
+
+4.Easy for beginners to understand.
+
+5.Quick development for small modules.
+
+
+8️⃣ Limitations
+
+1.Lack of scalability for complex forms.
+
+2.Hard to unit test.
+
+3.Custom validators require boilerplate directives.
+
+4.Complex conditional logic is harder to implement.
+
+5.Less predictable than Reactive Forms.
+
+
+9️⃣ Best Use Cases
+
+1.Contact forms
+
+2.Login forms
+
+3.Registration with few fields
+
+4.Feedback forms
+
+5.Simple data-entry screens
