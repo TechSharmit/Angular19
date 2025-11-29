@@ -1,0 +1,31 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+Angular's Approach to Forms
+
+Angular provides two distinct form-building techniques:
+
+(A) Template-Driven Forms
+
+Form logic is mainly in the HTML template
+
+Uses ngModel for two-way data binding
+
+Suitable for simpler forms
+
+More declarative and easier for beginners
+
+Relies on Angular directives automatically tracking state
+
+(B) Reactive Forms
+
+Form logic is written in TypeScript
+
+Uses explicit FormControl, FormGroup, FormArray classes
+
+More scalable and predictable
+
+Better testability and performance
+
+Best for complex, dynamic forms
