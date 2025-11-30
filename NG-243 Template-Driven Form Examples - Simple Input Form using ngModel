@@ -1,0 +1,39 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Examples - Simple Input Form using ngModel
+</h1>
+
+<div>
+
+    <label>
+        Enter your name :
+    </label>
+
+    <input type="text" [(ngModel)]="UserName" name="name">
+
+    <br>
+
+    <label>
+        Name entered by user : {{UserName}}
+    </label>
+
+
+</div>
+
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import {} from '@angular/router';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserName: string = '';
+}
