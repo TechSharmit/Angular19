@@ -1,0 +1,72 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Two-Way Data Binding Using ngModel (Multiple Fields)
+</h1>
+
+
+<form>
+
+    <label>
+        First Name :
+    </label>
+
+    <input type="text" name="FirstName" [(ngModel)]="FormData.FirstName">
+
+    <label>
+        Last Name :
+    </label>
+
+    <input type="text" name="LastName" [(ngModel)]="FormData.LastName">
+
+
+    <label>
+        Email :
+    </label>
+
+    <input type="text" name="Email" [(ngModel)]="FormData.Email">
+
+    <br><br>
+
+    <label>
+        Preview Data :-
+    </label>
+
+    <br>
+    <label>
+        First Name : {{FormData.FirstName}}
+    </label>
+
+    <br>
+    <label>
+        Last Name : {{FormData.LastName}}
+    </label>
+
+    <br>
+    <label>
+        Email : {{FormData.Email}}
+    </label>
+
+
+</form>
+
+
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  FormData = {
+    FirstName: '',
+    LastName: '',
+    Email: '',
+  };
+}
