@@ -1,0 +1,85 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Accessing Form object inside the HTML using #myForm="ngForm"
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm" (ngSubmit)="OnSubmit(MyForm)">
+
+    <label>
+        Name :
+    </label>
+
+    <input type="text" name="Name" ngModel>
+
+    <br> <br>
+
+    <label>
+        Age :
+    </label>
+
+    <input type="number" name="Age" ngModel>
+
+    <br> <br>
+
+    <button type="submit">Submit</button>
+
+    <hr>
+
+    <!--Showing Form Values Directly from MyForm-->
+
+    <h3>
+        Live Form Data:
+    </h3>
+
+    <p>
+        {{MyForm.value | json }}
+    </p>
+
+    <h3>
+        Form Status :
+    </h3>
+    <p>
+        Valid : {{MyForm.valid}}
+    </p>
+
+    <p>
+        Invalid : {{MyForm.invalid}}
+    </p>
+
+    <p>
+        Touched : {{MyForm.touched}}
+    </p>
+
+    <p>
+        Dirty : {{MyForm.dirty}}
+    </p>
+
+
+import { JsonPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  OnSubmit(Form: NgForm) {
+    console.log('Form Submitted');
+    console.log('Form value:', Form.value);
+
+    console.log('Form Valid:', Form.valid);
+    console.log('Form Invalid:', Form.invalid);
+    console.log('Form Controls:', Form.controls);
+  }
+}
+
+</form>
