@@ -1,0 +1,57 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Email Validation (email attribute)
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm" (ngSubmit)="OnSubmit(MyForm)">
+
+    <label>
+        Email :
+    </label>
+
+    <input type="email" name="Email" ngModel required email #EmailCtrl="ngModel">
+
+
+    <!-- Error Message -->
+
+    <div *ngIf="EmailCtrl.invalid && EmailCtrl.touched" style="color: red;">
+        <p *ngIf="EmailCtrl.errors?.['required']">
+
+            Email is required.
+        </p>
+
+        <p *ngIf="EmailCtrl.errors?.['email']">
+
+            Enter a valid email.
+
+        </p>
+
+    </div>
+
+    <button type="submit" [disabled]="MyForm.invalid">Submit</button>
+
+
+</form>
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  OnSubmit(Form: any) {
+    console.log('Form Values', Form.value);
+    alert('Form Submitted');
+  }
+}
