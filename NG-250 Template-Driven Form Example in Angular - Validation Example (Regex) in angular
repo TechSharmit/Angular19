@@ -1,0 +1,52 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Validation Example (Regex)
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm" (ngSubmit)="OnSubmit(MyForm)">
+
+    <label>
+        Phone Number :
+    </label>
+
+    <input type="text" name="PhoneNumber" ngModel required pattern="^[0-9]{10}$" #PhoneNumber="ngModel">
+
+    <!-- Error Messages -->
+
+    <div *ngIf="PhoneNumber.invalid && PhoneNumber.touched">
+
+        <p *ngIf="PhoneNumber.errors?.['pattern']">
+
+            Phone Number must be exactly 10 digits.
+
+        </p>
+
+    </div>
+    <hr>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  OnSubmit(Form: NgForm) {
+    alert('Form Submitted!');
+  }
+}
