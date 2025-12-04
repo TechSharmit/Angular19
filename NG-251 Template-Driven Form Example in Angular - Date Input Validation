@@ -1,0 +1,62 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Date Input Validation
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm" (ngSubmit)="OnSubmit(MyForm)">
+
+    <label>
+        Select Date :
+    </label>
+
+    <input type="date" name="SelectDate" ngModel required [min]="MinDate" [max]="MaxDate" #DateField="ngModel">
+
+    <!-- Error Messages -->
+
+    <div *ngIf="DateField.invalid && DateField.touched">
+
+        <small *ngIf="DateField.errors?.['required']">
+            Date is required
+        </small>
+
+        <small *ngIf="DateField.errors?.['min']">
+            Date must be after {{MinDate}}
+        </small>
+
+        <small *ngIf="DateField.errors?.['max']">
+            Date must be before {{MaxDate}}
+        </small>
+
+    </div>
+
+    <hr>
+    <button type="submit" [disabled]="MyForm.invalid">Submit</button>
+
+
+</form>
+
+
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  MinDate = '2020-01-01';
+  MaxDate = '2030-12-31';
+  OnSubmit(Form: NgForm) {
+    console.log('Date Selected', Form.value);
+  }
+}
