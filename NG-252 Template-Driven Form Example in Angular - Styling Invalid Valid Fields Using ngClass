@@ -1,0 +1,50 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Styling Invalid Valid Fields Using ngClass
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <label>
+        Username :
+    </label>
+
+    <input type="text" name="Username" ngModel required minlength="3" #Usernamectrl="ngModel" [ngClass]="{
+        'valid-field' : Usernamectrl.valid && Usernamectrl.touched,
+        'invalid-field' : Usernamectrl.invalid && Usernamectrl.touched
+    }">
+
+    <div *ngIf="Usernamectrl.invalid && Usernamectrl.touched" style="color: red;">
+
+        <p *ngIf="Usernamectrl.errors?.['required']">
+            Username is required
+        </p>
+
+        <p *ngIf="Usernamectrl.errors?.['minlength']">
+            Minimum {{ Usernamectrl.errors?.['minlength'].requiredLength }} characters required.
+        </p>
+
+    </div>
+
+    <button type="submit" [disabled]="MyForm.invalid">Submit</button>
+
+
+</form>
+
+import { NgClass, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgClass, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
