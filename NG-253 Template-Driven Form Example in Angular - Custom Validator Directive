@@ -1,0 +1,88 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Custom Validator Directive
+</h1>
+
+<hr>
+
+<!-- Test case 
+
+            Username : ABC, ABC123 - Valid
+                       A BC, ABC 123 - invalid
+
+
+                       -->
+
+<form #MyForm="ngForm">
+
+    <label>Username :</label>
+
+    <input type="text" name="username" ngModel required noSpace #usernameCtrl="ngModel">
+
+    <div *ngIf="usernameCtrl.invalid && usernameCtrl.touched" style="color:red;">
+
+        <p *ngIf="usernameCtrl.errors?.['required']">
+            Username is required.
+        </p>
+
+        <p *ngIf="usernameCtrl.errors?.['noSpace']">
+            Spaces are not allowed in the username.
+        </p>
+
+    </div>
+
+
+
+import { NgClass, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { NoSpaceValidatorDirective } from './no-space.directive';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule,NgIf, NgClass, NoSpaceValidatorDirective],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+
+import { Directive } from '@angular/core';
+import {
+  NG_VALIDATORS,
+  Validator,
+  AbstractControl,
+  ValidationErrors,
+} from '@angular/forms';
+
+@Directive({
+  selector: '[noSpace]',
+  providers: [
+    {
+      provide: NG_VALIDATORS,
+      useExisting: NoSpaceValidatorDirective,
+      multi: true,
+    },
+  ],
+})
+export class NoSpaceValidatorDirective implements Validator {
+  validate(control: AbstractControl): ValidationErrors | null {
+    const value = control.value ?? '';
+
+    if (value.includes(' ')) {
+      return { noSpace: true }; // error object
+    }
+
+    return null; // valid
+  }
+}
+
+
+
+
+</form>
