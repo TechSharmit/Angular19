@@ -1,0 +1,48 @@
+<h1>Angular Course by Tech Sharmit</h1>
+
+<h1>Template-Driven Form Example in Angular - Basic Form States pristine Vs dirty</h1>
+
+<hr>
+
+<h2>
+    Checking Pristine vs Dirty Example
+</h2>
+
+
+<form #MyForm="ngForm">
+
+    <label>Enter Username : </label>
+
+    <input type="text" name="Username" ngModel #UsernameCtrl="ngModel">
+
+    <p>
+        <strong>Pristine:</strong> {{UsernameCtrl.pristine}}
+    </p>
+
+    <p>
+        <strong>Dirty:</strong> {{UsernameCtrl.dirty}}
+    </p>
+
+    <p *ngIf="UsernameCtrl.pristine">
+        Input is still unchanged.
+    </p>
+
+    <p *ngIf="UsernameCtrl.dirty">
+        User has changed the value.
+    </p>
+</form>
+
+
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
