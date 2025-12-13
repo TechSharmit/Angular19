@@ -1,0 +1,34 @@
+<h1>Angular Course by Tech Sharmit</h1>
+
+<h1>Template-Driven Form Example in Angular - Checking Enabled vs Disabled Example</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+
+    <label>
+        Username :
+    </label>
+
+    <input type="text" name="Username" ngModel #UsernameCtrl="ngModel" [disabled]="IsDisabled">
+
+    <br> <br>
+
+    <button type="button" (click)="Toggle()">
+        {{ IsDisabled ? 'Enable-Input' : 'Disabled Input'}}
+    </button>
+
+    <p>
+        Disabled : {{UsernameCtrl.disabled}}
+    </p>
+
+    <p>
+        Enabled : {{UsernameCtrl.enabled}}
+    </p>
+
+
+</form>
+
+
+<hr>
