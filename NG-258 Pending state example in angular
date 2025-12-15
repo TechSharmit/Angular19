@@ -1,0 +1,76 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Checking Pending State
+</h1>
+
+<hr>
+
+<form MyForm="ngForm">
+
+    <label>
+        Username :
+    </label>
+
+    <input type="text" name="Username" ngModel required checkAsync #UsernameCtrl="ngModel">
+
+
+    <p>
+        Pending : {{UsernameCtrl.pending}}
+    </p>
+
+    <p *ngIf="UsernameCtrl.pending" style="color: blue;">
+
+        Checking...
+
+    </p>
+
+</form>
+
+
+
+
+<hr>
+
+
+import { Directive } from '@angular/core';
+import { NG_ASYNC_VALIDATORS, AsyncValidator } from '@angular/forms';
+import { of } from 'rxjs';
+import { delay } from 'rxjs/operators';
+
+@Directive({
+  selector: '[checkAsync]',
+  providers: [
+    {
+      provide: NG_ASYNC_VALIDATORS,
+      useExisting: CheckAsyncDirective,
+      multi: true,
+    },
+  ],
+  standalone: true,
+})
+export class CheckAsyncDirective implements AsyncValidator {
+  validate() {
+    return of(null).pipe(delay(2000)); // 2 sec delay
+  }
+}
+
+
+
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+import { CheckAsyncDirective } from './check-async.directive';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgIf, CheckAsyncDirective],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
