@@ -1,0 +1,20 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Angular Form States – Comparison Chart
+</h1>
+
+<hr>
+
+| State     | Opposite State     | When it is `true`                   | When it becomes `false`     | Triggered by          |
+| --------- | ------------------ | ------------------------------------| --------------------------- | --------------------- |
+| pristine  | dirty              | The control value has never changed | User changes the value      | Typing / value change |
+| dirty     | pristine           | User modifies the value             | Initial load                | Typing                |
+| untouched | touched            | The control never received focus    | Focus + blur happened       | Focus event           |
+| touched   | untouched          | Control received focus and then lost it | Before blur             | Focus + blur          |
+| valid     | invalid            | All validators pass                 | Any validator fails         | Validation            |
+| invalid   | valid              | At least one validator fails        | All validators pass         | Validation            |
+| pending   | —                  | Async validator is running          | Async validation completes  | Async validation      |
+| disabled  | enabled            | Control is disabled                 | Control is enabled          | Programmatic          |
