@@ -1,0 +1,40 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Styling Forms Based on State ng-valid and ng-invalid
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <label>Name : </label>
+
+    <input type="text" name="Username" ngModel required minlength="3" #UsernameCtrl="ngModel">
+
+</form>
+
+<hr>
+
+input.ng-valid {
+  border: 10px solid green;
+}
+
+input.ng-invalid {
+  border: 10px solid red;
+}
+
+
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
