@@ -1,0 +1,46 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Styling Forms Based on State ng-dirty & ng-pristine
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <label>
+        Name :
+    </label>
+
+    <input type="text" name="Username" ngModel required minlength="3" #UserCtrl="ngModel">
+
+    <button>Button</button>
+
+</form>
+
+<hr>
+
+input.ng-dirty {
+  border: 2px solid black;
+  background-color: red;
+}
+
+input.ng-pristine {
+  border: 2px solid black;
+  background-color: yellow;
+}
+
+
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
