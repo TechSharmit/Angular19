@@ -1,0 +1,49 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Styling Forms Based on State ng-touched & ng-untouched
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <label>
+        Name :
+    </label>
+
+    <input type="text" name="Username" ngModel required minlength="3" #UsernameCtrl="ngModel">
+
+    <button>Submit</button>
+</form>
+
+
+
+<hr>
+
+
+input.ng-touched {
+  background-color: aqua;
+  border: 5px solid red;
+}
+
+input.ng-untouched {
+  background-color: brown;
+  border: 5px solid blue;
+}
+
+
+
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
