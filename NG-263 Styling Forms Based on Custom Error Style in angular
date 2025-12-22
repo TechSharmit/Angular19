@@ -1,0 +1,48 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Styling Forms Based on Custom Error Style
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <label>
+        Name :
+    </label>
+
+    <input type="text" name="Username" ngModel required minlength="3" #UsernameCtrl="ngModel">
+
+    <p class="error" *ngIf="UsernameCtrl.invalid && UsernameCtrl.touched">
+        Name is required (Minimum 3 Characters)
+    </p>
+
+    <button>Submit</button>
+
+</form>
+
+<hr>
+
+.error {
+  color: red;
+  font-size: 14px;
+  background-color: aqua;
+  border: 2px solid black;
+}
+
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
