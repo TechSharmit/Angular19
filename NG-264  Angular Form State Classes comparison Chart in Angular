@@ -1,0 +1,18 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form Example in Angular - Angular Form State Classes comparison Chart in Angular
+</h1>
+
+<hr>
+
+| CSS Class    | Meaning (in simple CSS terms)      | When the Class Is Added      | When the Class Is Removed              | How CSS Uses It                   |
+| -------------| ---------------------------------- | ---------------------------- | -------------------------------------- | --------------------------------- |
+| ng-untouched | Input has not been interacted with | On page load                 | When user focuses and leaves the field | Used to keep default styling      |
+| ng-touched   | User has interacted with the input | After focus + blur           | Never removed                          | Used to show validation feedback  |
+| ng-pristine  | Value has not been changed         | On page load                 | When value changes                     | Used to avoid early styling       |
+| ng-dirty     | Value has been changed by user     | When user types first time   | Never removed                          | Used to highlight modified fields |
+| ng-invalid   | Validation rule failed             | When input breaks validation | When validation passes                 | Used to show error styling        |
+| ng-valid     | Validation rule passed             | When input satisfies rules   | When validation fails                  | Used to show success styling      |
