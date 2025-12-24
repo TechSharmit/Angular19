@@ -1,0 +1,59 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - ngModelGroup Introduction
+</h1>
+
+What is ngModelGroup?
+
+1.ngModelGroup is an Angular directive used in Template-Driven Forms.
+
+2.It is used to group related form controls (inputs, selects, textareas) under a single logical unit.
+
+3.ngModelGroup helps organize form fields that belong together, such as:
+
+Address details
+
+Personal information
+
+Bank details
+
+4.It creates a nested structure inside the form’s data model instead of keeping all values at the same level.
+
+ngModelGroup does not create a new form, but acts as a sub-section of an existing form.
+
+5.All form controls inside an ngModelGroup are treated as child controls of that group.
+
+6.The group automatically tracks the combined state of its child controls, such as:
+
+valid / invalid
+
+touched / untouched
+
+dirty / pristine
+
+7.If any control inside the group is invalid, the entire group becomes invalid.
+
+8.ngModelGroup works only with Template-Driven Forms and cannot be used in Reactive Forms.
+
+9.It is applied to a container element (like div or fieldset), not directly to input elements.
+
+10.Each control inside the group must still use:
+
+ngModel
+
+a unique name attribute
+
+11.The grouped data is returned as a nested object when the form is submitted.
+
+12.This nested structure makes it easier to:
+
+manage complex forms
+
+apply group-level validation
+
+style sections of the form
+
+send structured data to APIs
