@@ -1,0 +1,37 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Why Do We Need ngModelGroup?
+</h1>
+
+Why Do We Need ngModelGroup?
+
+1.In real-world forms, inputs are not independent; many fields are logically related.
+
+Without ngModelGroup, all form values are stored at the same level, making the form data flat and unorganized.
+
+2.A flat structure becomes hard to read, manage, and debug as the form grows.
+
+3.ngModelGroup allows developers to group related fields together, improving form structure and clarity.
+
+4.It helps create a nested data object, which better represents real-world data models.
+
+5.Grouping makes it easier to send structured data to backend APIs, which usually expect nested objects.
+
+6.ngModelGroup enables section-wise validation, such as validating the entire address or profile section at once.
+
+7.Without grouping, validation logic must be applied individually to each control, which is repetitive.
+
+8.It allows section-level styling, such as highlighting an entire group when it is invalid.
+
+9.ngModelGroup improves maintainability by keeping related controls together.
+
+10.It makes complex forms easier to understand for both developers and learners.
+
+11.Grouping supports scalability, allowing new fields to be added to a section without restructuring the whole form.
+
+12.It provides a clear separation of concerns within a single form.
+
+13.ngModelGroup helps align the UI structure with the data structure used in the application.
