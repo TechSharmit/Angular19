@@ -1,0 +1,55 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Where Is ngModelGroup Used
+</h1>
+
+Where Is ngModelGroup Used?
+
+1.ngModelGroup is used only in Template-Driven Forms in Angular.
+
+2.It is used inside a form that is already managed by Angular using ngForm.
+
+3.ngModelGroup is applied to a container element, such as:
+
+<div>
+
+<fieldset>
+
+<section>
+
+<ng-container>
+
+4.It is never applied directly to form controls like <input>, <select>, or <textarea>.
+
+5.All form controls that need to be grouped must be placed inside the container that has ngModelGroup.
+
+6.Each control inside the group must still use:
+
+ngModel
+
+a unique name attribute
+
+7.ngModelGroup is commonly used to group:
+
+Address details
+
+Personal information
+
+Contact details
+
+Payment or bank details
+
+Any logically related form section
+
+8.Multiple ngModelGroups can be used inside a single form.
+
+9.ngModelGroup can also be nested inside another ngModelGroup to create multi-level grouping.
+
+10.It works as a child section of the main form and contributes to the form’s overall validity and value.
+
+11.ngModelGroup cannot exist outside a form; it must always be a part of an Angular form.
+
+12.It is not used in Reactive Forms (Reactive Forms use FormGroup instead)
