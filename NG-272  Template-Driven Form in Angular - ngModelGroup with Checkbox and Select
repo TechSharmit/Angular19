@@ -1,0 +1,59 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - ngModelGroup with Checkbox and Select
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <div ngModelGroup="Prefrences">
+
+        <select name="Theme" ngModel>
+            <option value="Dark">
+                Dark
+            </option>
+
+            <option value="Light">
+                Light
+            </option>
+
+        </select>
+
+        <label>
+            Notifications
+        </label>
+
+        <input type="checkbox" name="Notifications" ngModel>
+
+    </div>
+
+    <button (click)="SubmitForm(MyForm)">
+        Submit
+    </button>
+
+
+</form>
+
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  SubmitForm(Form: NgForm) {
+    console.log(Form.value);
+  }
+}
