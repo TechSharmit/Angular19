@@ -1,0 +1,46 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Nested ngModelGroup
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <div ngModelGroup="User">
+
+        <label>
+            Username :
+        </label>
+
+        <input name="Username" ngModel>
+
+        <div ngModelGroup="Address">
+
+            <label>
+                City :
+            </label>
+
+            <input name="City" ngModel>
+
+            <label>
+                Pincode :
+            </label>
+
+            <input name="Pincode" ngModel>
+
+        </div>
+
+    </div>
+
+    <button (click)="SubmitForm(MyForm)">
+        Submit
+    </button>
+
+</form>
+
+
+<hr>
