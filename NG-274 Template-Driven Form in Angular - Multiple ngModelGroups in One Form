@@ -1,0 +1,68 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Multiple ngModelGroups in One Form
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <div ngModelGroup="PersonalInfo">
+
+        <label>
+            Name :
+        </label>
+
+        <input name="Name" ngModel>
+
+        <label>
+            Title :
+        </label>
+
+        <input name="Title" ngModel>
+
+    </div>
+
+    <div ngModelGroup="ProfessionalInfo">
+
+        <label>
+            Company Name :
+        </label>
+
+        <input name="CompanyName" ngModel>
+
+        <label>
+            Company Code :
+        </label>
+
+        <input name="CompanyCode" ngModel>
+
+    </div>
+
+    <button (click)="SubmitForm(MyForm)">
+        Submit
+    </button>
+
+</form>
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  SubmitForm(Form: NgForm) {
+    console.log(Form.value);
+  }
+}
