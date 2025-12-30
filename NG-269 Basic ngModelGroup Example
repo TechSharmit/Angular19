@@ -1,0 +1,39 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Basic ngModelGroup Example
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <div ngModelGroup="Name">
+
+        <label>
+            Firstname :
+        </label>
+
+        <input name="FirstName" ngModel>
+
+        <label>
+            Lastname :
+        </label>
+
+        <input name="LastName" ngModel>
+
+    </div>
+
+    <button (click)="Submit(MyForm)">
+        Submit
+    </button>
+
+
+
+</form>
+
+
+
+<hr>
