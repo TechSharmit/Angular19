@@ -1,0 +1,58 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - ngModelGroup with Validation
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <div ngModelGroup="Login" #LoginGroup="ngModelGroup">
+
+        <label>
+            Email :
+        </label>
+
+        <input name="Email" ngModel required>
+
+        <label>
+            Password :
+        </label>
+
+        <input name="Password" ngModel required>
+
+    </div>
+
+    <p *ngIf="LoginGroup.invalid">
+        Login group Invalid
+    </p>
+
+    <button (click)="SubmitForm(MyForm)">
+        Submit
+    </button>
+
+</form>
+
+
+<hr>
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  SubmitForm(Form: NgForm) {
+    console.log(Form.valid);
+    console.log(Form.value);
+  }
+}
