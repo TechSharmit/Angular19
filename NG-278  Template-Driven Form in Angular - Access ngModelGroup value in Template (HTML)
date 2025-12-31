@@ -1,0 +1,48 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Access ngModelGroup value in Template (HTML)
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <div ngModelGroup="Profile">
+
+        <label>
+            Username:
+        </label>
+
+        <input name="Username" ngModel>
+
+        <label>
+            Password:
+        </label>
+
+        <input name="Password" ngModel>
+
+    </div>
+
+    <pre>
+        {{MyForm.value.Profile.Username | json}}
+    </pre>
+
+</form>
+
+<hr>
+
+import { JsonPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
