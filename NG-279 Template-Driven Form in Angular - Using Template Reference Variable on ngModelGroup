@@ -1,0 +1,49 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Using Template Reference Variable on ngModelGroup
+</h1>
+
+<hr>
+
+<form #MyForm="ngForm">
+
+    <div ngModelGroup="Login" #LoginGroup="ngModelGroup">
+
+        <label>
+            Email:
+        </label>
+
+        <input name="Email" ngModel>
+
+        <label>
+            Password:
+        </label>
+
+        <input name="Password" ngModel>
+
+    </div>
+
+    <p>
+        {{LoginGroup.value | json }}
+    </p>
+
+
+</form>
+
+<hr>
+
+import { JsonPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
