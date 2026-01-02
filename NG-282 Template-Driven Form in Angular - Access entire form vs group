@@ -1,0 +1,101 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Access entire form vs group
+</h1>
+
+<hr>
+
+    <form #MyForm="ngForm">
+
+        <!-- Group 1 -->
+
+        <div ngModelGroup="Login">
+
+            <label>
+                Email :
+            </label>
+
+            <input name="Email" ngModel>
+
+            <label>
+                Password :
+            </label>
+
+            <input name="Password" ngModel>
+
+        </div>
+
+        <!-- Group 2 -->
+
+        <div ngModelGroup="Profile">
+
+            <label>
+                Age :
+            </label>
+
+            <input name="Age" ngModel>
+
+            <label>
+                Country :
+            </label>
+
+            <input name="Country" ngModel>
+        </div>
+
+        <button type="button" (click)="Submit(MyForm)">
+            Submit
+        </button>
+
+    </form>
+
+<hr>
+
+<h3>
+    Entire Form Values
+</h3>
+
+<pre>
+    {{MyForm.value | json}}
+</pre>
+
+
+<h3>
+    Login Group Values
+</h3>
+
+<pre>
+    {{MyForm.value.Login | json}}
+</pre>
+
+
+<h3>
+     Profile Group Values
+</h3>
+
+<pre>
+    {{MyForm.value.Profile | json}}
+</pre>
+
+import { JsonPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule, NgForm } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Submit(Form: NgForm) {
+    console.log('Entire Form:', Form.value);
+
+    console.log('Login Group :', Form.value.Login);
+
+    console.log('Profile Group : ', Form.value.Profile);
+  }
+}
