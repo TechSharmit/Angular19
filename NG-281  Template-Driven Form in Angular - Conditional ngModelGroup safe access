@@ -1,0 +1,41 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Template-Driven Form in Angular - Conditional ngModelGroup safe access
+</h1>
+
+<hr>
+<form #MyForm="ngForm">
+
+    <label>Show Address:</label>
+    <input type="checkbox" [(ngModel)]="Show" name="Toggle">
+
+    <div *ngIf="Show" ngModelGroup="Address">
+        <label>City:</label>
+        <input name="City" ngModel>
+    </div>
+
+</form>
+
+<pre>
+City Entered by user: {{ MyForm.value.Address?.City }}
+</pre>
+
+<hr>
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [FormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Show = false;
+}
