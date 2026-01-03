@@ -1,0 +1,67 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - What is a Reactive Form?
+</h1>
+
+<hr>
+
+1️⃣ What is a Reactive Form?
+
+
+1.A Reactive Form is a way to create and manage forms using code (TypeScript) instead of writing everything in HTML.
+
+2.You control the form from the component file, not the template.
+
+3.Angular keeps the form data, validation, and state in one place.
+
+
+2️⃣ Why Do We Need Reactive Forms?
+
+Problem without Reactive Forms:
+
+1.Hard to track form values
+
+2.Validation becomes messy
+
+3.Difficult to handle complex forms
+
+Benefits:
+
+1.Full control over form logic
+
+2.Easier validation
+
+3.Better for large and dynamic forms
+
+4.Clean and predictable behavior
+
+
+3️⃣ Real-Life Analogy
+
+📝 Job Application Form
+
+1.Each input field = a question (name, email, experience)
+
+2.Form group = the entire application
+
+3.Validation = rules (email must be valid, name required)
+
+Submit button = send application
+
+Angular acts like a form manager checking everything before submission.
+
+
+4️⃣ Key Building Blocks of Reactive Forms
+
+| Term        | Simple Meaning   |
+| ----------- | ---------------- |
+| FormControl | One input field  |
+| FormGroup   | Group of fields  |
+| FormArray   | List of fields   |
+| Validators  | Rules for inputs |
+| FormBuilder | Shortcut tool    |
+
+
