@@ -1,0 +1,54 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Create a Basic Reactive Form
+</h1>
+
+<hr>
+
+<form>
+
+    <label>
+        Username :
+    </label>
+
+    <input type="text" [formControl]="Username">
+
+    <label>
+        Password :
+    </label>
+
+    <input type="password" [formControl]="Password">
+
+    <p>
+        Data Provided by User: <br>
+
+        Username : {{Username.value}} <br>
+
+        Password : {{Password.value}}
+
+    </p>
+
+
+</form>
+
+
+
+
+<hr>
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Username = new FormControl();
+  Password = new FormControl();
+}
