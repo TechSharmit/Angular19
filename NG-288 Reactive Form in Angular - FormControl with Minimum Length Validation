@@ -1,0 +1,45 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormControl with Minimum Length Validation
+</h1>
+
+<hr>
+
+    <form>
+
+        <label>
+            Username :
+        </label>
+
+        <input type="text" [formControl]="Username">
+
+        <div *ngIf="Username.errors?.['minlength']">
+
+            Minimum 3 Characters are required.
+
+        </div>
+
+
+    </form>
+
+
+<hr>
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+
+  Username = new FormControl('', Validators.minLength(3));
+}
