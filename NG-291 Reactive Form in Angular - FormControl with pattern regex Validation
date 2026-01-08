@@ -1,0 +1,38 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormControl with Pattern (Regex) Validation
+</h1>
+
+<hr>
+<form>
+
+    <label>
+        Phone Number :
+    </label>
+
+    <input type="text" [formControl]="PhoneNumber">
+
+    <p *ngIf="PhoneNumber.errors?.['pattern']">
+        Invalid Mobile number.
+    </p>
+</form>
+
+<hr>
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  PhoneNumber = new FormControl('', Validators.pattern('[0-9]{10}'));
+}
