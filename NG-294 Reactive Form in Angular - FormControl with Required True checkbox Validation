@@ -1,0 +1,40 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormControl with Required True (Checkbox) Validation
+</h1>
+
+<hr>
+
+<form>
+
+    <label>
+        I agree to the terms and Conditions.
+    </label>
+
+    <input type="checkbox" [formControl]="Terms">
+
+    <p *ngIf="Terms.touched && Terms.errors?.['required']">
+        You must accept the terms and Conditions.
+    </p>
+
+</form>
+
+<hr>
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Terms = new FormControl(false, Validators.requiredTrue);
+}
