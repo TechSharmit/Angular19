@@ -1,0 +1,52 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormControl with Custom Validator No spaces allowed Validation
+</h1>
+
+<hr>
+
+<form>
+
+    <label>
+        Username :
+    </label>
+
+    <input type="text" [formControl]="Username">
+
+    <p *ngIf="Username.touched && Username.errors?.['NoSpace']">
+        Spaces are not allowed in the username.
+    </p>
+
+</form>
+
+
+<hr>
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  ReactiveFormsModule,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Username = new FormControl('', NoSpaceValidator);
+}
+
+function NoSpaceValidator(Control: AbstractControl) {
+  if (Control.value && Control.value.includes(' ')) {
+    return { NoSpace: true };
+  }
+  return null;
+}
