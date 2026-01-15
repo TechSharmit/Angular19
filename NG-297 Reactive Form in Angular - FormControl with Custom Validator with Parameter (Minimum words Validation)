@@ -1,0 +1,55 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormControl with Custom Validator with Parameter (Minimum words Validation)
+</h1>
+
+<hr>
+
+<form>
+
+    <label>
+        Full Name : 
+    </label>
+
+    <input type="text" [formControl]="FullName">
+
+    <p *ngIf="FullName.touched && FullName.errors?.['MinWords']">
+        Minimum two words are required.
+    </p>
+</form>
+
+
+<hr>
+
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  AbstractControl,
+  FormControl,
+  ReactiveFormsModule,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  FullName = new FormControl('', MinWordsValidators(2));
+}
+
+function MinWordsValidators(MinWords: number) {
+  return (Control: AbstractControl) => {
+    if (!Control.value) return null;
+
+    const WordCount = Control.value.trim().split(' ').length;
+
+    return WordCount < MinWords ? { MinWords: true } : null;
+  };
+}
