@@ -1,0 +1,56 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup Introduction
+</h1>
+
+(A) What is FormGroup?
+
+(1) FormGroup represents a collection of multiple form fields
+(2) It groups related form controls into one logical unit
+(3) It defines the structure of form data
+(4) It is mainly used to create complete forms
+
+Real-world example:
+A registration form with Name, Email, and Password together is one FormGroup.
+
+(2) Why do we need FormGroup?
+
+(1) FormControl manages only one input field
+(2) Real applications contain multiple related inputs
+(3) FormGroup helps manage all fields together
+(4) It allows validating and submitting the entire form at once
+
+Simple idea:
+
+When a form has many fields, FormGroup keeps everything organized.
+
+
+(3) What does FormGroup contain?
+
+(1) FormControl – for single inputs
+(2) FormGroup – for nested groups
+(3) FormArray – for dynamic lists of fields
+
+Real-world example:
+Profile Form → Personal Info (FormGroup), Address Info (FormGroup), Skills (FormArray)
+
+
+(4) Role of FormGroup in a Form
+
+(1) Collects values from all form fields
+(2) Tracks overall validity of the form
+(3) Controls form state such as enable, disable, and reset
+(4) Acts as the main container for reactive forms
+
+
+(5) FormGroup Data Structure
+
+(1) FormGroup value is always an object
+(2) Each key represents a form field name
+(3) Each value represents user input
+
+Real-world example:
+A filled application form converted into structured data.
