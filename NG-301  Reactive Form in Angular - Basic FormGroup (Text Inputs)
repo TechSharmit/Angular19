@@ -1,0 +1,50 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Basic FormGroup (Text Inputs)
+</h1>
+
+<hr>
+
+<form [formGroup]="UserData" (ngSubmit)="Submit()">
+
+
+    <label>Name: </label>
+    <input type="text" formControlName="Name">
+
+    <br>
+
+    <label>Email:</label>
+    <input type="email" formControlName="Email">
+
+    <br>
+
+    <button type="submit">Submit</button>
+
+</form>
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserData = new FormGroup({
+    Name: new FormControl(''),
+    Email: new FormControl(''),
+  });
+
+  Submit() {
+    console.log(this.UserData.value);
+  }
+}
