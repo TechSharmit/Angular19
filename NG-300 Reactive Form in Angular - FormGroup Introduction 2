@@ -1,0 +1,72 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup Introduction
+</h1>
+
+A. Validation Behavior
+
+1.FormGroup becomes invalid if any child control is invalid
+
+2.Supports group-level validation
+
+3.Used for validations involving multiple fields
+
+Example:
+
+Password and Confirm Password must match
+→ Validation applied at FormGroup level
+
+B. FormGroup Status States
+
+FormGroup can have the following states:
+
+1.VALID – all fields are correct
+
+2.INVALID – at least one field is incorrect
+
+3.PENDING – async validation is running
+
+4.DISABLED – form is disabled
+
+C. User Interaction Tracking
+
+1.FormGroup tracks user interaction such as:
+
+2.touched / untouched – user interacted or not
+
+3.dirty / pristine – data changed or not
+
+Real-world example:
+
+Form opened but not edited → pristine
+
+User types something → dirty
+
+D. Parent–Child Relationship
+
+1.FormGroup acts as a parent
+
+2.FormControls inside it are children
+
+3.Child errors automatically affect the parent FormGroup
+
+Real-world example:
+
+If one section fails, the entire form fails
+
+E.Relation with AbstractControl
+
+1.FormGroup extends AbstractControl
+
+2.It inherits common properties like:
+
+value
+
+valid / invalid
+
+touched / dirty
+
+3.Allows uniform handling of all form elements
