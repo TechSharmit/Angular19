@@ -1,0 +1,64 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup with Validators
+</h1>
+
+<hr>
+
+<form [formGroup]="UserData">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <label>
+        Email:
+    </label>
+
+    <input type="email" formControlName="Email">
+
+    <div *ngIf="UserData.get('Name')?.invalid && UserData.get('Name')?.touched">
+
+        Name is requied!
+
+    </div>
+
+    <div *ngIf="UserData.get('Email')?.invalid && UserData.get('Email')?.touched">
+
+        Valid email requied!
+
+    </div>
+
+</form>
+
+
+<hr>
+
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserData = new FormGroup({
+    Name: new FormControl('', Validators.required),
+    Email: new FormControl('', [Validators.required, Validators.email]),
+  });
+}
