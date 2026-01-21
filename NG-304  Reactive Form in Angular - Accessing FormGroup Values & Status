@@ -1,0 +1,94 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Accessing FormGroup Values & Status
+</h1>
+
+<hr>
+
+<form [formGroup]="UserData" (ngSubmit)="SubmitData()">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <label>
+        Email:
+    </label>
+
+    <input type="text" formControlName="Email">
+
+    <div *ngIf="UserData.get('Name')?.invalid && UserData.get('Name')?.touched">
+
+        Name is required.
+
+    </div>
+
+    <div *ngIf="UserData.get('Email')?.invalid && UserData.get('Email')?.touched">
+
+        Valid Email is required.
+
+    </div>
+
+    <button type="submit">
+        Submit
+    </button>
+
+    <h3>
+        Form Data & Status
+    </h3>
+
+    <p>
+        Form Value : {{UserData.value | json}}
+    </p>
+
+    <p>
+        Form Valid : {{UserData.valid}}
+    </p>
+    <p>
+        Form Invalid : {{UserData.invalid}}
+    </p>
+    <p>
+        Form Touched : {{UserData.touched}}
+    </p>
+    <p>
+        Form Dirty : {{UserData.dirty}}
+    </p>
+
+</form>
+
+<hr>
+
+
+import { JsonPipe, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserData = new FormGroup({
+    Name: new FormControl('', Validators.required),
+    Email: new FormControl('', [Validators.required, Validators.email]),
+  });
+
+  SubmitData() {
+    console.log('Form Value', this.UserData.value);
+    console.log('Form Valid', this.UserData.valid);
+    console.log('Form Invalid', this.UserData.invalid);
+  }
+}
