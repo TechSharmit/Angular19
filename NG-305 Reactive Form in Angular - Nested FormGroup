@@ -1,0 +1,69 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Nested FormGroup
+</h1>
+
+<hr>
+
+<form [formGroup]="UserData" (ngSubmit)="SubmitData()">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <div formGroupName="Address">
+
+        <label>
+            City:
+        </label>
+
+        <input type="text" formControlName="City">
+
+        <label>
+            Pin:
+        </label>
+
+        <input type="number" formControlName="Pin">
+
+    </div>
+
+    <button type="submit">
+        Submit
+    </button>
+
+
+</form>
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserData = new FormGroup({
+    Name: new FormControl(''),
+
+    Address: new FormGroup({
+      City: new FormControl(''),
+
+      Pin: new FormControl(''),
+    }),
+  });
+
+  SubmitData() {
+    console.log(this.UserData.value);
+  }
+}
