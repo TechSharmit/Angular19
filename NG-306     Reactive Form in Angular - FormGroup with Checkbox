@@ -1,0 +1,44 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup with Checkbox
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm" (ngSubmit)="SendData()">
+
+    <label>
+        Terms & Condition
+    </label>
+
+    <input type="checkbox" formControlName="AcceptTerms">
+
+    <button type="submit">
+        Submit
+    </button>
+</form>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm = new FormGroup({
+    AcceptTerms: new FormControl(false),
+  });
+
+  SendData() {
+    console.log('Terms and Condition', this.UserForm.value);
+  }
+}
