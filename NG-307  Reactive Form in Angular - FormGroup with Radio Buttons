@@ -1,0 +1,54 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup with Radio Buttons
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm" (ngSubmit)="SendData()">
+
+    <label>
+        Please Select Gender :
+    </label>
+    <label>
+        Male
+    </label>
+
+    <input type="radio" value="Male" formControlName="Gender">
+
+    <label>
+        Female
+    </label>
+
+    <input type="radio" value="Female" formControlName="Gender">
+
+    <button type="submit">
+        Send Data
+    </button>
+
+</form>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm = new FormGroup({
+    Gender : new FormControl(''),
+  });
+
+  SendData() {
+    console.log(this.UserForm.value);
+  }
+}
