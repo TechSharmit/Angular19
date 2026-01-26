@@ -1,0 +1,51 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup with Select Dropdown
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm" (ngSubmit)="SendData()">
+
+    <label>
+        Select Country
+    </label>
+
+    <select formControlName="Country">
+
+        <option value="">Select</option>
+        <option value="India">India</option>
+        <option value="USA">USA</option>
+
+    </select>
+
+    <button type="submit">
+        Send Data
+    </button>
+
+</form>
+
+
+<hr>
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm = new FormGroup({
+    Country: new FormControl(''),
+  });
+
+  SendData() {
+    console.log('Selected Country', this.UserForm.value);
+  }
+}
