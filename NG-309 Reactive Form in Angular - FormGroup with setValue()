@@ -1,0 +1,63 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup with setValue()
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm" (ngSubmit)="SetData()">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <label>
+        Email:
+    </label>
+
+    <input type="email" formControlName="Email">
+
+
+    <button type="submit">
+        Set Data
+    </button>
+</form>
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm = new FormGroup({
+    Name: new FormControl('', Validators.required),
+    Email: new FormControl('', Validators.required),
+  });
+
+  SetData() {
+    this.UserForm.setValue({
+      Name: 'Sharmit',
+      Email: 'Test@gmail.com',
+    });
+
+    console.log('Values Entered: ', this.UserForm.value);
+  }
+}
