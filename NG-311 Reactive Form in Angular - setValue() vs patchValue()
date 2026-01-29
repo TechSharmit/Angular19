@@ -1,0 +1,119 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - setValue() vs patchValue()
+</h1>
+
+<hr>
+
+🔹 setValue()
+
+setValue() is a method used to update the entire value of a form at once.
+Angular expects the complete form structure to be provided when using this method.
+
+In simple words:
+
+When you use setValue(), Angular assumes you know every field of the form and you are setting all of them together.
+
+🔹 patchValue()
+
+patchValue() is a method used to update only selected form fields.
+Angular allows partial updates without affecting other fields.
+
+In simple words:
+
+When you use patchValue(), Angular understands that you want to update only some fields, not the whole form.
+
+2️⃣ Strictness of Data Matching
+
+🔹 setValue()
+
+setValue() is strict by design.
+The object passed to it must exactly match the form structure.
+
+Every control in the form must be present
+
+Control names must match exactly
+
+No extra or missing controls are allowed
+
+If this rule is violated, Angular throws an error.
+
+This strict behavior ensures data accuracy and consistency.
+
+🔹 patchValue()
+
+patchValue() is lenient and flexible.
+
+Angular updates only the fields that are present in the object and ignores the rest.
+
+Missing controls are ignored
+
+Extra fields do not cause errors
+
+Structure does not have to match exactly
+
+This makes it suitable for real-world dynamic data.
+
+
+3️⃣ Error Handling Behavior
+
+🔹 setValue()
+
+If any form control is missing or incorrectly named, Angular immediately throws a runtime error.
+
+This happens because Angular assumes:
+
+“You are updating the full form — so every field must be accounted for.”
+
+This behavior helps catch programming mistakes early, especially when working with APIs.
+
+🔹 patchValue()
+
+patchValue() does not throw errors for missing controls.
+
+Angular simply:
+
+Updates matching controls
+
+Skips unmatched ones
+
+Continues execution normally
+
+This makes it safer when form structure or incoming data is uncertain.
+
+
+4️⃣ Partial vs Complete Updates
+
+🔹 setValue()
+
+Designed only for complete form updates.
+
+It cannot be used when:
+
+Only one or two fields need updating
+
+Data is incomplete
+
+Form controls change dynamically
+
+Using setValue() for partial updates is not allowed.
+
+🔹 patchValue()
+
+Designed specifically for partial updates.
+
+It is ideal when:
+
+Updating a single field (e.g., name)
+
+Updating nested fields
+
+Applying user edits without resetting other values
+
+This flexibility is its biggest strength.
+
+<hr>
+
