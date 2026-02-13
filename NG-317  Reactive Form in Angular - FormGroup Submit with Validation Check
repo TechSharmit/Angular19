@@ -1,0 +1,67 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup Submit with Validation Check
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm" (ngSubmit)="SubmitForm()">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <label>
+        Email:
+    </label>
+
+    <input type="text" formControlName="Email">
+
+    <div *ngIf="UserForm.get('Email')?.invalid && UserForm.get('Email')?.touched">
+        Email is required.
+
+    </div>
+
+    <button type="submit">
+        Submit Form
+    </button>
+
+</form>
+
+
+<hr>
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm = new FormGroup({
+    Name: new FormControl('', Validators.required),
+    Email: new FormControl('', [Validators.email, Validators.required]),
+  });
+
+  SubmitForm() {
+    if (this.UserForm.invalid) {
+      this.UserForm.markAllAsTouched();
+      return;
+    }
+    console.log('Form Submitted: ', this.UserForm.value);
+  }
+}
