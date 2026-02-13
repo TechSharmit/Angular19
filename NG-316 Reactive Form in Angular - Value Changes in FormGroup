@@ -1,0 +1,65 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Value Changes in FormGroup
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <label>
+        Email:
+    </label>
+
+    <input type="text" formControlName="Email">
+
+</form>
+
+<hr>
+<h3>
+    Live Form Value (Form Value Changes)
+</h3>
+
+<pre>
+    {{LatestValue | json}}
+</pre>
+import { JsonPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  LatestValue: any;
+
+  UserForm = new FormGroup({
+    Name: new FormControl('', Validators.required),
+    Email: new FormControl('', Validators.email),
+  });
+
+  ngOnInit() {
+    this.UserForm.valueChanges.subscribe((Value) => {
+      console.log('Form Changed : ', Value);
+      this.LatestValue = Value;
+    });
+  }
+}
