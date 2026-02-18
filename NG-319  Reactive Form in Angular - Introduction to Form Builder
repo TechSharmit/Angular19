@@ -1,0 +1,63 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Introduction to FormBuilder
+</h1>
+
+<hr>
+
+🔵 What is FormBuilder?
+
+1.FormBuilder is an Angular service.
+
+2.It is used in Reactive Forms.
+
+3.It provides a shortcut way to create FormGroup, FormControl, and FormArray.
+
+4.It reduces repetitive code.
+
+5.It makes form code cleaner and more readable.
+
+
+🔵 Why Use FormBuilder?
+
+1.Reduces boilerplate code.
+
+2.Improves readability.
+
+3.Makes large forms easier to manage.
+
+4.Preferred in real-world applications.
+
+
+🔵 Syntax Difference
+
+1.Without FormBuilder
+
+userForm = new FormGroup({
+name: new FormControl(''),
+email: new FormControl('')
+});
+
+2.With FormBuilder
+
+constructor(private fb: FormBuilder) {}
+
+userForm = this.fb.group({
+name: [''],
+email: ['']
+});
+
+
+🔵 Key Difference Summary
+
+FormGroup (Manual) FormBuilder
+Uses new keyword Uses shortcut methods
+More verbose Short and clean
+More typing Less typing
+Good for small forms Better for large forms
+
+
+<hr>
