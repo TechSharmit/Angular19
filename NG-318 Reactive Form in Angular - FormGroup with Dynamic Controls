@@ -1,0 +1,67 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormGroup with Dynamic Controls
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <!-- Age field with appear only if added -->
+
+    <div *ngIf="UserForm.get('Age')">
+        <label>
+            Age:
+        </label>
+
+        <input type="number" formControlName="Age">
+
+    </div>
+
+</form>
+
+<button (click)="AddControl()">
+    Add Age
+</button>
+
+
+<button (click)="RemoveControl()">
+    Remove Age
+</button>
+
+
+<hr>
+
+import { NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm = new FormGroup<any>({
+    Name: new FormControl(''),
+  });
+
+  AddControl() {
+    this.UserForm.addControl('Age', new FormControl(''));
+  }
+
+  RemoveControl() {
+    this.UserForm.removeControl('Age');
+  }
+}
