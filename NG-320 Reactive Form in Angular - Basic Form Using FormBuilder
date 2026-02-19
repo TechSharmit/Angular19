@@ -1,0 +1,55 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Basic Form Using FormBuilder
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <label>
+        Email:
+    </label>
+
+    <input type="email" formControlName="Email">
+
+</form>
+
+<pre>
+    {{ UserForm.value | json }}
+</pre>
+
+
+<hr>
+
+import { JsonPipe } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+
+  UserForm;
+
+  constructor(private Fb: FormBuilder) {
+    this.UserForm = this.Fb.group({
+      Name: [''],
+      Email: [''],
+    });
+  }
+}
