@@ -1,0 +1,61 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormBuilder with Validation
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <div *ngIf="UserForm.get('Name')?.invalid && UserForm.get('Name')?.touched">
+        Name is Required.
+    </div>
+
+    <label>
+        Email:
+    </label>
+
+    <input type="email" formControlName="Email">
+
+    <div *ngIf="UserForm.get('Email')?.invalid && UserForm.get('Email')?.touched">
+        valid Email is Required.
+    </div>
+
+    <Button type="submit">
+        Submit
+    </Button>
+
+</form>
+
+<hr>
+
+import { JsonPipe, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm;
+
+  constructor(private Fb: FormBuilder) {
+    this.UserForm = this.Fb.group({
+      Name: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+    });
+  }
+}
