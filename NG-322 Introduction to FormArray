@@ -1,0 +1,55 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Introduction to FormArray
+</h1>
+
+<hr>
+
+🔵 What is FormArray?
+
+1.FormArray is a class in Angular Reactive Forms used to manage a dynamic list of form controls.
+
+2.It is used when the number of form fields is not fixed.
+
+3.Unlike FormGroup, it does not use named keys — it uses indexes (0, 1, 2…).
+
+4.It stores controls in an array structure.
+
+🔵 Why Do We Need FormArray?
+
+1.When form fields need to be added or removed dynamically.
+
+2.When user can enter multiple values of the same type (skills, hobbies, addresses).
+
+3.When the number of inputs depends on user interaction.
+
+4.When working with dynamic API data.
+
+🔵 FormArray vs FormGroup (Core Difference)
+
+1.FormGroup uses key–value pairs (name, email).
+
+2.FormArray uses index-based structure (0, 1, 2).
+
+3.FormGroup is used for fixed structure forms.
+
+4.FormArray is used for dynamic structure forms.
+
+🔵 Where is FormArray Commonly Used?
+
+1.Adding multiple skills
+
+2.Multiple phone numbers
+
+3.Multiple addresses
+
+4.Education details
+
+5.Work experience entries
+
+6.Dynamic product lists
+
+<hr>
