@@ -1,0 +1,73 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Introduction to FormArray (Part-2)
+</h1>
+
+<hr>
+
+🔵 Structure of FormArray
+
+1.FormArray contains multiple AbstractControls.
+
+2.Each item inside FormArray can be:
+
+FormControl
+
+FormGroup
+
+Another FormArray
+
+3.This makes it flexible and powerful.
+
+🔵 Key Characteristics
+
+1.Controls are accessed using index.
+
+2.Supports validation.
+
+3.Supports dynamic add/remove.
+
+4.Can be nested inside FormGroup.
+
+5.Works with valueChanges and statusChanges.
+
+🔵 Important Methods of FormArray
+
+1.push() → Add new control
+
+2.removeAt(index) → Remove specific control
+
+3.clear() → Remove all controls
+
+4.at(index) → Get control by index
+
+5.length → Get total number of controls
+
+🔵 FormArray Validation Concept
+
+1.Validation can be applied to:
+
+Individual controls
+
+Entire FormArray
+
+2.Useful for enforcing:
+
+Minimum items
+
+Maximum items
+
+Required fields inside array
+
+🔵 Real-World Importance
+
+1.FormArray is essential for enterprise-level dynamic forms.
+
+2.It helps manage unpredictable user input structures.
+
+3.It is commonly used in admin dashboards and data-entry systems.
+
+<hr>
