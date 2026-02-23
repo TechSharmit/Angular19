@@ -1,0 +1,77 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Remove Item from FormArray
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm">
+
+    <div formArrayName="Skills">
+
+        <div *ngFor="let skill of Skills.controls; let i = index">
+
+            <input [formControlName]="i" placeholder="Ener Skill">
+
+            <button type="button" (click)="RemoveSkill(i)">
+                Remove
+            </button>
+
+        </div>
+
+    </div>
+
+    <button type="button" (click)="AddSkill()">
+        Add Skill
+    </button>
+</form>
+
+<pre>
+    {{UserForm.value | json}}
+</pre>
+
+
+
+<hr>
+
+import { JsonPipe, NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgFor, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm;
+
+  constructor(private Fb: FormBuilder) {
+    this.UserForm = this.Fb.group({
+      Skills: this.Fb.array([]),
+    });
+  }
+
+  //Getter for easy access
+
+  get Skills() {
+    return this.UserForm.get('Skills') as FormArray;
+  }
+
+  //Add new SKill
+
+  AddSkill() {
+    this.Skills.push(this.Fb.control('New Control'));
+  }
+
+  //Remove skill by Index
+
+  RemoveSkill(index: number) {
+    this.Skills.removeAt(index);
+  }
+}
