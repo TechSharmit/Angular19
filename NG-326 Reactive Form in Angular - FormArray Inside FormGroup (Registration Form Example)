@@ -1,0 +1,120 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormArray Inside FormGroup (Registration Form Example)
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm" (ngSubmit)="SubmitForm()">
+
+    <label>
+        Name:
+    </label>
+
+    <input type="text" formControlName="Name">
+
+    <div *ngIf="UserForm.get('Name')?.invalid && UserForm.get('Name')?.touched" style="color: red;">
+        Name is required.
+    </div>
+
+    <label>
+        Email:
+    </label>
+
+    <input type="email" formControlName="Email">
+
+    <div *ngIf="UserForm.get('Email')?.invalid && UserForm.get('Email')?.touched" style="color: red;">
+        Valid Email is required.
+    </div>
+
+    <label>
+        Skills
+    </label>
+
+    <div formArrayName="Skills">
+        <div *ngFor="let Skill of Skills.controls; let i = index">
+
+            <input type="text" [formControlName]="i" placeholder="Enter Skill">
+
+            <div *ngIf="Skill.invalid && Skill.touched" style="color: red;">
+
+            </div>
+
+            <button type="button" (click)="RemoveSkill(i)">
+                Remove Skill
+            </button>
+        </div>
+
+    </div>
+
+    <button type="button" (click)="AddSkill()">
+        Add Skill
+    </button>
+
+    <button type="submit">
+        Submit
+    </button>
+
+</form>
+
+<hr>
+
+
+
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgFor, NgIf, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm;
+
+  constructor(private Fb: FormBuilder) {
+    this.UserForm = this.Fb.group({
+      Name: ['', Validators.required],
+      Email: ['', [Validators.required, Validators.email]],
+      Skills: this.Fb.array([]),
+    });
+  }
+
+  //Getter for FormArray
+
+  get Skills() {
+    return this.UserForm.get('Skills') as FormArray;
+  }
+
+  //Add New Skill
+
+  AddSkill() {
+    this.Skills.push(this.Fb.control('', Validators.required));
+  }
+
+  //Remove Skill
+
+  RemoveSkill(index: number) {
+    this.Skills.removeAt(index);
+  }
+
+  //Submit Form
+
+  SubmitForm() {
+    if (this.UserForm.invalid) {
+      this.UserForm.markAllAsTouched();
+      return;
+    }
+  }
+}
