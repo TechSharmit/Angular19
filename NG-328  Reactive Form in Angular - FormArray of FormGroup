@@ -1,0 +1,97 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - FormArray of FormGroup
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm">
+
+    <div formArrayName="Addresses">
+        <div *ngFor="let Address of Addresses.controls; let i = index" [formArrayName]="i"
+            style="border: 1px solid black; padding: 10px; margin-bottom: 10px;">
+
+            <label>
+                City:
+            </label>
+
+            <input type="text" formControlName="City">
+
+
+            <label>
+                Country:
+            </label>
+
+            <input type="text" formControlName="Country">
+
+            <button type="button" (click)="RemoveAddress(i)">
+                Remove Addresses
+            </button>
+
+        </div>
+
+    </div>
+
+    <button type="button" (click)="AddAddress()">
+        Add Address
+    </button>
+
+</form>
+
+
+
+<hr>
+
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgFor, NgIf, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm;
+
+  constructor(private Fb: FormBuilder) {
+    this.UserForm = this.Fb.group({
+      Addresses: this.Fb.array([]),
+    });
+  }
+
+  //Getter
+
+  get Addresses() {
+    return this.UserForm.get('Addresses') as FormArray;
+  }
+
+  //Createone Address Formgroup
+
+  NewAddress() {
+    return this.Fb.group({
+      City: ['', Validators.required],
+      Country: ['', Validators.required],
+    });
+  }
+
+  //Add Address
+
+  AddAddress() {
+    this.Addresses.push(this.NewAddress());
+  }
+
+  RemoveAddress(index: number) {
+    this.Addresses.removeAt(index);
+  }
+}
