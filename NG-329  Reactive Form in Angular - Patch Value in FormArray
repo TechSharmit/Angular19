@@ -1,0 +1,77 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Patch Value in FormArray
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm">
+    <div formArrayName="Skills">
+
+        <div *ngFor="let Skill of Skills.controls; let i = index">
+
+            <input type="text" [formControlName]="i">
+
+        </div>
+
+    </div>
+
+</form>
+
+<button (click)="PatchSkills()">
+    Patch Value
+</button>
+
+<hr>
+
+<pre>
+    {{UserForm.value | json}}
+</pre>
+
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormArray, FormBuilder, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf, NgFor, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserForm;
+
+  constructor(private Fb: FormBuilder) {
+    this.UserForm = this.Fb.group({
+      Skills: this.Fb.array([]),
+    });
+
+    // Add 3 empty controls intially
+
+    this.AddSkill();
+    this.AddSkill();
+    this.AddSkill();
+  }
+
+  //Getter
+
+  get Skills() {
+    return this.UserForm.get('Skills') as FormArray;
+  }
+
+  // Add Skill
+
+  AddSkill() {
+    this.Skills.push(this.Fb.control(''));
+  }
+
+  //Patch Values
+
+  PatchSkills() {
+    this.Skills.patchValue(['Angular', 'React', 'Vue']);
+  }
+}
