@@ -1,0 +1,91 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Disable / Enable Entire FormArray
+</h1>
+
+<hr>
+
+<form [formGroup]="UserForm">
+
+    <div formArrayName="Skills">
+        <div *ngFor="let skill of Skills.controls; let i = index">
+            <input [formControlName]="i" placeholder="Enter Skill">
+            <br><br>
+        </div>
+    </div>
+
+    <button type="button" (click)="addSkill()">
+        Add Skill
+    </button>
+
+    <br><br>
+
+    <button type="button" (click)="disableSkills()">
+        Disable All Skills
+    </button>
+
+    <button type="button" (click)="enableSkills()">
+        Enable All Skills
+    </button>
+
+</form>
+
+<hr>
+
+
+<pre>{{ UserForm.value | json }}</pre>
+
+
+import { JsonPipe, NgFor, NgIf } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormArray,
+  FormBuilder,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgIf, NgFor, JsonPipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+
+  UserForm;
+
+  constructor(private fb: FormBuilder) {
+    this.UserForm = this.fb.group({
+      Skills: this.fb.array([]),
+    });
+  }
+
+  // Getter
+
+  get Skills() {
+    return this.UserForm.get('Skills') as FormArray;
+  }
+
+  // Add Skill
+
+  addSkill() {
+    this.Skills.push(this.fb.control(''));
+  }
+
+  // Disable Entire FormArray
+
+  disableSkills() {
+    this.Skills.disable();
+  }
+
+  // Enable Entire FormArray
+  
+  enableSkills() {
+    this.Skills.enable();
+  }
+}
