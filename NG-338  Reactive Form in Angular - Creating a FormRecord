@@ -1,0 +1,34 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Creating a FormRecord
+</h1>
+
+<hr>
+
+<div *ngFor="let item of phones.controls | keyvalue">
+    {{item.key}} : <input [formControl]="item.value">
+</div>
+
+
+<hr>
+
+import { KeyValuePipe, NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, FormRecord, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgFor, KeyValuePipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  phones = new FormRecord<FormControl<string | null>>({
+    Home: new FormControl('1234567890'),
+    Office: new FormControl('9876543210'),
+  });
+}
