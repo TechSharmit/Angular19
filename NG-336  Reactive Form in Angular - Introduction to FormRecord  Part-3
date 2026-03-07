@@ -1,0 +1,63 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Introduction to FormRecord (Part-3)
+</h1>
+
+<hr>
+
+Advantages
+
+Key advantages of FormRecord:
+
+1.Supports dynamic control names
+
+2.Integrates seamlessly with Reactive Forms
+
+3.Works well with typed forms
+
+4.Simplifies API-driven forms
+
+5.Reduces need for manual form restructuring
+
+Limitations
+
+Limitations of FormRecord include:
+
+1.Not suitable for ordered collections
+
+2.Cannot represent indexed lists
+
+3.Less commonly used in simple forms
+
+4.Template iteration requires additional handling
+
+Common Real-World Use Cases
+
+FormRecord is useful in applications where form fields are not predetermined.
+
+Common scenarios include:
+
+1.Dynamic configuration panels
+
+2.User preference settings
+
+3.Social media links forms
+
+4.Feature flags management
+
+5.Dynamic permissions
+
+6.CMS custom fields
+
+7.Survey response forms
+
+8.API-driven dynamic forms
+
+9.Key-value admin dashboards
+
+10.Environment variables management
+
+<hr>
