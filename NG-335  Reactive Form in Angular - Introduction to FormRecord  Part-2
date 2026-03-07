@@ -1,0 +1,65 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Introduction to FormRecord (Part-2)
+</h1>
+
+<hr>
+
+A.Key Characteristics
+
+Important properties of FormRecord:
+
+1.Supports dynamic keys
+
+2.Stores FormControl objects
+
+3.Structure is object-based
+
+4.Provides runtime flexibility
+
+5.Works with typed reactive forms
+
+6.Supports validators and form state management
+
+
+B.Core Operations Supported
+
+FormRecord supports all major control container operations.
+
+Main operations include:
+
+1.Add control dynamically
+
+2.Remove existing control
+
+3.Replace existing control
+
+4.Check if control exists
+
+5.Retrieve specific control
+
+6.Update values
+
+7.Reset form state
+
+These operations allow developers to manage dynamic form structures efficiently.
+
+
+C.Nested FormRecord
+
+FormRecord can be nested inside other form containers.
+
+Possible nesting structures include:
+
+FormGroup → FormRecord
+
+FormRecord → FormGroup
+
+FormRecord → FormRecord
+
+This allows developers to build complex dynamic form hierarchies.
+
+<hr>4
