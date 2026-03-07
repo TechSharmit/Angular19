@@ -1,0 +1,42 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Introduction to FormRecord (Part-4)
+</h1>
+
+<hr>
+
+When to Use FormRecord
+
+Use FormRecord when:
+
+1.Control names are dynamic
+
+2.Keys come from API responses
+
+3.Form structure is key-value based
+
+4.Users can add custom fields
+
+When Not to Use FormRecord
+
+Avoid using FormRecord when:
+
+1.Form fields are fixed → use FormGroup
+
+2.Data is an ordered list → use FormArray
+
+3.Form structure is static
+
+
+Key Concept to Remember
+
+The easiest way to remember FormRecord:
+
+FormGroup → fixed object structure
+FormArray → indexed list structure
+FormRecord → dynamic object structure
+
+<hr>
