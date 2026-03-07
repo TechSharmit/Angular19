@@ -1,0 +1,67 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Introduction to FormRecord
+</h1>
+
+<hr>
+
+1. What is FormRecord?
+
+FormRecord is a reactive forms container that manages a dynamic collection of form controls where the control names
+(keys) are not known in advance.
+
+It behaves like a dictionary (key-value object) where:
+
+Key → control name
+
+Value → FormControl
+
+Example structure
+
+{
+home: FormControl,
+office: FormControl,
+Family: FormControl
+}
+
+
+2. Why FormRecord Was Introduced
+
+Before Angular introduced typed reactive forms, developers used FormGroup for dynamic controls.
+
+Problem with FormGroup:
+
+Keys had to be predefined.
+
+Type safety was difficult.
+
+Dynamic structures were harder to manage.
+
+FormRecord solves this by allowing unlimited dynamic keys while maintaining type safety.
+
+
+3. Definition of FormRecord
+
+Conceptually, FormRecord can be understood as:
+
+FormRecord<FormControl<T>>
+
+Where:
+
+T represents the type of value stored inside the control.
+
+Example
+
+phones = new FormRecord<FormControl<string>>({});
+
+Meaning:
+
+Keys are dynamic
+
+Values must be string
+
+
+<hr>
