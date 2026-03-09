@@ -1,0 +1,41 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Adding control to FormRecord
+</h1>
+
+<hr>
+
+<button (click)="AddPhone()">
+    Add Phone
+</button>
+
+<div *ngFor="let item of Phones.controls | keyvalue">
+
+    {{item.key}} : {{item.value.value}}
+
+</div>
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import { FormControl, FormRecord, ReactiveFormsModule } from '@angular/forms';
+import { KeyValuePipe, NgFor } from '@angular/common';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgFor, KeyValuePipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Phones = new FormRecord<FormControl<string | null>>({});
+
+  AddPhone() {
+    this.Phones.addControl('Home', new FormControl('1234567890'));
+  }
+}
