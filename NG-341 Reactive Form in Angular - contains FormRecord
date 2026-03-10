@@ -1,0 +1,36 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - contains() with FormRecord
+</h1>
+
+<hr>
+
+<button (click)="CheckPhone()">
+    Check Phone
+</button>
+
+<hr>
+
+import { KeyValuePipe, NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import { FormControl, FormRecord, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgFor, KeyValuePipe],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Phones = new FormRecord<FormControl<string | null>>({
+    Home: new FormControl('123456789'),
+  });
+
+  CheckPhone() {
+    alert(this.Phones.contains('home'));
+  }
+}
