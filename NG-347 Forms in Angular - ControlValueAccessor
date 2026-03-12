@@ -1,0 +1,65 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Forms in Angular - ControlValueAccessor
+</h1>
+
+<hr>
+
+A. What is ControlValueAccessor?
+
+1.ControlValueAccessor is an interface in Angular Forms.
+
+2.It allows a custom component to behave like a form control.
+
+3.It acts as a bridge between Angular Forms API and the DOM element.
+
+4.With it, Angular forms can read and write values from custom components.
+
+Simple idea:
+
+It allows a custom component to work with formControl, formControlName, and ngModel.
+
+
+B. Why ControlValueAccessor is Used
+
+Angular forms work directly with native HTML controls like:
+
+input
+
+select
+
+textarea
+
+If we create a custom component, Angular does not know how to interact with it.
+
+ControlValueAccessor tells Angular:
+
+how to set value
+
+how to read value
+
+how to track touch events
+
+
+3. Real-World Use Cases
+
+Used when creating custom reusable form controls such as:
+
+custom dropdown
+
+star rating
+
+toggle switch
+
+custom date picker
+
+quantity counter
+
+rich text editor
+
+These components must work with Angular Reactive Forms.
+
+<hr>
