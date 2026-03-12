@@ -1,0 +1,88 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Forms in Angular - ControlValueAccessor
+</h1>
+
+<hr>
+
+(A) What Problem ControlValueAccessor Solves
+
+Without ControlValueAccessor:
+
+Angular forms cannot communicate with custom components.
+
+Example problem:
+
+formControlName will not work with custom components.
+
+ControlValueAccessor solves this by connecting the custom component to the Angular forms system.
+
+(B)Core Methods of ControlValueAccessor
+
+ControlValueAccessor has four important methods.
+
+1. writeValue()
+
+Called by Angular when the form model updates.
+
+Used to set the value inside the component.
+
+Example idea:
+
+Form sets value → component UI updates.
+
+2. registerOnChange()
+
+Angular provides a function to track value changes.
+
+Component must call this function whenever the user changes value.
+
+Example idea:
+
+User clicks star rating → update form value.
+
+3. registerOnTouched()
+
+Angular provides a function to track touch events.
+
+Component must call it when the user interacts with the control.
+
+Example idea:
+
+User clicks input → control becomes touched.
+
+4. setDisabledState() (optional)
+
+Called when the form control becomes disabled or enabled.
+
+Used to disable UI elements inside the component.
+
+Example idea:
+
+disable button or input field.
+
+
+(C) ControlValueAccessor Workflow
+
+Flow of communication:
+
+Form Model → Component UI
+
+writeValue()
+
+Component UI → Form Model
+
+registerOnChange()
+
+Touch Interaction
+
+registerOnTouched()
+
+Disabled State
+
+setDisabledState()
+
+<hr>
