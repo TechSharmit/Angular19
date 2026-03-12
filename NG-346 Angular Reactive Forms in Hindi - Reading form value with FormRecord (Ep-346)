@@ -1,0 +1,39 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Form in Angular - Reading form value with FormRecord
+</h1>
+
+<hr>
+
+<button (click)="PrintValue()">
+
+    Print value
+
+</button>
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import { FormControl, FormRecord, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Phones = new FormRecord<FormControl<string | null>>({
+    Home: new FormControl('111222333'),
+    Office: new FormControl('444555666'),
+  });
+
+  PrintValue() {
+    console.log('Values from Phones FormRecord : ', this.Phones.value);
+  }
+}
