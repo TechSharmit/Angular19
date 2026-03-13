@@ -1,0 +1,119 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Forms in Angular - ControlValueAccessor - Understanding registerOnChange and registerOnTouched in Angular
+</h1>
+
+<hr>
+
+<h2>My Custom Input</h2>
+
+
+<app-comp1 [formControl]="name"></app-comp1>
+
+<!-- This will show live value from FormControl as user types -->
+ 
+<p>Form Value: {{ name.value }}</p>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './Components/comp1/comp1.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component, ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+
+  // FormControl with default value 'Amit'
+
+  // This will trigger writeValue('Amit') on our custom component
+
+  name = new FormControl('Amit');
+  
+}
+
+
+<p>comp1 works!</p>
+
+<!-- [value]="value"   → shows current value in input box   -->
+
+<!-- (input)="onInput" → fires every time user types        -->
+ 
+<input [value]="value" (input)="onInput($event)">
+
+
+import { Component, forwardRef, Input } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+@Component({
+  selector: 'app-comp1',
+  imports: [],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+  providers: [
+    {
+      // Step 1: Register this component as a form control
+
+      // Without this Angular will never talk to this component
+
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => Comp1Component),
+      multi: true,
+
+    },
+  ],
+})
+export class Comp1Component {
+
+  // This holds the current value shown in the input box
+
+  value = '';
+
+  // This will hold Angular's function — we will call it when user types
+
+  // Right now it is empty, Angular will fill it via registerOnChange
+
+  onChange = (val: any) => {};
+
+  // Step 2: Angular calls this and passes the value from FormControl
+  // Example: FormControl('Amit') → Angular calls writeValue('Amit')
+  // We just save it so our input box shows 'Amit'
+
+  writeValue(val: string): void {
+    this.value = val;
+  }
+
+  // Step 3: Angular calls this once and gives us its own function
+  // We save that function in onChange
+  // Later when user types, we will call this saved function
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  // Step 4: Angular calls this once and gives us its own function
+  // We save that function in onTouched
+
+  // Later when user leaves the field, we will call this saved function
+  onTouched = () => {};
+
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn; 
+  }
+
+  // Step 5: User typed something in the input box
+  // We call onChange so Angular knows the new value
+  // We call onTouched so Angular knows the field was touched
+  onInput(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    this.onChange(input.value); // tell Angular: "user typed this value"
+    this.onTouched(); // tell Angular: "user touched this field"
+  }
+}
