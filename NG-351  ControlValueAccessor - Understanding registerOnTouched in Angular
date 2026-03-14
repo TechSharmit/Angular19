@@ -1,0 +1,104 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Forms in Angular - ControlValueAccessor - Understanding registerOnTouched()
+</h1>
+
+<hr>
+
+<!--
+Using our custom component like a normal form input
+-->
+<app-comp1 [formControl]="name"></app-comp1>
+
+<br><br>
+
+<!--
+This shows whether the control is touched or not
+-->
+Touched Status: {{ name.touched }}
+
+<p>Form Value: {{ name.value }}</p>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './Components/comp1/comp1.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component, ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  // Creating a FormControl with initial value "Amit"
+  name = new FormControl('Amit');
+}
+
+
+<p>comp1 works!</p>
+
+<!--
+This is our custom input field
+-->
+
+<!-- When user clicks the input and then leaves it, blur event happens. We call onTouched() so
+    Angular knows that the user has interacted with this control. -->
+
+<input [value]="value" (blur)="onTouched()" placeholder="Type something">
+
+import { Component, forwardRef, Input } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+@Component({
+  selector: 'app-comp1',
+  imports: [],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+
+  // This tells Angular that this component will behave like a form control
+
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => Comp1Component),
+      multi: true,
+    },
+  ],
+})
+export class Comp1Component {
+
+  // This variable will store the value coming from the form
+
+  value = '';
+
+  // Angular will give us functions here
+
+  // We will store them and call them when needed
+
+  onChange: any = () => {};
+  onTouched: any = () => {};
+
+  // Angular calls this when it wants to write a value into the input
+
+  writeValue(val: string): void {
+    this.value = val;
+  }
+
+  // Angular gives us a function that we call when value changes
+
+  registerOnChange(fn: any): void {
+    this.onChange = fn;
+  }
+
+  // Angular gives us a function that we call when the control is touched
+  
+  registerOnTouched(fn: any): void {
+    this.onTouched = fn;
+  }
+}
