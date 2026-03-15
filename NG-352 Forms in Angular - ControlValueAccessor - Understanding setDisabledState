@@ -1,0 +1,95 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Forms in Angular - ControlValueAccessor - Understanding setDisabledState()
+</h1>
+
+<hr>
+
+<h2>setDisabledState() Example</h2>
+
+<!-- Using custom component as form control -->
+<app-comp1 [formControl]="name"></app-comp1>
+
+<br><br>
+
+<button (click)="disableControl()">
+    Disable Control
+</button>
+
+<hr>
+
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './Components/comp1/comp1.component';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component, ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+
+  // Creating a form control with initial value
+
+  name = new FormControl('Amit');
+
+  // Method to disable the form control
+
+  disableControl() {
+    this.name.disable();
+  } 
+  
+}
+
+
+
+
+<p>comp1 works!</p>
+<input [value]="value" [disabled]="disabled">
+
+
+
+import { Component, forwardRef, Input } from '@angular/core';
+import { NG_VALUE_ACCESSOR } from '@angular/forms';
+
+@Component({
+  selector: 'app-comp1',
+  imports: [],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+
+  // This tells Angular that this component will behave like a form control
+
+  providers: [
+    {
+      provide: NG_VALUE_ACCESSOR,
+      useExisting: forwardRef(() => Comp1Component),
+      multi: true,
+    },
+  ],
+})
+
+export class Comp1Component {
+ 
+  value = '';
+
+  disabled = false;
+
+  writeValue(val: string): void {
+    this.value = val;
+  }
+
+  registerOnChange(fn: any): void {}
+  
+  registerOnTouched(fn: any): void {}
+
+  setDisabledState(isDisabled: boolean): void {
+    this.disabled = isDisabled;
+  }
+}
