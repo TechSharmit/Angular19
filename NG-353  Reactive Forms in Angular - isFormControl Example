@@ -1,0 +1,52 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Forms in Angular - isFormControl Example
+</h1>
+
+<hr>
+
+<label>
+    UserName :
+</label>
+
+<input type="text" [formControl]="UserName">
+
+<br> <br>
+
+<button (click)="CheckControl()">
+    Check Control
+</button>
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  isFormControl,
+  ReactiveFormsModule,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  UserName = new FormControl('');
+
+  CheckControl() {
+    if (isFormControl(this.UserName)) {
+      console.log('This is a Form Control');
+      console.log('Value : ', this.UserName.value);
+    }
+  }
+  else() {
+    console.log('This is not a form control');
+  }
+}
