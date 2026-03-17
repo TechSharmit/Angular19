@@ -1,0 +1,40 @@
+import { Component } from '@angular/core';
+import { FormGroup, FormControl, isFormGroup } from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  templateUrl: './app.component.html'
+})
+export class AppComponent {
+
+  form = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl('')
+  });
+
+  checkGroup() {
+
+    if (isFormGroup(this.form)) {
+      console.log('This is a FormGroup');
+      console.log(this.form.controls);
+    }
+
+  }
+
+}
+
+<h2>isFormGroup Example</h2>
+
+<form [formGroup]="form">
+
+  <input type="text" formControlName="name" placeholder="Name">
+
+  <br><br>
+
+  <input type="email" formControlName="email" placeholder="Email">
+
+</form>
+
+<br>
+
+<button (click)="checkGroup()">Check Group</button>
