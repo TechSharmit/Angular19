@@ -1,0 +1,71 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Forms in Angular - isFormArray Example
+</h1>
+
+<hr>
+
+<form [formGroup]="Form">
+
+    <div formArrayName="Skills">
+
+        <div *ngFor="let Skill of skills.controls; let i = index">
+
+            <input [formControlName]="i">
+
+        </div>
+
+    </div>
+
+</form>
+
+<br>
+
+<button (click)="CheckArray()">
+    Check Form Array
+</button>
+
+
+<hr>
+
+import { NgFor } from '@angular/common';
+import { Component } from '@angular/core';
+import {
+  FormArray,
+  FormControl,
+  FormGroup,
+  isFormArray,
+  ReactiveFormsModule,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule, NgFor],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Form = new FormGroup({
+    Skills: new FormArray([
+      new FormControl('Angular'),
+      new FormControl('React'),
+    ]),
+  });
+
+  get skills() {
+    return this.Form.get('Skills') as FormArray;
+  }
+
+  CheckArray() {
+    const control = this.Form.get('Skills');
+
+    if (isFormArray(control)) {
+      console.log('This is a Form Array');
+      console.log('Total Items', control.length);
+    }
+  }
+}
