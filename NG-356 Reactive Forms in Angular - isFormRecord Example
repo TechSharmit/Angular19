@@ -1,0 +1,58 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Reactive Forms in Angular - isFormRecord Example
+</h1>
+
+<hr>
+
+<label>
+    First Name
+</label>
+
+<input [formControl]="Record.controls['FirstName']">
+
+
+<label>
+    Last Name
+</label>
+
+<input [formControl]="Record.controls['LastName']">
+
+<button (click)="CheckRecord()">
+    Check Form Record
+</button>
+
+
+<hr>
+
+import { Component } from '@angular/core';
+import {
+  FormControl,
+  FormRecord,
+  isFormRecord,
+  ReactiveFormsModule,
+} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [ReactiveFormsModule],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Record = new FormRecord({
+    FirstName: new FormControl('Tech'),
+    LastName: new FormControl('Sharmit'),
+  });
+
+  CheckRecord() {
+    if (isFormRecord(this.Record)) {
+      console.log('This is a Form Record');
+      console.log(this.Record.controls)
+    }
+  }
+}
