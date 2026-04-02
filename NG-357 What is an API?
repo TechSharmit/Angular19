@@ -1,0 +1,43 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Introduction to API
+</h1>
+
+<hr>
+
+
+🔷 What is an API?
+
+1.API stands for Application Programming Interface
+2.It is a bridge that allows two different applications to talk to each other
+3.API defines rules — what you can ask, how to ask it, and what you'll get back
+4.You don't need to know how the other app works internally — you just use the API
+5.Think of it as a contract between two systems
+
+
+One line definition: API is a messenger that takes your request, goes to another system, and brings back the response.
+
+| Restaurant        | API World                  |
+|-------------------|----------------------------|
+| You (Customer)    | Your App / Angular Frontend|
+| Waiter            | API                        |
+| Kitchen           | Server / Backend           |
+| Menu              | API Documentation          |
+| Your Order        | API Request                |
+| Food Served       | API Response               |
+
+1.You don't go into the kitchen yourself → You don't talk to the server directly
+2.You tell the waiter what you want → Your app sends a request to the API
+3.The waiter goes to the kitchen → API communicates with the backend
+4.The kitchen prepares the food → Server processes and fetches data
+5.The waiter brings it back to you → API returns the response to your app
+6.If the dish is not on the menu, the kitchen won't make it → API only allows what is defined
+
+
+Key takeaway: You interact with the waiter (API), not the kitchen (server). This keeps things clean, secure, and
+organised.
+
+<hr>
