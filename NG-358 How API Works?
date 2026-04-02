@@ -1,0 +1,31 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    How API Works?
+</h1>
+
+<hr>
+
+1. How API Works (Detailed Understanding)
+Whenever a user interacts with an application (like opening a page or clicking a button), the frontend (Angular) may
+need data from a server.
+
+The frontend cannot directly communicate with the database or server logic, so it sends a request through an API.
+
+Step-by-step flow:
+1.User performs an action (e.g., opens a product page)
+2.Angular application sends a request to the API
+3.API receives the request and forwards it to the backend server
+4.Server processes the request (fetches data from database or performs logic)
+5.Server sends the response back to the API
+6.API returns the response to the Angular application
+7.Angular receives the data and updates the UI
+
+Important points:
+1.API acts as a middle layer between frontend and backend
+2.It ensures security and structure
+3.Frontend never directly accesses the database
+
+<hr>
