@@ -1,0 +1,54 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Request and Response in API
+</h1>
+
+<hr>
+
+🔹 What is a Request?
+1.A request is a message sent by the frontend to the API asking for some data or action.
+2.Every API interaction starts with a request.
+
+A request usually contains:
+(A) URL (endpoint) → where to send the request
+(B) HTTP method → what action to perform (GET, POST, etc.)
+(C) Headers → additional information (optional)
+(D) Parameters → extra data (optional)
+
+Example:
+* When you open a users page → Angular sends a request like:
+GET /users
+
+👉 This means: “Give me the list of users”
+
+🔹 What is a Response?
+
+1.A response is the data returned by the server through the API.
+2.It is the answer to the request sent by the frontend.
+
+A response usually contains:
+1.Data (mostly in JSON format)
+2.Status code (indicates success or failure)
+
+Headers
+
+Example:
+
+API may return:
+
+{
+"id": 1,
+"name": "John"
+}
+
+👉 This is the data Angular will display in UI
+
+🔹 Key Understanding:
+
+1.Request = asking for something
+2.Response = receiving the answer
+
+<hr>
