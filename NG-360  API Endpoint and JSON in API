@@ -1,0 +1,62 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    API Endpoint and JSON in API
+</h1>
+
+<hr>
+
+API Endpoint
+1.An endpoint is the specific URL of an API used to access a particular resource.
+2.Each endpoint represents a specific type of data or operation.
+
+Examples:
+/users → get all users
+/users/1 → get a specific user
+/products → get product list
+
+Important points:
+1.One API can have multiple endpoints
+2.Changing the endpoint changes the data you receive
+3.Endpoints are like different “options” available in an API
+
+Analogy:
+Just like a restaurant menu has different items, an API has different endpoints
+
+4. JSON (Data Format Used in APIs)
+1.JSON stands for JavaScript Object Notation
+2.It is the standard format used by APIs to send and receive data
+
+Why JSON is used:
+1.Lightweight (fast to transfer)
+2.Easy to read and understand
+3.Easy to use in JavaScript/Angular
+
+JSON Structure:
+1.Data is stored in key–value pairs
+2.Objects are written using {}
+3.Arrays are written using []
+
+Example (Object):
+
+{
+"id": 1,
+"name": "Sharmit",
+"email": "test@gmail.com"
+}
+
+Example (Array):
+[
+{ "id": 1, "name": "A" },
+{ "id": 2, "name": "B" }
+]
+
+Key Points:
+1.Keys are always strings
+2.Values can be string, number, boolean, array, or object
+3.Angular uses this JSON data to display content in UI
+
+
+<hr>
