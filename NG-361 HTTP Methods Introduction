@@ -1,0 +1,105 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    HTTP Methods – Introduction
+</h1>
+
+<hr>
+
+🔹 What are HTTP Methods?
+1.HTTP Methods are used to define what action we want to perform on the server data
+2.Whenever we call an API, we must specify what we want to do
+3.These methods are part of the HTTP protocol
+
+Simple understanding:
+
+👉 HTTP Method = Instruction to the server
+
+Example:
+1.If you want data → use GET
+2.If you want to add data → use POST
+
+🔹 Why HTTP Methods are Important
+
+1.They tell the server what type of operation to perform
+2.Without methods, server will not understand your intention
+3.They make APIs:
+    A.Structured
+    B.Predictable
+    C.Easy to use
+
+🔹 Common HTTP Methods
+
+🔸 GET (Read Data)
+1.Used to fetch data from server
+2.Does NOT modify any data
+3.Most commonly used method
+
+Example:
+GET /users
+
+👉 “Give me all users”
+
+Key Points:
+1.Safe (no data change)
+2.Idempotent (same result every time)
+3.Used for displaying data
+
+Real-world examples:
+1.Loading Instagram feed
+2.Fetching product list
+3.Getting weather data
+
+🔸POST (Create Data)
+1.Used to send data to server
+2.Creates new resource
+
+Example:
+POST /users
+
+👉 “Create a new user”
+
+Key Points:
+1.Data is sent in request body
+2.Not idempotent (creates new entry every time)
+
+Real-world examples:
+1.Registering a user
+2.Submitting a form
+3.Placing an order
+
+🔸 PUT (Update Data)
+1.Used to update existing data completely
+
+Example:
+PUT /users/1
+
+👉 “Update user with id 1”
+
+Key Points:
+1.Replaces entire data
+2.Idempotent
+
+Real-world examples:
+1.Updating profile details
+2.Editing product info
+
+🔸DELETE (Remove Data)
+1.Used to delete data from server
+
+Example:
+DELETE /users/1
+
+👉 “Delete user with id 1”
+
+Key Points:
+1.Removes resource
+2.Idempotent
+
+Real-world examples:
+1.Deleting account
+2.Removing item from cart
+
+<hr>
