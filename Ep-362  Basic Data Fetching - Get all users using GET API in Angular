@@ -1,0 +1,52 @@
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { AppComponent } from './app/app.component';
+
+import { provideHttpClient } from '@angular/common/http';
+
+bootstrapApplication(AppComponent, {
+  providers: [provideHttpClient()], // activate HttpClient for the whole app
+});
+
+import { NgFor } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import {} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [NgFor],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  Users: any[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .subscribe((data) => (this.Users = data));
+  }
+}
+
+
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Basic Data Fetching - Get all users using GET API in Angular
+</h1>
+
+<hr>
+
+<ul>
+    <li *ngFor="let User of Users">
+        {{User.name}} - {{User.email}}
+    </li>
+</ul>
+<hr>
+
