@@ -1,0 +1,64 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Fetch Single Resource - Get user by ID using GET API in Angular
+</h1>
+
+<hr>
+
+<h2>
+    Data returned from API
+</h2>
+
+<p>
+    Name : {{User.name}}
+</p>
+
+<p>
+    Email : {{User.email}}
+</p>
+
+<p>
+    Phone : {{User.phone}}
+</p>
+
+
+<hr>
+
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import {} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  User: any = {};
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    const id = 2;
+
+    this.http
+      .get<any>(`https://jsonplaceholder.typicode.com/users/${id}`)
+      .subscribe((Data) => (this.User = Data));
+  }
+}
+
+
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { AppComponent } from './app/app.component';
+
+import { provideHttpClient } from '@angular/common/http';
+
+bootstrapApplication(AppComponent, {
+  providers: [provideHttpClient()], // activate HttpClient for the whole app
+});
