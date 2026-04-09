@@ -1,0 +1,71 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Pagination - Get users with page number using get api in angular
+</h1>
+
+<hr>
+
+
+<p>Page: {{ page }}</p>
+
+<ul>
+    <li *ngFor="let user of users">
+        {{ user.id }} {{ user.name }} - {{ user.email }}
+    </li>
+</ul>
+
+
+<hr>
+
+import { NgFor } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
+import {} from '@angular/forms';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [NgFor],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  users: any[] = [];
+
+  allUsers: any[] = [];
+
+  page = 2;
+
+  pageSize = 5;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit() {
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .subscribe((data) => {
+        this.allUsers = data;
+        this.updatePage();
+      });
+  }
+
+  updatePage() {
+    const start = (this.page - 1) * this.pageSize;
+    const end = start + this.pageSize;
+    this.users = this.allUsers.slice(start, end);
+  }
+}
+
+
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { AppComponent } from './app/app.component';
+
+import { provideHttpClient } from '@angular/common/http';
+
+bootstrapApplication(AppComponent, {
+  providers: [provideHttpClient()], // activate HttpClient for the whole app
+});
