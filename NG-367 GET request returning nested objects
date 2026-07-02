@@ -1,0 +1,91 @@
+import { ApplicationConfig } from '@angular/core';
+
+import { provideHttpClient } from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient()],
+};
+
+
+export const environment = {
+  production: false,
+  apiUrl: 'https://jsonplaceholder.typicode.com',
+};
+
+
+export interface Address {
+  city: string;
+  zipcode: string;
+}
+
+export interface User {
+  id: number;
+  name: string;
+  username: string;
+  email: string;
+  address: Address;
+}
+
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    GET request returning nested objects
+</h1>
+
+<hr>
+
+
+<app-comp1></app-comp1>
+
+<p>Comp1 Homepage</p>
+
+<h2>User Details</h2>
+
+<p>Name : {{ user.name }}</p>
+
+<p>Email : {{ user.email }}</p>
+
+<p>City : {{ user.address.city }}</p>
+
+<p>Zip Code : {{ user.address.zipcode }}</p>
+
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { environment } from '../environment';
+import { CommonModule } from '@angular/common';
+import { User } from '../Users';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component implements OnInit {
+  user!: User;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http.get<User>(`${environment.apiUrl}/users/2`).subscribe((res) => {
+      this.user = res;
+    });
+  }
+}
