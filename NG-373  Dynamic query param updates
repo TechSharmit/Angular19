@@ -1,0 +1,83 @@
+import { ApplicationConfig } from '@angular/core';
+
+import { provideHttpClient } from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient()],
+};
+
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Dynamic query param updates
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component, OnInit } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component implements OnInit {
+  users: any[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.getUser(1);
+  }
+
+  getUser(id: number) {
+    const params = new HttpParams().set('id', id);
+
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users', { params })
+      .subscribe((res) => {
+        this.users = res;
+      });
+  }
+}
+
+
+<button (click)="getUser(1)">User 1</button>
+
+<button (click)="getUser(2)">User 2</button>
+
+<button (click)="getUser(3)">User 3</button>
+
+<hr>
+
+@for(user of users; track user.id){
+
+<h2>{{user.name}}</h2>
+
+}
