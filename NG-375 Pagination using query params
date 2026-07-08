@@ -1,0 +1,86 @@
+import { ApplicationConfig } from '@angular/core';
+
+import { provideHttpClient } from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient()],
+};
+
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Pagination using Query Parameters
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { HttpParams } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+ 
+  posts: any[] = [];
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.loadPosts(1);
+  }
+
+  loadPosts(page: number) {
+    const params = new HttpParams().set('_page', page).set('_limit', 5);
+
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/posts', { params })
+      .subscribe((res) => {
+        this.posts = res;
+      });
+  }
+}
+
+
+<h2>Posts</h2>
+
+<button (click)="loadPosts(1)">Page 1</button>
+
+<button (click)="loadPosts(2)">Page 2</button>
+
+<button (click)="loadPosts(3)">Page 3</button>
+
+<hr>
+
+@for(post of posts; track post.id){
+
+<p>{{ post.id }} - {{ post.title }}</p>
+
+}
