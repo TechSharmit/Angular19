@@ -1,0 +1,71 @@
+import { ApplicationConfig } from '@angular/core';
+
+import { provideHttpClient } from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient()],
+};
+
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    GET using route parameters
+
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  user: any;
+
+  constructor(private http: HttpClient) {}
+
+  ngOnInit(): void {
+    this.http
+      .get<any>('https://jsonplaceholder.typicode.com/users/1')
+      .subscribe((res) => {
+        this.user = res;
+      });
+  }
+}
+
+
+<h2>User Details</h2>
+
+<p>ID : {{ user.id }}</p>
+
+<p>Name : {{ user.name }}</p>
+
+<p>Email : {{ user.email }}</p>
