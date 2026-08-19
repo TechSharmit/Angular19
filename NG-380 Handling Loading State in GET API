@@ -1,0 +1,67 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Handling Loading State in GET API
+
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+
+<div *ngIf="isLoading">
+    <p>Loading users, please wait...</p>
+</div>
+
+<div *ngIf="!isLoading">
+    <ul>
+        <li *ngFor="let user of users">{{ user.name }}</li>
+    </ul>
+</div>
+
+
+// Handling Loading State in GET API
+
+import { Component } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  users: any[] = [];
+  isLoading: boolean = true; // Step 1: Start as true (loading begins immediately)
+
+  constructor(private http: HttpClient) {
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .subscribe((response) => {
+        this.users = response;
+        this.isLoading = false; // Step 2: Data aa gaya, loading band karo
+      });
+  }
+}
