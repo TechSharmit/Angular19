@@ -1,0 +1,83 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Handling GET API Errors
+
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+<div *ngIf="isLoading">
+    <p>Loading users, please wait...</p>
+</div>
+
+<div *ngIf="hasError">
+    <p>Something went wrong. Please try again later.</p>
+</div>
+
+<div *ngIf="!isLoading && !hasError">
+    <ul>
+        <li *ngFor="let user of users">{{ user.name }}</li>
+    </ul>
+</div>
+
+// Handling Loading State in GET API
+
+import { Component } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  users: any[] = [];
+
+  isLoading: boolean = true;
+
+  hasError: boolean = false; // Tracks whether an error occurred
+
+  constructor(private http: HttpClient) {
+    // Intentionally wrong URL, to trigger an error
+
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .subscribe({
+        next: (response) => {
+          this.users = response;
+          this.isLoading = false;
+        },
+        error: (err) => {
+          console.log('API Error:', err);
+          this.hasError = true;
+          this.isLoading = false; // Stop loading even if it failed
+        },
+      });
+  }
+}
+
+
