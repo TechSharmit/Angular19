@@ -1,0 +1,120 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Handling Multiple HTTP Status Codes (401, 403, 404, 500)
+
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+<div *ngIf="isLoading">
+    <p>Loading users, please wait...</p>
+</div>
+
+<div *ngIf="isUnauthorized">
+    <p>401 - You are not logged in. Please log in to continue.</p>
+</div>
+
+<div *ngIf="isForbidden">
+    <p>403 - You do not have permission to view this data.</p>
+</div>
+
+<div *ngIf="isNotFound">
+    <p>404 - The requested data was not found.</p>
+</div>
+
+<div *ngIf="isServerError">
+    <p>500 - Something went wrong on the server. Please try again later.</p>
+</div>
+
+<div *ngIf="isOtherError">
+    <p>An unexpected error occurred. Please check your connection.</p>
+</div>
+
+<div *ngIf="!isLoading && !isUnauthorized && !isForbidden && !isNotFound && !isServerError && !isOtherError">
+    <ul>
+        <li *ngFor="let user of users">{{ user.name }}</li>
+    </ul>
+</div>
+
+
+
+// Handling Loading State in GET API
+
+import { Component } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  users: any[] = [];
+  
+  isLoading: boolean = true;
+
+  // One flag per error type, instead of one generic "hasError"
+  isUnauthorized: boolean = false; // 401
+  isForbidden: boolean = false; // 403
+  isNotFound: boolean = false; // 404
+  isServerError: boolean = false; // 500
+  isOtherError: boolean = false; // anything else (network error, etc.)
+
+  constructor(private http: HttpClient) {
+    
+    // Intentionally wrong URL, to trigger an error (change status codes by testing different mock APIs)
+    
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/usersxyz')
+      .subscribe({
+        next: (response) => {
+          this.users = response;
+          this.isLoading = false;
+        },
+        error: (err: HttpErrorResponse) => {
+          this.isLoading = false;
+
+          switch (err.status) {
+            case 401:
+              this.isUnauthorized = true; // User is not logged in / invalid token
+              break;
+            case 403:
+              this.isForbidden = true; // User is logged in but not allowed
+              break;
+            case 404:
+              this.isNotFound = true; // Resource does not exist
+              break;
+            case 500:
+              this.isServerError = true; // Something broke on the server side
+              break;
+            default:
+              this.isOtherError = true; // Network error, timeout, unknown status
+              break;
+          }
+        },
+      });
+  }
+}
