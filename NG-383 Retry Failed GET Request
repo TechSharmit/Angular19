@@ -1,0 +1,61 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Retry Failed GET Request
+
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+<p>Check the browser console for retry logs.</p>
+
+// Handling Loading State in GET API
+
+import { Component } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { retry } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  constructor(private http: HttpClient) {
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/usersxyz')
+      .pipe(
+        retry(1), // Try again up to 2 more times before giving up
+      )
+      .subscribe({
+        next: (response) => {
+          console.log('Data received:', response);
+        },
+        error: (err: HttpErrorResponse) => {
+          console.log('Failed even after retrying:', err.status);
+        },
+      });
+  }
+}
