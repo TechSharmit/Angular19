@@ -1,0 +1,48 @@
+📘 Notes: Understanding Observable Returned by GET
+What Happens When You Call http.get()
+Writing this.http.get(url) does not send a request immediately.
+If you write it alone, without .subscribe(), no network call happens at all — check the Network tab, it will be empty.
+http.get() only returns an Observable — it does not execute anything by itself.
+What is an Observable
+An Observable is an object that represents a stream of future values.
+It is like a "plan" for getting data — but nothing happens until someone starts "listening" to it.
+The actual HTTP request is only triggered when you call .subscribe() on it.
+typescript
+this.http.get('https://jsonplaceholder.typicode.com/users')
+  .subscribe((response) => {
+    console.log(response);
+  });
+Only after .subscribe() is called:
+The actual HTTP request is sent.
+When the response arrives, the function inside subscribe() runs.
+Real-Life Analogy — YouTube Channel
+Finding a YouTube channel but not subscribing = creating the Observable (request not sent yet).
+Subscribing to the channel = calling .subscribe() — now you start receiving notifications (data).
+Until you subscribe, no notification (data) will ever reach you, even if the channel keeps uploading videos.
+Observable vs Promise — Key Differences
+Aspect	Promise	Observable
+When it executes	Immediately, as soon as it's created	Only when .subscribe() is called
+How many values it gives	Only once	Can give multiple values (a stream)
+Can it be cancelled?	No	Yes, using .unsubscribe()
+Angular's HttpClient.get() returns an Observable.
+Plain JavaScript's fetch() returns a Promise.
+This is exactly why in Angular, we always need to write .subscribe().
+Step-by-Step Flow
+this.http.get(url)
+    ↓
+An Observable object is created (but NO request is sent yet)
+    ↓
+.subscribe(...) is called
+    ↓
+NOW the actual HTTP request is triggered
+    ↓
+Server sends back a response
+    ↓
+The function inside subscribe() (next/error) runs
+Why This Matters (Learning Outcome)
+http.get() only creates an Observable — it does not send the request.
+The request is only sent after .subscribe() is called.
+Beginners often assume "I wrote http.get(), so the request went" — this is incorrect.
+If you forget to write .subscribe(), there is no error — the request simply never goes. This is a silent bug that's easy to miss.
+Practical Debugging Tip
+If an API call seems to "not work" and there's no request visible in the Network tab, the first thing to check is: did you forget to write .subscribe()?
