@@ -1,0 +1,56 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    <p>Transforming GET Response using map()</p>
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+import { Component } from '@angular/core';
+
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+import { map } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  constructor(private http: HttpClient) {
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .pipe(
+        map((users) => users.map((user) => user.name)), // Transform: keep only names
+      )
+      .subscribe((names) => {
+        console.log('Names only:', names);
+      });
+  }
+}
+
+<p>Check the browser console for transformed data.</p>
+
+<p>Check the browser console for transformed data.</p>
