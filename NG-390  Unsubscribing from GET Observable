@@ -1,0 +1,61 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Unsubscribing from GET Observable
+</h1>
+
+<hr>
+
+<button (click)="showComponent = !showComponent">Toggle Component</button>
+
+<app-comp1 *ngIf="showComponent"></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component, CommonModule  ],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {
+  showComponent: boolean = true; // Controls whether comp1 exists on screen
+}
+
+<p>Check the browser console for subscription logs.</p>
+
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  private mySubscription: Subscription;
+
+  constructor(private http: HttpClient) {
+    this.mySubscription = this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .subscribe((response) => {
+        console.log('Data received:', response);
+      });
+  }
+
+  ngOnDestroy(): void {
+    this.mySubscription.unsubscribe();
+    console.log('Unsubscribed - component destroyed');
+  }
+}
