@@ -1,0 +1,74 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    GET API - Live Search using debounceTime() + switchMap()
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+
+<input type="text" (input)="onSearchChange($any($event.target).value)" placeholder="Search posts..." />
+
+<ul>
+    <li *ngFor="let post of posts">{{ post.title }}</li>
+</ul>
+
+
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { Subject } from 'rxjs';
+import { debounceTime, distinctUntilChanged, switchMap } from 'rxjs/operators';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  posts: any[] = [];
+  
+  private searchSubject = new Subject<string>(); // Emits every time user types
+
+  constructor(private http: HttpClient) {
+    this.searchSubject
+      .pipe(
+        debounceTime(500), // Wait 500ms after user stops typing
+        distinctUntilChanged(), // Skip if the value is same as last time
+        switchMap((searchTerm) =>
+          this.http.get<any[]>(
+            `https://jsonplaceholder.typicode.com/posts?title_like=${searchTerm}`,
+          ),
+        ),
+      )
+      .subscribe((response) => {
+        this.posts = response;
+      });
+  }
+
+  onSearchChange(value: string): void {
+    this.searchSubject.next(value); // Push the typed value into the stream
+  }
+}
