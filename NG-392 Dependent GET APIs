@@ -1,0 +1,69 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Dependent GET APIs
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+<div *ngIf="user">
+    <h3>User: {{ user.name }}</h3>
+</div>
+
+<ul>
+    <li *ngFor="let post of posts">{{ post.title }}</li>
+</ul>
+
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  user: any = null;
+  posts: any[] = [];
+
+  constructor(private http: HttpClient) {
+    // Step 1: First get the user
+    this.http
+      .get<any>('https://jsonplaceholder.typicode.com/users/1')
+      .subscribe((userResponse) => {
+        this.user = userResponse;
+
+        // Step 2: Use the user's ID to fetch their posts
+        this.http
+          .get<
+            any[]
+          >(`https://jsonplaceholder.typicode.com/posts?userId=${this.user.id}`)
+          .subscribe((postsResponse) => {
+            this.posts = postsResponse;
+          });
+      });
+  }
+}
