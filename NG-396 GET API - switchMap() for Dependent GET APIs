@@ -1,0 +1,67 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    GET API - switchMap() for Dependent GET APIs
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { switchMap } from 'rxjs';
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  
+  posts: any[] = [];
+
+  constructor(private http: HttpClient) {
+    this.http
+      .get<any>('https://jsonplaceholder.typicode.com/users/1')
+      .pipe(
+        // Use the user from API 1 to build API 2
+        switchMap((user) =>
+          this.http.get<any[]>(
+            `https://jsonplaceholder.typicode.com/posts?userId=${user.id}`,
+          ),
+        ),
+      )
+      .subscribe((posts) => {
+        this.posts = posts;
+      });
+  }
+}
+
+
+<h3>Posts</h3>
+
+<ul>
+    <li *ngFor="let post of posts">{{ post.title }}</li>
+</ul>
