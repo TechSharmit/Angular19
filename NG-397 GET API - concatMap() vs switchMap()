@@ -1,0 +1,86 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    GET API - concatMap() vs switchMap()
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+
+
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { switchMap } from 'rxjs';
+import { Subject } from 'rxjs';
+import { concatMap } from 'rxjs/operators'; 
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+
+  // Emits a user ID every time we call next()
+
+  private userId$ = new Subject<number>();
+
+  constructor(private http: HttpClient) {
+
+    // Pipeline 1: switchMap cancels the previous pending request
+    
+    this.userId$
+      .pipe(
+        switchMap((id) =>
+          this.http.get<any>(
+            `https://jsonplaceholder.typicode.com/users/${id}`,
+          ),
+        ),
+      )
+      .subscribe((user) => console.log('switchMap result:', user.name));
+
+    // Pipeline 2: concatMap queues requests and runs them one after another
+    this.userId$
+      .pipe(
+        concatMap((id) =>
+          this.http.get<any>(
+            `https://jsonplaceholder.typicode.com/users/${id}`,
+          ),
+        ),
+      )
+      .subscribe((user) => console.log('concatMap result:', user.name));
+  }
+
+  fireThreeRequests(): void {
+    // Three values pushed back-to-back, like a very fast user
+    this.userId$.next(1);
+    this.userId$.next(2);
+    this.userId$.next(3);
+  }
+}
+
+
+<button (click)="fireThreeRequests()">Fire 3 Requests</button>
+<p>Check the browser console.</p>
