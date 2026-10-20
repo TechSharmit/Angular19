@@ -1,0 +1,54 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Introduction to HTTP Headers
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+
+
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  constructor(private http: HttpClient) {
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .subscribe((response) => {
+        console.log('Data received:', response);
+      });
+  }
+}
+
+
+
+<p>Open DevTools → Network tab → click the "users" request → Headers tab.</p>
