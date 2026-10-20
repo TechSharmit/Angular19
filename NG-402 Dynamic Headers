@@ -1,0 +1,67 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Dynamic Headers
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { HttpHeaders } from '@angular/common/http';
+
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+ 
+  constructor(private http: HttpClient) {}
+
+  loadData(language: string): void {
+
+    // The header value comes from the "language" variable, not a fixed string
+    
+    const headers = new HttpHeaders({
+      'X-Language': language,
+    });
+
+    this.http
+      .get<any>('https://httpbin.org/headers', { headers })
+      .subscribe((response) => {
+        console.log(
+          'Server received X-Language:',
+          response.headers['X-Language'],
+        );
+      });
+  }
+}
+
+
+<button (click)="loadData('en')">English</button>
+<button (click)="loadData('hi')">Hindi</button>
+<p>Click a button and check the browser console.</p>
