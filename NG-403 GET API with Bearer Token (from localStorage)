@@ -1,0 +1,72 @@
+// Command to store in console just put it and press enter - localStorage.setItem('token', 'my-demo-token-123')
+
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    GET API with Bearer Token (from localStorage)
+</h1>
+
+<hr>
+
+<app-comp1></app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { Comp1Component } from './comp1/comp1.component';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.css'],
+})
+export class AppComponent {}
+
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { HttpHeaders } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+
+  constructor(private http: HttpClient) {
+
+    // Read the token from browser storage (returns null if it does not exist)
+   
+    const token = localStorage.getItem('token');
+
+    // Do not send the request if there is no token
+    
+    if (!token) {
+      console.log('No token found in localStorage');
+      return;
+    }
+
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+
+    this.http.get<any>('https://httpbin.org/bearer', { headers }).subscribe({
+      next: (response) => console.log('Success:', response),
+      error: (err: HttpErrorResponse) =>
+        console.log('Failed, status:', err.status),
+    });
+  }
+}
+
+<p>Set the token in DevTools first (see steps below), then refresh and check the console.</p>
+
+<p>Set the token in DevTools first (see steps below), then refresh and check the console.</p>
