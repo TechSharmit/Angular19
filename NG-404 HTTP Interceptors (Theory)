@@ -1,0 +1,50 @@
+1. The Problem Interceptors Solve
+So far, every API call has been written independently in each component or service.
+If 10 APIs need the Authorization header, we copy the same header code 10 times.
+If 10 APIs need 401 handling, we copy the same error code 10 times.
+If we want to log every request, we repeat console.log everywhere.
+This is repeated code. It is hard to maintain, and if one place is forgotten, a bug appears.
+We need one single place that can act on all requests and responses.
+That place is an Interceptor.
+2. What is an HTTP Interceptor
+An interceptor is a function that sits between the application and the server.
+Every HTTP request made using HttpClient passes through it before going to the server.
+Every response coming back from the server also passes through it before reaching the component.
+It can read, modify, block, or observe requests and responses.
+It is an Angular HttpClient concept. It is not a feature of HTTP or of the server.
+The server does not know an interceptor exists. It only sees the final request.
+3. Real-Life Analogy
+Security gate of an office building.
+Everyone entering or leaving passes through one gate.
+The guard checks the ID, records the entry, and may stop someone.
+Individual departments (components) do not keep their own guards.
+Similarly, one interceptor handles all HTTP traffic.
+4. Where It Sits in the Flow
+Component
+    ↓
+HttpClient.get()
+    ↓
+Interceptor  (request goes through here)
+    ↓
+Server
+    ↓
+Interceptor  (response comes back through here)
+    ↓
+Component → subscribe()
+The interceptor sees the request on the way out.
+The interceptor sees the response on the way back.
+The component does not know the interceptor exists, so component code stays clean.
+5. Two Sides of an Interceptor
+Side	When it runs	Typical use
+Request side	Before the request goes to the server	Add token, add headers, log the request, show loading spinner
+Response side	After the response comes back	Handle 401, show error messages, log the response, hide loading spinner
+One interceptor can do both sides.
+6. Common Real-World Uses
+Attach the Authorization token to every request.
+Handle 401 in one place (clear token, redirect to login).
+Handle global errors (show a toast or message).
+Show and hide a loading spinner for all API calls.
+Log requests and responses for debugging.
+Add common headers (for example Accept, language).
+Add a base URL so that components do not repeat it.
+Retry failed requests globally.
