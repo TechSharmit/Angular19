@@ -1,0 +1,74 @@
+main.ts
+
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
+
+bootstrapApplication(AppComponent, appConfig).catch((err) =>
+  console.error(err),
+);
+
+
+app.config.ts 
+
+import { ApplicationConfig } from '@angular/core';
+
+import { provideHttpClient } from '@angular/common/http';
+import { loggingInterceptor } from './interceptors/logging.interceptor';
+import { withInterceptors } from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient(withInterceptors([loggingInterceptor]))],
+};
+
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    HTTP Interceptors Basic Example in Angular
+</h1>
+
+<hr>
+
+<app-comp1> </app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  constructor(private http: HttpClient) {
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .subscribe((response) => {
+        console.log('Data received:', response);
+      });
+  }
+}
+
+
+<p>check the console.</p>
+
+import { HttpInterceptorFn } from '@angular/common/http';
+
+export const loggingInterceptor: HttpInterceptorFn = (req, next) => {
+  // This runs for EVERY request made with HttpClient
+
+  console.log('Interceptor caught request:', req.method, req.url);
+
+  // Pass the request forward to the server. Without this line the request would never be sent
+
+  return next(req);
+};
+
