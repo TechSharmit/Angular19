@@ -1,0 +1,92 @@
+<h1>
+    Angular Course by Tech Sharmit
+</h1>
+
+<h1>
+    Global Error Handling using Interceptor
+</h1>
+
+<hr>
+
+<app-comp1> </app-comp1>
+
+<hr>
+
+import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  constructor(private http: HttpClient) {
+    // Intentionally wrong URL, to trigger a 404
+
+    this.http
+      .get<any[]>('https://jsonplaceholder.typicode.com/usersxyz')
+      .subscribe({
+        next: (response) => console.log('Data received:', response),
+        error: (err: HttpErrorResponse) =>
+          console.log('Component got error:', err.status),
+      });
+  }
+}
+
+
+<p>Check the browser console for the global error handler logs.</p><p>Check the browser console for the global error handler logs.</p>
+
+
+
+import { HttpInterceptorFn } from '@angular/common/http';
+import { HttpErrorResponse } from '@angular/common/http';
+import { catchError, throwError } from 'rxjs';
+
+export const loggingInterceptor: HttpInterceptorFn = (req, next) => {
+  return next(req).pipe(
+    catchError((err: HttpErrorResponse) => {
+      // One central place to react to errors
+      if (err.status === 0) {
+        console.log('Global handler: Network error');
+      } else if (err.status === 401) {
+        console.log('Global handler: Unauthorized (401)');
+      } else if (err.status === 404) {
+        console.log('Global handler: Not found (404)');
+      } else if (err.status >= 500) {
+        console.log('Global handler: Server error (' + err.status + ')');
+      }
+
+      // Pass the error forward so the component can still react to it
+      return throwError(() => err);
+    }),
+  );
+};
+
+
+import { bootstrapApplication } from '@angular/platform-browser';
+
+import { AppComponent } from './app/app.component';
+import { appConfig } from './app/app.config';
+
+bootstrapApplication(AppComponent, appConfig).catch((err) =>
+  console.error(err),
+);
+
+
+
+import { ApplicationConfig } from '@angular/core';
+
+import { provideHttpClient } from '@angular/common/http';
+import { loggingInterceptor } from './interceptors/logging.interceptor';
+import { withInterceptors } from '@angular/common/http';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient(withInterceptors([loggingInterceptor]))],
+};
+
+
