@@ -1,0 +1,111 @@
+loading.service.ts                  → Shared loading state (NEW)
+interceptors/loading.interceptor.ts → Turns loading ON/OFF (NEW)
+app.config.ts                       → Register the interceptor
+app.component.ts                    → Reads loading state
+app.component.html                  → Shows "Loading..." + comp1
+comp1.component.ts                  → Plain GET call (no loading code)
+comp1.component.html                → Display users
+
+📄 loading.service.ts
+
+import { Injectable } from '@angular/core';
+
+@Injectable({ providedIn: 'root' })
+export class LoadingService {
+  // Counts how many requests are currently running
+  activeRequests = 0;
+
+  get isLoading(): boolean {
+    return this.activeRequests > 0;
+  }
+}
+
+📄 interceptors/loading.interceptor.ts
+
+import { HttpInterceptorFn } from '@angular/common/http';
+import { inject } from '@angular/core';
+import { finalize } from 'rxjs';
+import { LoadingService } from '../loading.service';
+
+export const loadingInterceptor: HttpInterceptorFn = (req, next) => {
+  // Interceptors are functions, so we use inject() instead of a constructor
+  const loadingService = inject(LoadingService);
+
+  // A request is starting
+  loadingService.activeRequests++;
+
+  return next(req).pipe(
+    // Runs on success AND error, when the request ends
+    finalize(() => {
+      loadingService.activeRequests--;
+    })
+  );
+};
+
+📄 app.config.ts
+
+import { ApplicationConfig } from '@angular/core';
+import { provideHttpClient, withInterceptors } from '@angular/common/http';
+import { loadingInterceptor } from './interceptors/loading.interceptor';
+
+export const appConfig: ApplicationConfig = {
+  providers: [provideHttpClient(withInterceptors([loadingInterceptor]))],
+};
+
+📄 app.component.ts
+
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { Comp1Component } from './comp1/comp1.component';
+import { LoadingService } from './loading.service';
+
+@Component({
+  selector: 'app-root',
+  standalone: true,
+  imports: [CommonModule, Comp1Component],
+  templateUrl: './app.component.html',
+  styleUrl: './app.component.css',
+})
+export class AppComponent {
+  constructor(public loadingService: LoadingService) {}
+}
+
+📄 app.component.html
+
+<p *ngIf="loadingService.isLoading">Loading...</p>
+
+<app-comp1></app-comp1>
+
+📄 comp1.component.ts
+
+import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { HttpClient } from '@angular/common/http';
+
+@Component({
+  selector: 'app-comp1',
+  standalone: true,
+  imports: [CommonModule],
+  templateUrl: './comp1.component.html',
+  styleUrl: './comp1.component.css',
+})
+export class Comp1Component {
+  users: any[] = [];
+
+  constructor(private http: HttpClient) {
+    // Notice: no isLoading flag and no finalize here
+    this.http.get<any[]>('https://jsonplaceholder.typicode.com/users')
+      .subscribe((response) => {
+        this.users = response;
+      });
+  }
+}
+
+
+📄 comp1.component.html
+
+
+<ul>
+  <li *ngFor="let user of users">{{ user.name }}</li>
+</ul>
+
